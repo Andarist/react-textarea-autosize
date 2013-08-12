@@ -3,11 +3,11 @@
 Replacement for textarea component which uses jquery-autosize to grow textarea
 as content grows:
 
-    var textarea = require('react-textarea-autosize');
+    var Textarea = require('react-textarea-autosize');
 
     React.renderComponent(
       <div>
-        <textarea autosize></textarea>
+        <Textarea autosize></Textarea>
       </div>,
       document.body);
 
