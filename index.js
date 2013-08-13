@@ -10,7 +10,7 @@ module.exports = React.createClass({
   },
 
   componentWillUnmount: function() {
-    window.jQuery(this.getDOMNode()).trigger('autosize.destory');
+    window.jQuery(this.getDOMNode()).trigger('autosize.destroy');
   },
 
   render: function() {
