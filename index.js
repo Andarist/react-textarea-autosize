@@ -1,4 +1,4 @@
-var React = require('react-tools/build/modules/React');
+var React = require('react');
 require('jquery-autosize');
 
 module.exports = React.createClass({
