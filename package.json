@@ -20,6 +20,7 @@
   "homepage": "https://github.com/andreypopp/react-textarea-autosize",
   "keywords": [
     "react",
+    "react-component",
     "textarea",
     "grow",
     "autosize"
