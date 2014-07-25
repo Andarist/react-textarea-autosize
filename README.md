@@ -7,11 +7,8 @@ as content grows:
 
     React.renderComponent(
       <div>
-        <Textarea autosize></Textarea>
+        <Textarea></Textarea>
       </div>,
       document.body);
-
-As you can see there's `autosize` boolean property which would activate
-jquery-autosize plugin.
 
 This component relies on jQuery to be globally accessible via `window.jQuery`.
