@@ -4,9 +4,7 @@ require('jquery-autosize');
 module.exports = React.createClass({
 
   componentDidMount: function() {
-    if (this.props.autosize) {
-      window.jQuery(this.getDOMNode()).autosize();
-    }
+    window.jQuery(this.getDOMNode()).autosize();
   },
 
   componentWillUnmount: function() {
@@ -14,7 +12,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    return this.transferPropsTo(React.DOM.textarea(null, this.props.children));
+    return this.transferPropsTo(React.DOM.textarea({autosize: true}, this.props.children));
   }
 
 });
