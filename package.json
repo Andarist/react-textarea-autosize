@@ -4,7 +4,7 @@
   "description": "textarea component for React which grows with content",
   "main": "index.js",
   "dependencies": {
-    "jquery-autosize": "~1.17.2"
+    "jquery-autosize": "~1.18.4"
   },
   "peerDependencies": {
     "react-tools": ">= 0.4.1"
