@@ -22,8 +22,8 @@ module.exports = React.createClass({
   getDiffSize: function() {
     var styles = window.getComputedStyle(this.getDOMNode());
     this.diff  = (
-      parseInt(styles.getPropertyValue('paddingBottom') || 0, 10) +
-      parseInt(styles.getPropertyValue('paddingTop') || 0, 10)
+      parseInt(styles.getPropertyValue('padding-bottom') || 0, 10) +
+      parseInt(styles.getPropertyValue('padding-top') || 0, 10)
     );
   },
 
