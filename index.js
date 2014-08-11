@@ -46,10 +46,15 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    return this.transferPropsTo(
-      React.DOM.textarea({
-        onChange: this.onChange
-      }, this.props.children)
-    );
+    var props = {
+      onChange: this.onChange,
+      style: { overflow: 'hidden' }
+    };
+    
+    for (var key in this.props) {
+      props[key] = this.props[key];
+    }
+
+    return React.DOM.textarea(props, this.props.children);
   }
 });
