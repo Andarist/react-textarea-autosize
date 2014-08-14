@@ -1,18 +1,60 @@
 var React = require('react');
-require('jquery-autosize');
 
 module.exports = React.createClass({
+  displayName: 'TextAreaAutoSize',
 
   componentDidMount: function() {
-    window.jQuery(this.getDOMNode()).autosize();
+    this.getDiffSize();
+    this.recalculateSize();
   },
 
-  componentWillUnmount: function() {
-    window.jQuery(this.getDOMNode()).trigger('autosize.destroy');
+  componentWillReceiveProps: function(nextProps) {
+    this.dirty = !!nextProps.style;
+  },
+
+  componentDidUpdate: function() {
+    if (this.dirty) {
+      this.getDiffSize();
+      this.dirty = false;
+    }
+  },
+
+  getDiffSize: function() {
+    var styles = window.getComputedStyle(this.getDOMNode());
+    this.diff  = (
+      parseInt(styles.getPropertyValue('padding-bottom') || 0, 10) +
+      parseInt(styles.getPropertyValue('padding-top') || 0, 10)
+    );
+  },
+
+  recalculateSize: function() {
+    if (!this.isMounted()) {
+      return;
+    }
+
+    var node = this.getDOMNode();
+    node.style.height = 'auto';
+    node.style.height = (node.scrollHeight - this.diff) + 'px';
+  },
+
+  onChange: function(e) {
+    if (this.props.onChange) {
+      this.props.onChange(e);
+    }
+
+    this.recalculateSize();
   },
 
   render: function() {
-    return this.transferPropsTo(React.DOM.textarea({autosize: true}, this.props.children));
-  }
+    var props = {
+      onChange: this.onChange,
+      style: { overflow: 'hidden' }
+    };
+    
+    for (var key in this.props) {
+      props[key] = this.props[key];
+    }
 
+    return React.DOM.textarea(props, this.props.children);
+  }
 });
