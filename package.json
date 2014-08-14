@@ -1,14 +1,14 @@
 {
   "name": "react-textarea-autosize",
-  "version": "0.3.1",
   "description": "textarea component for React which grows with content",
-  "main": "index.js",
-  "peerDependencies": {
-    "react": ">=0.10.0"
+  "version": "0.3.1",
+  "author": {
+    "name": "Andrey Popp",
+    "email": "8mayday@gmail.com",
+    "url": "http://andreypopp.com"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/andreypopp/react-textarea-autosize.git"
+  "dependencies": {
+    "object-assign": "^1.0.0"
   },
   "homepage": "https://github.com/andreypopp/react-textarea-autosize",
   "keywords": [
@@ -18,10 +18,13 @@
     "grow",
     "autosize"
   ],
-  "author": {
-    "name": "Andrey Popp",
-    "email": "8mayday@gmail.com",
-    "url": "http://andreypopp.com"
+  "license": "MIT",
+  "main": "index.js",
+  "peerDependencies": {
+    "react": ">=0.10.0"
   },
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andreypopp/react-textarea-autosize.git"
+  }
 }

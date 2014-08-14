@@ -1,4 +1,5 @@
 var React = require('react');
+var objectAssign = require('object-assign');
 
 module.exports = React.createClass({
   displayName: 'TextAreaAutoSize',
@@ -48,9 +49,9 @@ module.exports = React.createClass({
   render: function() {
     var props = {
       onChange: this.onChange,
-      style: { overflow: 'hidden' }
+      style: objectAssign({}, this.props.style, {overflow: 'hidden'})
     };
-    
+
     for (var key in this.props) {
       props[key] = this.props[key];
     }
