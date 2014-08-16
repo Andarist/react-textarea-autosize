@@ -3,4 +3,4 @@ var TextareaAutosize = require('../');
 
 React.renderComponent(
   new TextareaAutosize({defaultValue: (new Array(15)).join('\nLine.')}),
-  document.body);
+  document.getElementById('main'));
