@@ -1,8 +1,8 @@
 var React = require('react');
 var objectAssign = require('object-assign');
 
-module.exports = React.createClass({
-  displayName: 'TextAreaAutoSize',
+var TextareaAutosize = React.createClass({
+  displayName: 'TextareaAutosize',
 
   render: function() {
     var props = objectAssign({}, this.props, {
@@ -64,3 +64,5 @@ module.exports = React.createClass({
     node.style.height = (node.scrollHeight - this.diff) + 'px';
   }
 });
+
+module.exports = TextareaAutosize;
