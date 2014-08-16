@@ -45,13 +45,12 @@ var TextareaAutosize = React.createClass({
         styles.getPropertyValue('-moz-box-sizing') === "border-box" ||
         styles.getPropertyValue('-webkit-box-sizing') === "border-box") {
       this.diff = 0;
-      return;
+    } else {
+      this.diff  = (
+        parseInt(styles.getPropertyValue('padding-bottom') || 0, 10) +
+        parseInt(styles.getPropertyValue('padding-top') || 0, 10)
+      );
     }
-
-    this.diff  = (
-      parseInt(styles.getPropertyValue('padding-bottom') || 0, 10) +
-      parseInt(styles.getPropertyValue('padding-top') || 0, 10)
-    );
   },
 
   recalculateSize: function() {
