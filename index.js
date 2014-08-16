@@ -13,14 +13,6 @@ module.exports = React.createClass({
     return React.DOM.textarea(props, this.props.children);
   },
 
-  getInitialState: function() {
-    if (this.props.onChange) {
-      return {
-        "_onChange": this.props.onChange
-      };
-    }
-  },
-
   componentDidMount: function() {
     this.getDiffSize();
     this.recalculateSize();
@@ -38,8 +30,8 @@ module.exports = React.createClass({
   },
 
   onChange: function(e) {
-    if (this.state._onChange) {
-      this.state._onChange(e);
+    if (this.props.onChange) {
+      this.props.onChange(e);
     }
     this.recalculateSize();
   },
