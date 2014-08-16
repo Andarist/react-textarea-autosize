@@ -4,6 +4,15 @@ var objectAssign = require('object-assign');
 module.exports = React.createClass({
   displayName: 'TextAreaAutoSize',
 
+  render: function() {
+    var props = objectAssign({}, this.props, {
+      onChange: this.onChange,
+      style: objectAssign({}, this.props.style, {overflow: 'hidden'})
+    });
+
+    return React.DOM.textarea(props, this.props.children);
+  },
+
   getInitialState: function() {
     if (this.props.onChange) {
       return {
@@ -26,6 +35,13 @@ module.exports = React.createClass({
       this.getDiffSize();
       this.dirty = false;
     }
+  },
+
+  onChange: function(e) {
+    if (this.state._onChange) {
+      this.state._onChange(e);
+    }
+    this.recalculateSize();
   },
 
   getDiffSize: function() {
@@ -54,22 +70,5 @@ module.exports = React.createClass({
     var node = this.getDOMNode();
     node.style.height = 'auto';
     node.style.height = (node.scrollHeight - this.diff) + 'px';
-  },
-
-  onChange: function(e) {
-    if (this.state._onChange) {
-      this.state._onChange(e);
-    }
-
-    this.recalculateSize();
-  },
-
-  render: function() {
-    var props = objectAssign({}, this.props, {
-      onChange: this.onChange,
-      style: objectAssign({}, this.props.style, {overflow: 'hidden'})
-    });
-
-    return React.DOM.textarea(props, this.props.children);
   }
 });
