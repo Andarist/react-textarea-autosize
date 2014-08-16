@@ -65,12 +65,10 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var props = {
+    var props = objectAssign({}, this.props, {
       onChange: this.onChange,
       style: objectAssign({}, this.props.style, {overflow: 'hidden'})
-    };
-
-    props = objectAssign(this.props, props);
+    });
 
     return React.DOM.textarea(props, this.props.children);
   }
