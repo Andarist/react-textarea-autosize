@@ -9,6 +9,9 @@ Replacement for textarea component which automatically grows textarea as content
         <Textarea></Textarea>
       </div>,
       document.body);
+      
+## Demo
+http://andreypopp.github.io/react-textarea-autosize/
 
 ## Development
 
