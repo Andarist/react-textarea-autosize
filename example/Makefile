@@ -11,4 +11,4 @@ publish:
 	git push -f git@github.com:andreypopp/react-textarea-autosize.git gh-pages
 
 bundle.js: ../index.js index.js
-	@$(BIN)/browserify example/index.js > $@
+	@$(BIN)/browserify ./index.js > $@
