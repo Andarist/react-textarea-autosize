@@ -1,15 +1,24 @@
 # react-textarea-autosize
 
-Replacement for textarea component which automatically grows textarea as content grows:
+Drop-in replacement for the textarea component which automatically resizes textarea as content changes.
+A native React version of the popular [jQuery
+Autosize](http://www.jacklmoore.com/autosize/)!
 
-    var Textarea = require('react-textarea-autosize');
+This module supports IE9 and above. PR welcome to add IE8 support.
 
-    React.renderComponent(
-      <div>
-        <Textarea></Textarea>
-      </div>,
-      document.body);
-      
+```javascript
+var Textarea = require('react-textarea-autosize');
+
+React.renderComponent(
+  <div>
+    <Textarea></Textarea>
+  </div>,
+  document.body);
+```
+
+## Install
+`npm install react-textarea-autosize`
+
 ## Demo
 http://andreypopp.github.io/react-textarea-autosize/
 
