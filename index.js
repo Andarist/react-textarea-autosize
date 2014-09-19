@@ -37,7 +37,7 @@ var TextareaAutosize = React.createClass({
   },
 
   getDiffSize: function() {
-    if(window.getComputedStyle) {
+    if (window.getComputedStyle) {
       var styles = window.getComputedStyle(this.getDOMNode());
 
       // If the textarea is set to border-box, it's not necessary to
