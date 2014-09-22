@@ -37,19 +37,23 @@ var TextareaAutosize = React.createClass({
   },
 
   getDiffSize: function() {
-    var styles = window.getComputedStyle(this.getDOMNode());
+    if (window.getComputedStyle) {
+      var styles = window.getComputedStyle(this.getDOMNode());
 
-    // If the textarea is set to border-box, it's not necessary to
-    // subtract the padding.
-    if (styles.getPropertyValue('box-sizing') === "border-box" ||
-        styles.getPropertyValue('-moz-box-sizing') === "border-box" ||
-        styles.getPropertyValue('-webkit-box-sizing') === "border-box") {
-      this.diff = 0;
+      // If the textarea is set to border-box, it's not necessary to
+      // subtract the padding.
+      if (styles.getPropertyValue('box-sizing') === "border-box" ||
+          styles.getPropertyValue('-moz-box-sizing') === "border-box" ||
+          styles.getPropertyValue('-webkit-box-sizing') === "border-box") {
+        this.diff = 0;
+      } else {
+        this.diff = (
+            parseInt(styles.getPropertyValue('padding-bottom') || 0, 10) +
+            parseInt(styles.getPropertyValue('padding-top') || 0, 10)
+            );
+      }
     } else {
-      this.diff  = (
-        parseInt(styles.getPropertyValue('padding-bottom') || 0, 10) +
-        parseInt(styles.getPropertyValue('padding-top') || 0, 10)
-      );
+      this.diff = 0;
     }
   },
 
