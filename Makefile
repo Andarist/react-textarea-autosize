@@ -2,6 +2,9 @@ BIN = ./node_modules/.bin
 
 all:
 
+lint:
+	@$(BIN)/jsxhint --force-transform ./index.js
+
 install:
 	npm install
 
