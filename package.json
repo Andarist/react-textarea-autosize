@@ -26,9 +26,5 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/andreypopp/react-textarea-autosize.git"
-  },
-  "devDependencies": {
-    "browserify": "^5.10.0",
-    "react": "^0.11.1"
   }
 }

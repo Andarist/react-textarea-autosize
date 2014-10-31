@@ -1,6 +1,8 @@
 var React = require('react');
 var TextareaAutosize = require('../');
 
-React.renderComponent(
-  new TextareaAutosize({defaultValue: (new Array(15)).join('\nLine.')}),
+React.render(
+  React.createElement(
+    TextareaAutosize,
+    {defaultValue: (new Array(15)).join('\nLine.')}),
   document.getElementById('main'));
