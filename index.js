@@ -1,3 +1,6 @@
+var React = require('react');
+var objectAssign = require('object-assign');
+
 var TextareaAutosize = React.createClass({
   displayName: 'TextareaAutosize',
 
@@ -54,7 +57,6 @@ var TextareaAutosize = React.createClass({
     } else {
       this.diff = 0;
     }
-    console.log('getDiffSize', this.diff);
   },
 
   recalculateSize: function() {
