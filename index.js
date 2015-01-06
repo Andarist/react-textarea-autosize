@@ -21,19 +21,19 @@ var TextareaAutosize = React.createClass({
 
   componentDidUpdate: function(prevProps) {
     if (
-      prevProps.style
-      || prevProps.value !== this.props.value
-      || this.props.value == undefined
+      prevProps.style ||
+      prevProps.value !== this.props.value ||
+      this.props.value === undefined
     ) {
       this.recalculateSize();
     }
   },
 
-  onChange(e) {
+  onChange: function(e) {
     if (this.props.onChange) {
       this.props.onChange(e);
     }
-    if (this.props.value == undefined) {
+    if (this.props.value === undefined) {
       // controlled mode
       this.recalculateSize();
     }
