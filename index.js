@@ -5,9 +5,9 @@ var TextareaAutosize = React.createClass({
   displayName: 'TextareaAutosize',
 
   render: function() {
-    this.renderProps = _.assign({}, this.props, {
+    this.renderProps = objectAssign({}, this.props, {
       onChange: this.onChange,
-      style: _.assign({}, this.props.style, {overflow: 'hidden'})
+      style: objectAssign({}, this.props.style, {overflow: 'hidden'})
     });
 
     return React.DOM.textarea(this.renderProps, this.props.children);
@@ -19,7 +19,7 @@ var TextareaAutosize = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    this.renderProps = _.assign({}, nextProps, this.renderProps);
+    this.renderProps = objectAssign({}, nextProps, this.renderProps);
     this.dirty = !!this.renderProps.style;
   },
 
