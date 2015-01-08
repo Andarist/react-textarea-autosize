@@ -18,4 +18,4 @@ publish:
 	git push -f git@github.com:andreypopp/react-textarea-autosize.git gh-pages
 
 bundle.js: ../index.js index.js ../package.json
-	@$(BIN)/browserify ./index.js > $@
+	@$(BIN)/browserify  --transform [ reactify --harmony ] ./index.js > $@
