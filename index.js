@@ -23,7 +23,14 @@ var TextareaAutosize = React.createClass({
     if (
       prevProps.style ||
       prevProps.value !== this.props.value ||
-      this.props.value === undefined
+      // We need to call `recalculateSize()` if component is used in
+      // uncontrolled mode because the `<texarea />` will re-render itself in
+      // that case.
+      //
+      // We check for `== null` to cover both `null` and `undefined`,
+      // this is what React does check if component is used in uncontrolled
+      // mode.
+      this.props.value == null
     ) {
       this.recalculateSize();
     }
