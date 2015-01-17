@@ -17,6 +17,11 @@ var TextareaAutosize = React.createClass({
 
   componentDidMount: function() {
     this.recalculateSize();
+    window.addEventListener('resize', this.recalculateSize);
+  },
+
+  componentWillUnmount: function() {
+    window.removeEventListener('resize', this.recalculateSize);
   },
 
   componentDidUpdate: function(prevProps) {
