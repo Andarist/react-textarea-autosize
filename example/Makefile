@@ -17,5 +17,5 @@ publish:
 	git commit -m 'Docs'
 	git push -f git@github.com:andreypopp/react-textarea-autosize.git gh-pages
 
-bundle.js: ../index.js index.js ../package.json
+bundle.js: index.js
 	@$(BIN)/browserify  --transform [ reactify --harmony ] ./index.js > $@

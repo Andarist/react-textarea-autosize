@@ -11,6 +11,7 @@ var Demo = React.createClass({
         <div>
           <h2>Controlled mode</h2>
           <TextareaAutosize
+            useCacheForDOMMeasurements
             value={this.state.value}
             onChange={this.onChange}
             />

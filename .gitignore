@@ -2,3 +2,4 @@ node_modules
 components
 example/bundle.js
 example/.git
+lib

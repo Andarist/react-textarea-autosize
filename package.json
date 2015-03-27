@@ -8,7 +8,7 @@
     "url": "http://andreypopp.com"
   },
   "dependencies": {
-    "object-assign": "^2.0.0"
+    "babel-runtime": "^4.7.16"
   },
   "homepage": "https://github.com/andreypopp/react-textarea-autosize",
   "keywords": [
@@ -19,7 +19,7 @@
     "autosize"
   ],
   "license": "MIT",
-  "main": "index.js",
+  "main": "lib/TextareaAutosize.js",
   "peerDependencies": {
     "react": ">=0.10.0"
   },
@@ -28,6 +28,7 @@
     "url": "git://github.com/andreypopp/react-textarea-autosize.git"
   },
   "devDependencies": {
+    "babel": "^4.7.16",
     "jsxhint": "^0.5.0"
   }
 }
