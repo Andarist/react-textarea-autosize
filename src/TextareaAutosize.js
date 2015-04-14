@@ -36,6 +36,7 @@ export default class TextareaAutosize extends React.Component {
   }
 
   constructor(props) {
+    super(props);
     this.props = props;
     this.state = {height: null};
   }
