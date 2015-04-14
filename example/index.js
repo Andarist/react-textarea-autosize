@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var TextareaAutosize = require('../');
+var TextareaAutosize = require('../src/TextareaAutosize');
 
 var Demo = React.createClass({
 
