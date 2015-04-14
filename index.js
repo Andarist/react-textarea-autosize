@@ -74,8 +74,15 @@ var TextareaAutosize = React.createClass({
     }
 
     var node = this.getDOMNode();
+    
+    // Record the X and Y screen position so the window doesn't bounce if
+    // the textarea is longer than the whole screen.
+    var currentScrollPositionX = window.pageXOffset;
+    var currentScrollPositionY = window.pageYOffset;
     node.style.height = 'auto';
     node.style.height = (node.scrollHeight - diff) + 'px';
+    // Set the X and Y screen position to the stored values.
+    window.scrollTo(currentScrollPositionX, currentScrollPositionY);
   }
 });
 
