@@ -16,6 +16,8 @@ const SIZING_STYLE = [
   'line-height',
   'padding-top',
   'padding-bottom',
+  'font-family',
+  'font-weight',
   'font-size',
   'width',
   'padding-left',
