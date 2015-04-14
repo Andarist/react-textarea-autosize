@@ -25,6 +25,12 @@
     "url": "git://github.com/andreypopp/react-textarea-autosize.git"
   },
   "devDependencies": {
-    "babel": "^5.1.0"
+    "babel": "^5.1.0",
+    "babel-eslint": "^3.0.1",
+    "eslint": "^0.19.0",
+    "eslint-plugin-react": "^2.1.0"
+  },
+  "dependencies": {
+    "autobind-decorator": "^1.1.0"
   }
 }

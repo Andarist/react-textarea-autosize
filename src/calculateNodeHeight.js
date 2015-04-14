@@ -24,7 +24,7 @@ const SIZING_STYLE = [
   'padding-right'
 ];
 
-let computedStyleCache = {}
+let computedStyleCache = {};
 let hiddenTextarea;
 
 export default function calculateNodeHeight(uiTextNode, newContent, useCache = false) {
@@ -40,8 +40,8 @@ export default function calculateNodeHeight(uiTextNode, newContent, useCache = f
   // Need to have the overflow attribute to hide the scrollbar otherwise
   // text-lines will not calculated properly as the shadow will technically be
   // narrower for content
-  hiddenTextarea.setAttribute('style', sizingStyle + ";" + HIDDEN_TEXTAREA_STYLE);
-  hiddenTextarea.value = typeof newContent == "string" ? newContent : uiTextNode.value;
+  hiddenTextarea.setAttribute('style', sizingStyle + ';' + HIDDEN_TEXTAREA_STYLE);
+  hiddenTextarea.value = typeof newContent === 'string' ? newContent : uiTextNode.value;
   return hiddenTextarea.scrollHeight - sumVerticalPaddings;
 }
 
@@ -63,9 +63,9 @@ function calculateNodeStyling(node, useCache = false) {
   // If the textarea is set to border-box, it's not necessary to
   // subtract the padding.
   if (
-    compStyle.getPropertyValue('box-sizing') !== "border-box" &&
-    compStyle.getPropertyValue('-moz-box-sizing') !== "border-box" &&
-    compStyle.getPropertyValue('-webkit-box-sizing') !== "border-box"
+    compStyle.getPropertyValue('box-sizing') !== 'border-box' &&
+    compStyle.getPropertyValue('-moz-box-sizing') !== 'border-box' &&
+    compStyle.getPropertyValue('-webkit-box-sizing') !== 'border-box'
   ) {
     sumPaddings = (
       parseFloat(compStyle.getPropertyValue('padding-bottom')) +
@@ -74,7 +74,9 @@ function calculateNodeStyling(node, useCache = false) {
   }
 
   let nodeInfo = {
-    sizingStyle: SIZING_STYLE.map(styleName => styleName + ':' + compStyle.getPropertyValue(styleName)).join(';'),
+    sizingStyle: SIZING_STYLE
+      .map(name => `${name}:${compStyle.getPropertyValue(name)}`)
+      .join(';'),
     sumVerticalPaddings: sumPaddings
   };
 

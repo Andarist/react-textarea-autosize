@@ -9,6 +9,12 @@ BABEL_OPTS = \
 
 build: $(LIB)
 
+test::
+	@echo No tests...
+
+lint::
+	@$(BIN)/eslint $(SRC)
+
 clean:
 	@rm -f $(LIB)
 

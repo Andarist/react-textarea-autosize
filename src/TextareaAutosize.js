@@ -1,11 +1,12 @@
 /**
  * <TextareaAutosize />
  */
- 
+
 import React from 'react';
 import emptyFunction from 'react/lib/emptyFunction';
+import autobind from 'autobind-decorator';
 import calculateNodeHeight from './calculateNodeHeight';
- 
+
 export default class TextareaAutosize extends React.Component {
 
   static propTypes = {
@@ -37,14 +38,11 @@ export default class TextareaAutosize extends React.Component {
   constructor(props) {
     this.props = props;
     this.state = {height: null};
-    // Auto-bind important listeners.
-    this._onChange = this._onChange.bind(this);
-    this._resizeComponent = this._resizeComponent.bind(this);
   }
 
   render() {
     let {valueLink, onChange, ...props} = this.props;
-    if (typeof valueLink == 'object') {
+    if (typeof valueLink === 'object') {
       props.value = this.props.valueLink.value;
     }
     props.style = {
@@ -63,11 +61,12 @@ export default class TextareaAutosize extends React.Component {
     onNextFrame(this._resizeComponent);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     // Re-render with the new content then recalculate the height as required.
     onNextFrame(this._resizeComponent);
   }
 
+  @autobind
   _onChange(e) {
     this._resizeComponent();
     let {valueLink, onChange} = this.props;
@@ -78,6 +77,7 @@ export default class TextareaAutosize extends React.Component {
     }
   }
 
+  @autobind
   _resizeComponent() {
     let {useCacheForDOMMeasurements} = this.props;
     let height = calculateNodeHeight(
