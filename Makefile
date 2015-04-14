@@ -4,10 +4,8 @@ LIB = $(SRC:src/%=lib/%)
 TESTS = $(wildcard src/__tests__/*-test.js)
 
 BABEL_OPTS = \
-	--experimental \
-	--playground \
-	--source-maps-inline \
-	--optional runtime \
+	--stage 0 \
+	--source-maps-inline
 
 build: $(LIB)
 

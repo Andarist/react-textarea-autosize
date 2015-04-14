@@ -7,9 +7,6 @@
     "email": "8mayday@gmail.com",
     "url": "http://andreypopp.com"
   },
-  "dependencies": {
-    "babel-runtime": "^4.7.16"
-  },
   "homepage": "https://github.com/andreypopp/react-textarea-autosize",
   "keywords": [
     "react",
@@ -28,7 +25,6 @@
     "url": "git://github.com/andreypopp/react-textarea-autosize.git"
   },
   "devDependencies": {
-    "babel": "^4.7.16",
-    "jsxhint": "^0.5.0"
+    "babel": "^5.1.0"
   }
 }
