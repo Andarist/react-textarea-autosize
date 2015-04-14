@@ -4,7 +4,7 @@
 
 import React from 'react';
 import emptyFunction from 'react/lib/emptyFunction';
-import autobind from 'autobind-decorator';
+import autobind from 'autobind-decorator';  //eslint-disable-line no-unused-vars
 import calculateNodeHeight from './calculateNodeHeight';
 
 export default class TextareaAutosize extends React.Component {
