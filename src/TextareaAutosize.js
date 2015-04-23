@@ -78,7 +78,6 @@ export default class TextareaAutosize extends React.Component {
     let {useCacheForDOMMeasurements} = this.props;
     let height = calculateNodeHeight(
       React.findDOMNode(this),
-      undefined,
       useCacheForDOMMeasurements);
     this.setState({height});
   }
