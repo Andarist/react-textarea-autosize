@@ -54,11 +54,7 @@ export default class TextareaAutosize extends React.Component {
   }
 
   componentDidMount() {
-    // Timeout seems to be required for all media queries to be applied
-    // because if the textarea has a class then it's width all kinds of wrong
-    // so we have to do this in the next animation frame
-    // rAF works faster than setTimeout in modern browsers.
-    onNextFrame(this._resizeComponent);
+    this._resizeComponent();
   }
 
   componentWillReceiveProps() {
