@@ -7,9 +7,6 @@
     "email": "8mayday@gmail.com",
     "url": "http://andreypopp.com"
   },
-  "dependencies": {
-    "object-assign": "^2.0.0"
-  },
   "homepage": "https://github.com/andreypopp/react-textarea-autosize",
   "keywords": [
     "react",
@@ -19,15 +16,21 @@
     "autosize"
   ],
   "license": "MIT",
-  "main": "index.js",
+  "main": "lib/TextareaAutosize.js",
   "peerDependencies": {
-    "react": ">=0.10.0"
+    "react": ">= 0.13.0, < 0.14.0"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/andreypopp/react-textarea-autosize.git"
   },
   "devDependencies": {
-    "jsxhint": "^0.5.0"
+    "babel": "^5.1.0",
+    "babel-eslint": "^3.0.1",
+    "eslint": "^0.19.0",
+    "eslint-plugin-react": "^2.1.0"
+  },
+  "dependencies": {
+    "autobind-decorator": "^1.1.0"
   }
 }

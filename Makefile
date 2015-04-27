@@ -1,29 +1,40 @@
-BIN = ./node_modules/.bin
+BIN = node_modules/.bin
+SRC = $(wildcard src/*.js)
+LIB = $(SRC:src/%=lib/%)
+TESTS = $(wildcard src/__tests__/*-test.js)
 
-all:
+BABEL_OPTS = \
+	--stage 0 \
+	--source-maps-inline
 
-lint:
-	@$(BIN)/jsxhint --force-transform ./index.js
+build: $(LIB)
 
-install:
-	npm install
+test::
+	@echo No tests...
 
-test:
-	#@$(BIN)/mocha complex -b -R spec ./spec.js
+lint::
+	@$(BIN)/eslint $(SRC)
 
-release-patch: test
+clean:
+	@rm -f $(LIB)
+
+sloc:
+	@$(BIN)/sloc ./src
+
+release-patch: lint test build
 	@$(call release,patch)
 
-release-minor: test
+release-minor: lint test build
 	@$(call release,minor)
 
-release-major: test
+release-major: lint test build
 	@$(call release,major)
 
-publish:
-	git push --tags origin HEAD:master
-	npm publish
+publish: build
+	@git push --tags origin HEAD:master
+	@npm publish
 
-define release
-	npm version $(1)
-endef
+lib/%.js: src/%.js
+	@echo "building $@"
+	@mkdir -p $(@D)
+	@$(BIN)/babel $(BABEL_OPTS) -o $@ $<
