@@ -21,7 +21,9 @@ const SIZING_STYLE = [
   'font-size',
   'width',
   'padding-left',
-  'padding-right'
+  'padding-right',
+  'border-width',
+  'box-sizing'
 ];
 
 let computedStyleCache = {};
