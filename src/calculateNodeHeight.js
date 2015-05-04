@@ -29,7 +29,7 @@ const SIZING_STYLE = [
 let computedStyleCache = {};
 let hiddenTextarea;
 
-export default function calculateNodeHeight(uiTextNode, useCache = false) {
+export default function calculateNodeHeight(uiTextNode, useCache = false, minRows = null) {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
     document.body.appendChild(hiddenTextarea);
@@ -43,8 +43,23 @@ export default function calculateNodeHeight(uiTextNode, useCache = false) {
   // text-lines will not calculated properly as the shadow will technically be
   // narrower for content
   hiddenTextarea.setAttribute('style', sizingStyle + ';' + HIDDEN_TEXTAREA_STYLE);
-  hiddenTextarea.value = uiTextNode.value;
+  let value = uiTextNode.value;
+  if (minRows !== null) {
+    let rows = countRows(value);
+    if (rows < minRows) {
+      value = value + generateRows(minRows - rows);
+    }
+  }
+  hiddenTextarea.value = value;
   return hiddenTextarea.scrollHeight - sumVerticalPaddings;
+}
+
+function generateRows(n) {
+  return new Array(n + 1).join('\n');
+}
+
+function countRows(text) {
+  return text.split('\n').length;
 }
 
 function calculateNodeStyling(node, useCache = false) {

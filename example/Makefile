@@ -21,4 +21,4 @@ bundle.js: index.js
 	@$(BIN)/browserify --debug --transform [ babelify --stage 0 ] ./index.js > $@
 
 watch:
-	@$(BIN)/watchify -v --debug --transform [ babelify --stage 0 ] ./index.js -o $@
+	@$(BIN)/watchify -v --debug --transform [ babelify --stage 0 ] ./index.js -o ./bundle.js
