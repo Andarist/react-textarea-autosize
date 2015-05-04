@@ -1,7 +1,7 @@
 {
   "name": "react-textarea-autosize",
   "description": "textarea component for React which grows with content",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": {
     "name": "Andrey Popp",
     "email": "8mayday@gmail.com",
@@ -30,6 +30,5 @@
     "eslint": "^0.19.0",
     "eslint-plugin-react": "^2.1.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
