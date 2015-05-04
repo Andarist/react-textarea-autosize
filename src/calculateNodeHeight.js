@@ -44,14 +44,18 @@ export default function calculateNodeHeight(uiTextNode, useCache = false, minRow
   // narrower for content
   hiddenTextarea.setAttribute('style', sizingStyle + ';' + HIDDEN_TEXTAREA_STYLE);
   let value = uiTextNode.value;
+
   if (minRows !== null) {
-    let rows = countRows(value);
-    if (rows < minRows) {
-      value = value + generateRows(minRows - rows);
-    }
+    // measure height of a textarea with a single row
+    hiddenTextarea.value = 'x';
+    let singleRowHeight = hiddenTextarea.scrollHeight - sumVerticalPaddings;
+    hiddenTextarea.value = value;
+    let height = hiddenTextarea.scrollHeight - sumVerticalPaddings;
+    return Math.max(singleRowHeight * minRows, height);
+  } else {
+    hiddenTextarea.value = value;
+    return hiddenTextarea.scrollHeight - sumVerticalPaddings;
   }
-  hiddenTextarea.value = value;
-  return hiddenTextarea.scrollHeight - sumVerticalPaddings;
 }
 
 function generateRows(n) {
