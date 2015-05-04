@@ -1,5 +1,6 @@
 'use strict';
 
+require('babel/polyfill');
 var React = require('react');
 var TextareaAutosize = require('../src/TextareaAutosize');
 
