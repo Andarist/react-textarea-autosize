@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "babel": "^5.2.9",
     "babelify": "^6.0.2",
     "browserify": "^6.0.0",
     "watchify": "^3.1.0"

@@ -4,7 +4,6 @@
 
 import React from 'react';
 import emptyFunction from 'react/lib/emptyFunction';
-import autobind from 'autobind-decorator';  //eslint-disable-line no-unused-vars
 import calculateNodeHeight from './calculateNodeHeight';
 
 export default class TextareaAutosize extends React.Component {
@@ -38,6 +37,8 @@ export default class TextareaAutosize extends React.Component {
   constructor(props) {
     super(props);
     this.state = {height: null};
+    this._onChange = this._onChange.bind(this);
+    this._resizeComponent = this._resizeComponent.bind(this);
   }
 
   render() {
@@ -62,7 +63,6 @@ export default class TextareaAutosize extends React.Component {
     onNextFrame(this._resizeComponent);
   }
 
-  @autobind
   _onChange(e) {
     this._resizeComponent();
     let {valueLink, onChange} = this.props;
@@ -73,7 +73,6 @@ export default class TextareaAutosize extends React.Component {
     }
   }
 
-  @autobind
   _resizeComponent() {
     let {useCacheForDOMMeasurements} = this.props;
     let height = calculateNodeHeight(
