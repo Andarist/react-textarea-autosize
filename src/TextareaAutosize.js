@@ -47,8 +47,8 @@ export default class TextareaAutosize extends React.Component {
       props.value = this.props.valueLink.value;
     }
     props.style = {
-      ...props.style,
       overflow: 'hidden',
+      ...props.style,
       height: this.state.height
     };
     return <textarea {...props} onChange={this._onChange} />;
