@@ -98,14 +98,10 @@ export default class TextareaAutosize extends React.Component {
 
 }
 
-if (process.browser) {
-
-  let onNextFrame = window.requestAnimationFrame;
-
-  if (onNextFrame === undefined) {
-    onNextFrame = function onNextFrame(cb) {
-      window.setTimeout(cb, 1);
-    };
+function onNextFrame(cb) {
+  if (window.requestAnimationFrame) {
+    window.requestAnimationFrame(cb);
+  } else {
+    window.setTimeout(cb, 1);
   }
-
 }
