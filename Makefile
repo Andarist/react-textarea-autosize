@@ -30,6 +30,8 @@ release-minor: lint test build
 release-major: lint test build
 	@$(call release,major)
 
+release = npm version $(1)
+
 publish: build
 	@git push --tags origin HEAD:master
 	@npm publish
