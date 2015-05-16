@@ -48,33 +48,23 @@ export default function calculateNodeHeight(uiTextNode,
 
   hiddenTextarea.value = uiTextNode.value;
   let height = hiddenTextarea.scrollHeight - sumVerticalPaddings;
+  let minHeight = -Infinity;
+  let maxHeight = Infinity;
 
   if (minRows !== null || maxRows !== null) {
     // measure height of a textarea with a single row
     hiddenTextarea.value = 'x';
     let singleRowHeight = hiddenTextarea.scrollHeight - sumVerticalPaddings;
     if (minRows !== null) {
-      let minHeight = singleRowHeight * minRows;
-      return {
-        height: Math.max(minHeight, height),
-        minHeight,
-        maxHeight: Infinity
-      };
+      minHeight = singleRowHeight * minRows;
+      height = Math.max(minHeight, height);
     }
     if (maxRows !== null) {
-      let maxHeight = singleRowHeight * maxRows;
-      return {
-        height: Math.min(maxHeight, height),
-        minHeight: -Infinity,
-        maxHeight
-      };
+      maxHeight = singleRowHeight * maxRows;
+      height = Math.min(maxHeight, height);
     }
   }
-  return {
-    height,
-    minHeight: -Infinity,
-    maxHeight: Infinity
-  };
+  return {height, minHeight, maxHeight};
 }
 
 function calculateNodeStyling(node, useCache = false) {
