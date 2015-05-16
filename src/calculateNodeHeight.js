@@ -29,7 +29,9 @@ const SIZING_STYLE = [
 let computedStyleCache = {};
 let hiddenTextarea;
 
-export default function calculateNodeHeight(uiTextNode, useCache = false, minRows = null, maxRows = null) {
+export default function calculateNodeHeight(uiTextNode,
+    useCache = false,
+    minRows = null, maxRows = null) {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
     document.body.appendChild(hiddenTextarea);
