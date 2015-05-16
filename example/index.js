@@ -9,6 +9,21 @@ var Demo = React.createClass({
     return (
       <div>
         <div>
+          <h2>Component with maxRows</h2>
+          <pre>
+{`
+  <TextareaAutosize
+    maxRows={5}
+    defaultValue="Just a single line..."
+    />
+`}
+          </pre>
+          <TextareaAutosize
+            maxRows={4}
+            defaultValue="Just a single line..."
+            />
+        </div>
+        <div>
           <h2>Component with maxHeight</h2>
           <pre>
 {`
@@ -19,7 +34,6 @@ var Demo = React.createClass({
 `}
           </pre>
           <TextareaAutosize
-            rows={4}
             style={{maxHeight: 300}}
             defaultValue="Just a single line..."
             />

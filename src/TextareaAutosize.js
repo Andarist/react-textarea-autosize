@@ -26,7 +26,22 @@ export default class TextareaAutosize extends React.Component {
      * This optimization doesn't work if we dynamically style <textarea />
      * component.
      */
-    useCacheForDOMMeasurements: React.PropTypes.bool
+    useCacheForDOMMeasurements: React.PropTypes.bool,
+
+    /**
+     * Minimal numbder of rows to show.
+     */
+    rows: React.PropTypes.number,
+
+    /**
+     * Alias for `rows`.
+     */
+    minRows: React.PropTypes.number,
+
+    /**
+     * Maximum number of rows to show.
+     */
+    maxRows: React.PropTypes.number
   }
 
   static defaultProps = {
@@ -36,7 +51,11 @@ export default class TextareaAutosize extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {height: null};
+    this.state = {
+      height: null,
+      minHeight: -Infinity,
+      maxHeight: Infinity
+    };
     this._onChange = this._onChange.bind(this);
     this._resizeComponent = this._resizeComponent.bind(this);
   }
@@ -51,7 +70,10 @@ export default class TextareaAutosize extends React.Component {
       ...props.style,
       height: this.state.height
     };
-    if (!props.style.maxHeight || props.style.maxHeight > props.style.height) {
+    let maxHeight = Math.max(
+      props.style.maxHeight ? props.style.maxHeight : Infinity,
+      this.state.maxHeight);
+    if (maxHeight < this.state.height) {
       props.style.overflow = 'hidden';
     }
     return <textarea {...props} onChange={this._onChange} />;
@@ -78,11 +100,11 @@ export default class TextareaAutosize extends React.Component {
 
   _resizeComponent() {
     let {useCacheForDOMMeasurements} = this.props;
-    let height = calculateNodeHeight(
+    this.setState(calculateNodeHeight(
       React.findDOMNode(this),
       useCacheForDOMMeasurements,
-      this.props.rows);
-    this.setState({height});
+      this.props.rows || this.props.minRows,
+      this.props.maxRows));
   }
 
   /**

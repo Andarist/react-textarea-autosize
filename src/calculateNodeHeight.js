@@ -29,7 +29,7 @@ const SIZING_STYLE = [
 let computedStyleCache = {};
 let hiddenTextarea;
 
-export default function calculateNodeHeight(uiTextNode, useCache = false, minRows = null) {
+export default function calculateNodeHeight(uiTextNode, useCache = false, minRows = null, maxRows = null) {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
     document.body.appendChild(hiddenTextarea);
@@ -44,17 +44,35 @@ export default function calculateNodeHeight(uiTextNode, useCache = false, minRow
   // narrower for content
   hiddenTextarea.setAttribute('style', sizingStyle + ';' + HIDDEN_TEXTAREA_STYLE);
 
-  if (minRows !== null) {
+  hiddenTextarea.value = uiTextNode.value;
+  let height = hiddenTextarea.scrollHeight - sumVerticalPaddings;
+
+  if (minRows !== null || maxRows !== null) {
     // measure height of a textarea with a single row
     hiddenTextarea.value = 'x';
     let singleRowHeight = hiddenTextarea.scrollHeight - sumVerticalPaddings;
-    hiddenTextarea.value = uiTextNode.value;
-    let height = hiddenTextarea.scrollHeight - sumVerticalPaddings;
-    return Math.max(singleRowHeight * minRows, height);
-  } else {
-    hiddenTextarea.value = uiTextNode.value;
-    return hiddenTextarea.scrollHeight - sumVerticalPaddings;
+    if (minRows !== null) {
+      let minHeight = singleRowHeight * minRows;
+      return {
+        height: Math.max(minHeight, height),
+        minHeight,
+        maxHeight: Infinity
+      };
+    }
+    if (maxRows !== null) {
+      let maxHeight = singleRowHeight * maxRows;
+      return {
+        height: Math.min(maxHeight, height),
+        minHeight: -Infinity,
+        maxHeight
+      };
+    }
   }
+  return {
+    height,
+    minHeight: -Infinity,
+    maxHeight: Infinity
+  };
 }
 
 function calculateNodeStyling(node, useCache = false) {
