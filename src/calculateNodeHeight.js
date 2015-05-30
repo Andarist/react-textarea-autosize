@@ -13,12 +13,14 @@ const HIDDEN_TEXTAREA_STYLE = `
 `;
 
 const SIZING_STYLE = [
+  'letter-spacing',
   'line-height',
   'padding-top',
   'padding-bottom',
   'font-family',
   'font-weight',
   'font-size',
+  'text-transform',
   'width',
   'padding-left',
   'padding-right',
