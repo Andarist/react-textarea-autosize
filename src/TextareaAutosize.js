@@ -85,7 +85,12 @@ export default class TextareaAutosize extends React.Component {
 
   componentWillReceiveProps() {
     // Re-render with the new content then recalculate the height as required.
-    onNextFrame(this._resizeComponent);
+    this.onNextFrameActionId = onNextFrame(this._resizeComponent);
+  }
+  
+  componentWillUnmount() {
+    //remove any scheduled events to prevent manipulating the node after it's been unmounted
+    if(this.onNextFrameActionId) clearNextFrameAction(this.onNextFrameActionId);
   }
 
   _onChange(e) {
@@ -125,8 +130,15 @@ export default class TextareaAutosize extends React.Component {
 
 function onNextFrame(cb) {
   if (window.requestAnimationFrame) {
-    window.requestAnimationFrame(cb);
+    return window.requestAnimationFrame(cb);
+  }
+  return window.setTimeout(cb, 1);
+}
+
+function clearNextFrameAction(nextFrameId) {
+  if (window.cancelAnimationFrame) {
+    window.cancelAnimationFrame(nextFrameId);
   } else {
-    window.setTimeout(cb, 1);
+    window.clearTimeout(nextFrameId);
   }
 }
