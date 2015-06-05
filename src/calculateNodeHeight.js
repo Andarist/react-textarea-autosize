@@ -41,7 +41,7 @@ export default function calculateNodeHeight(uiTextNode,
 
   // Copy all CSS properties that have an impact on the height of the content in
   // the textbox
-  let {sizingStyle, sumVerticalPaddings} = calculateNodeStyling(uiTextNode, useCache);
+  let {sizingStyle, heightAdjustment} = calculateNodeStyling(uiTextNode, useCache);
 
   // Need to have the overflow attribute to hide the scrollbar otherwise
   // text-lines will not calculated properly as the shadow will technically be
@@ -49,14 +49,14 @@ export default function calculateNodeHeight(uiTextNode,
   hiddenTextarea.setAttribute('style', sizingStyle + ';' + HIDDEN_TEXTAREA_STYLE);
 
   hiddenTextarea.value = uiTextNode.value;
-  let height = hiddenTextarea.scrollHeight - sumVerticalPaddings;
+  let height = hiddenTextarea.scrollHeight + heightAdjustment;
   let minHeight = -Infinity;
   let maxHeight = Infinity;
 
   if (minRows !== null || maxRows !== null) {
     // measure height of a textarea with a single row
     hiddenTextarea.value = 'x';
-    let singleRowHeight = hiddenTextarea.scrollHeight - sumVerticalPaddings;
+    let singleRowHeight = hiddenTextarea.scrollHeight + heightAdjustment;
     if (minRows !== null) {
       minHeight = singleRowHeight * minRows;
       height = Math.max(minHeight, height);
@@ -82,16 +82,23 @@ function calculateNodeStyling(node, useCache = false) {
 
   let compStyle = window.getComputedStyle(node);
 
-  let sumPaddings = 0;
+  // scrollHeight = content + padding; depending on what box-sizing is
+  // set to, we'll need an adjustment when we set the new height
+  let heightAdjustment = 0;
 
-  // If the textarea is set to border-box, it's not necessary to
-  // subtract the padding.
-  if (
-    compStyle.getPropertyValue('box-sizing') !== 'border-box' &&
-    compStyle.getPropertyValue('-moz-box-sizing') !== 'border-box' &&
-    compStyle.getPropertyValue('-webkit-box-sizing') !== 'border-box'
-  ) {
-    sumPaddings = (
+  let boxSizing = (
+    compStyle.getPropertyValue('box-sizing') ||
+    compStyle.getPropertyValue('-moz-box-sizing') ||
+    compStyle.getPropertyValue('-webkit-box-sizing')
+  );
+  // border-box: add border, since height = content + padding + border
+  if (boxSizing === 'border-box') {
+    heightAdjustment = (
+      parseFloat(compStyle.getPropertyValue('border-bottom')) +
+      parseFloat(compStyle.getPropertyValue('border-top'))
+    );
+  } else if (boxSizing === 'content-box') { // remove padding, since height = content
+    heightAdjustment = -(
       parseFloat(compStyle.getPropertyValue('padding-bottom')) +
       parseFloat(compStyle.getPropertyValue('padding-top'))
     );
@@ -101,7 +108,7 @@ function calculateNodeStyling(node, useCache = false) {
     sizingStyle: SIZING_STYLE
       .map(name => `${name}:${compStyle.getPropertyValue(name)}`)
       .join(';'),
-    sumVerticalPaddings: sumPaddings
+    heightAdjustment
   };
 
   if (useCache && nodeRef) {
