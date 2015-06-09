@@ -94,8 +94,8 @@ function calculateNodeStyling(node, useCache = false) {
   // border-box: add border, since height = content + padding + border
   if (boxSizing === 'border-box') {
     heightAdjustment = (
-      parseFloat(compStyle.getPropertyValue('border-bottom')) +
-      parseFloat(compStyle.getPropertyValue('border-top'))
+      parseFloat(compStyle.getPropertyValue('border-bottom-width')) +
+      parseFloat(compStyle.getPropertyValue('border-top-width'))
     );
   } else if (boxSizing === 'content-box') { // remove padding, since height = content
     heightAdjustment = -(
