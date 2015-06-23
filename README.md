@@ -15,13 +15,15 @@ React.renderComponent(
   <div>
     <Textarea></Textarea>
   </div>,
-  document.body);
+  document.getElementById('element'));
 ```
 
 ## Install
+
 `npm install react-textarea-autosize`
 
 ## Demo
+
 http://andreypopp.github.io/react-textarea-autosize/
 
 ## Development
