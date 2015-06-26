@@ -103,6 +103,21 @@ var Demo = React.createClass({
             defaultValue={this.state.value}
             />
         </div>
+        <div>
+          <h2>Receive message on height change.</h2>
+          <pre>
+{`
+  <TextareaAutosize
+    useCacheForDOMMeasurements
+    onHeightChange={height => console.log(height)}
+    />
+`}
+          </pre>
+          <TextareaAutosize
+            useCacheForDOMMeasurements
+            onHeightChange={height => console.log(height)}
+            />
+        </div>
       </div>
     );
   },
