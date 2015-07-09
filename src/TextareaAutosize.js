@@ -20,6 +20,11 @@ export default class TextareaAutosize extends React.Component {
     onChange: React.PropTypes.func,
 
     /**
+     * Callback on height changes.
+     */
+    onHeightChange: React.PropTypes.func,
+
+    /**
      * Try to cache DOM measurements performed by component so that we don't
      * touch DOM when it's not needed.
      *
@@ -46,6 +51,7 @@ export default class TextareaAutosize extends React.Component {
 
   static defaultProps = {
     onChange: emptyFunction,
+    onHeightChange: emptyFunction,
     useCacheForDOMMeasurements: false
   }
 
@@ -86,6 +92,13 @@ export default class TextareaAutosize extends React.Component {
   componentWillReceiveProps() {
     // Re-render with the new content then recalculate the height as required.
     this.onNextFrameActionId = onNextFrame(this._resizeComponent);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // Invoke callback when old height does not equal to new one.
+    if (this.state.height !== prevState.height) {
+      this.props.onHeightChange(this.state.height);
+    }
   }
 
   componentWillUnmount() {
