@@ -26,6 +26,25 @@ var Demo = React.createClass({
             />
         </div>
         <div>
+          <h2>Component with maxRows and minRows (box-sizing: border-box)</h2>
+          <pre>
+{`
+  <TextareaAutosize
+    style={{boxSizing: 'border-box'}}
+    minRows={3}
+    maxRows={6}
+    defaultValue="Just a single line..."
+    />
+`}
+          </pre>
+          <TextareaAutosize
+            style={{boxSizing: 'border-box'}}
+            minRows={3}
+            maxRows={6}
+            defaultValue="Just a single line..."
+            />
+        </div>
+        <div>
           <h2>Component with maxRows</h2>
           <pre>
 {`
@@ -36,7 +55,7 @@ var Demo = React.createClass({
 `}
           </pre>
           <TextareaAutosize
-            maxRows={4}
+            maxRows={5}
             defaultValue="Just a single line..."
             />
         </div>
