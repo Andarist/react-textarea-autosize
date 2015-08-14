@@ -105,8 +105,8 @@ export default class TextareaAutosize extends React.Component {
   }
 
   componentWillUnmount() {
-    //remove any scheduled events to prevent manipulating the node after it's
-    //been unmounted
+    // remove any scheduled events to prevent manipulating the node after it's
+    // been unmounted
     this.clearNextFrame();
   }
 
@@ -137,6 +137,7 @@ export default class TextareaAutosize extends React.Component {
 
   /**
    * Read the current value of <textarea /> from DOM.
+   * @return {String} value of <textarea />
    */
   get value(): string {
     return ReactDOM.findDOMNode(this).value;
@@ -144,6 +145,7 @@ export default class TextareaAutosize extends React.Component {
 
   /**
    * Put focus on a <textarea /> DOM element.
+   * @returns {undefined} No return value
    */
   focus() {
     ReactDOM.findDOMNode(this).focus();
