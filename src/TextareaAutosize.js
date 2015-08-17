@@ -3,8 +3,9 @@
  */
 
 import React from 'react';
-import emptyFunction from 'react/lib/emptyFunction';
 import calculateNodeHeight from './calculateNodeHeight';
+
+const emptyFunction = function(){};
 
 export default class TextareaAutosize extends React.Component {
 
