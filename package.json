@@ -17,8 +17,11 @@
   ],
   "license": "MIT",
   "main": "lib/TextareaAutosize.js",
+  "files": [
+    "src/"
+  ],
   "peerDependencies": {
-    "react": ">= 0.13.0 || ^0.14.0-alpha"
+    "react": "^0.13.0 || ^0.14.0 || 0.14.0-alpha || 0.14.0-rc1"
   },
   "repository": {
     "type": "git",
