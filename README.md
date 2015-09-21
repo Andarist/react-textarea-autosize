@@ -7,8 +7,6 @@ Autosize](http://www.jacklmoore.com/autosize/)!
 This module supports IE9 and above. PR welcome to add IE8 support.
 
 ```javascript
-require('babel/polyfill'); // polyfill is required
-
 var Textarea = require('react-textarea-autosize');
 
 React.renderComponent(
