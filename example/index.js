@@ -9,6 +9,12 @@ var Demo = React.createClass({
     return (
       <div>
         <div>
+          <TextareaAutosize
+            maxRows={3}
+            style={{lineHeight: 1, fontSize: 10, border: 0, boxSizing: 'border-box'}}
+            />
+        </div>
+        <div>
           <h2>Component with maxRows and minRows</h2>
           <pre>
 {`
