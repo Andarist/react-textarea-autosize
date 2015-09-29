@@ -5,7 +5,7 @@
 import React from 'react';
 import calculateNodeHeight from './calculateNodeHeight';
 
-const emptyFunction = function(){};
+const emptyFunction = function() {};
 
 export default class TextareaAutosize extends React.Component {
 
@@ -88,7 +88,7 @@ export default class TextareaAutosize extends React.Component {
 
   componentDidMount() {
     this._resizeComponent();
-    window.addEventListener("resize", this._resizeComponent);
+    window.addEventListener('resize', this._resizeComponent);
   }
 
   componentWillReceiveProps() {
@@ -108,7 +108,7 @@ export default class TextareaAutosize extends React.Component {
     //remove any scheduled events to prevent manipulating the node after it's
     //been unmounted
     this.clearNextFrame();
-    window.removeEventListener("resize", this._resizeComponent);
+    window.removeEventListener('resize', this._resizeComponent);
   }
 
   clearNextFrame() {
