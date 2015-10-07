@@ -35,7 +35,7 @@
     "no-sparse-arrays": 2,            // Disallow sparse arrays
     "no-unreachable": 2,              // Disallow unreachable statements after a return, throw, continue, or break statement
     "use-isnan": 2,                   // Disallow comparisons with the value NaN
-    "valid-jsdoc": 2,                 // Ensure JSDoc comments are valid (off by default)
+    "valid-jsdoc": 0,                 // Ensure JSDoc comments are valid (off by default)
     "valid-typeof": 2,                // Ensure that the results of typeof are compared against a valid string
 
 
