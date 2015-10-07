@@ -6,5 +6,9 @@
     "babelify": "^6.0.2",
     "browserify": "^6.0.0",
     "watchify": "^3.1.0"
+  },
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "react-dom": "^0.14.0"
   }
 }

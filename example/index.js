@@ -1,9 +1,16 @@
-'use strict';
 
-var React = require('react');
-var TextareaAutosize = require('../src/TextareaAutosize');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TextareaAutosize from '../src/TextareaAutosize';
 
-var Demo = React.createClass({
+class Demo extends React.Component {
+
+  constructor(props) {
+    super(props);
+    let value = (new Array(15)).join('\nLine.');
+    this.state = {value};
+    this.changeValueProgramatically = this.changeValueProgramatically.bind(this);
+  }
 
   render() {
     return (
@@ -145,17 +152,15 @@ var Demo = React.createClass({
         </div>
       </div>
     );
-  },
-
-  getInitialState() {
-    var value = (new Array(15)).join('\nLine.');
-    return {value};
-  },
+  }
 
   changeValueProgramatically() {
     var value = 'This value was set programatically';
     this.setState({value});
   }
-});
+}
 
-React.render(<Demo />, document.getElementById('main'));
+ReactDOM.render(
+  <Demo />,
+  document.getElementById('main')
+);
