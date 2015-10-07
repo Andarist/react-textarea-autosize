@@ -63,8 +63,10 @@ export default class TextareaAutosize extends React.Component {
       minHeight: -Infinity,
       maxHeight: Infinity
     };
+    this._rootDOMNode = null;
     this._onChange = this._onChange.bind(this);
     this._resizeComponent = this._resizeComponent.bind(this);
+    this._onRootDOMNode = this._onRootDOMNode.bind(this);
   }
 
   render() {
@@ -83,7 +85,13 @@ export default class TextareaAutosize extends React.Component {
     if (maxHeight < this.state.height) {
       props.style.overflow = 'hidden';
     }
-    return <textarea {...props} onChange={this._onChange} />;
+    return (
+      <textarea
+        {...props}
+        onChange={this._onChange}
+        ref={this._onRootDOMNode}
+        />
+    );
   }
 
   componentDidMount() {
@@ -117,6 +125,10 @@ export default class TextareaAutosize extends React.Component {
     }
   }
 
+  _onRootDOMNode(node) {
+    this._rootDOMNode = node;
+  }
+
   _onChange(e) {
     this._resizeComponent();
     let {valueLink, onChange} = this.props;
@@ -130,7 +142,7 @@ export default class TextareaAutosize extends React.Component {
   _resizeComponent() {
     let {useCacheForDOMMeasurements} = this.props;
     this.setState(calculateNodeHeight(
-      React.findDOMNode(this),
+      this._rootDOMNode,
       useCacheForDOMMeasurements,
       this.props.rows || this.props.minRows,
       this.props.maxRows));
@@ -140,14 +152,14 @@ export default class TextareaAutosize extends React.Component {
    * Read the current value of <textarea /> from DOM.
    */
   get value(): string {
-    return React.findDOMNode(this).value;
+    return this._rootDOMNode.value;
   }
 
   /**
    * Put focus on a <textarea /> DOM element.
    */
   focus() {
-    React.findDOMNode(this).focus();
+    this._rootDOMNode.focus();
   }
 
 }
