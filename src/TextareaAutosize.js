@@ -114,8 +114,8 @@ export default class TextareaAutosize extends React.Component {
   }
 
   componentWillUnmount() {
-    //remove any scheduled events to prevent manipulating the node after it's
-    //been unmounted
+    // Remove any scheduled events to prevent manipulating the node after it's
+    // been unmounted.
     this._clearNextFrame();
     window.removeEventListener('resize', this._resizeComponent);
   }
