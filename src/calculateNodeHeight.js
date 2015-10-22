@@ -3,13 +3,15 @@
  */
 
 const HIDDEN_TEXTAREA_STYLE = `
-  height:0;
-  visibility:hidden;
-  overflow:hidden;
-  position:absolute;
-  z-index:-1000;
-  top:0;
-  right:0
+  min-height:none !important;
+  max-height:none !important;
+  height:0 !important;
+  visibility:hidden !important;
+  overflow:hidden !important;
+  position:absolute !important;
+  z-index:-1000 !important;
+  top:0 !important;
+  right:0 !important
 `;
 
 const SIZING_STYLE = [
