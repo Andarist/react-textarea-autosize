@@ -157,6 +157,13 @@ export default class TextareaAutosize extends React.Component {
   }
 
   /**
+   * Set the current value of <textarea /> DOM node.
+   */
+  set value(val) {
+    this._rootDOMNode.value = val;
+  }
+
+  /**
    * Put focus on a <textarea /> DOM element.
    */
   focus() {
