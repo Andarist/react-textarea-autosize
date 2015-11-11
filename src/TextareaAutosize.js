@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import update from 'react-addons-update';
 import calculateNodeHeight from './calculateNodeHeight';
 
 const emptyFunction = function() {};
@@ -76,10 +77,9 @@ export default class TextareaAutosize extends React.Component {
     if (typeof valueLink === 'object') {
       props.value = this.props.valueLink.value;
     }
-    props.style = {
-      ...props.style,
+    props.style = update(props.style, {
       height: this.state.height
-    };
+    });
     let maxHeight = Math.max(
       props.style.maxHeight ? props.style.maxHeight : Infinity,
       this.state.maxHeight);
