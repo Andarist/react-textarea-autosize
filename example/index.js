@@ -141,13 +141,13 @@ class Demo extends React.Component {
 {`
   <TextareaAutosize
     useCacheForDOMMeasurements
-    onHeightChange={height => console.log(height)}
+    onHeightChange={(height, rowCount) => console.log(height, rowCount)}
     />
 `}
           </pre>
           <TextareaAutosize
             useCacheForDOMMeasurements
-            onHeightChange={height => console.log(height)}
+            onHeightChange={(height, rowCount) => console.log(height, rowCount)}
             />
         </div>
       </div>
