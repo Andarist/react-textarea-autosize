@@ -162,6 +162,34 @@ export default class TextareaAutosize extends React.Component {
   set value(val) {
     this._rootDOMNode.value = val;
   }
+  
+  /**
+   * Read the current selectionStart of <textarea /> from DOM.
+   */
+  get selectionStart(): string {
+    return this._rootDOMNode.selectionStart;
+  }
+
+  /**
+   * Set the current selectionStart of <textarea /> DOM node.
+   */
+  set selectionStart(val) {
+    this._rootDOMNode.selectionStart = val;
+  }
+  
+  /**
+   * Read the current selectionEnd of <textarea /> from DOM.
+   */
+  get selectionEnd(): string {
+    return this._rootDOMNode.selectionEnd;
+  }
+
+  /**
+   * Set the current selectionEnd of <textarea /> DOM node.
+   */
+  set selectionEnd(val) {
+    this._rootDOMNode.selectionEnd = val;
+  }
 
   /**
    * Put focus on a <textarea /> DOM element.
