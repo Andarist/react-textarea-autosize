@@ -18,7 +18,7 @@ class Demo extends React.Component {
         <div>
           <TextareaAutosize
             maxRows={3}
-            style={{textIndent: 60, lineHeight: 1, fontSize: 10, border: 0, boxSizing: 'border-box'}}
+            style={{lineHeight: 1, fontSize: 10, border: 0, boxSizing: 'border-box'}}
             />
         </div>
         <div>
@@ -35,7 +35,6 @@ class Demo extends React.Component {
           <TextareaAutosize
             minRows={3}
             maxRows={6}
-            style={{textIndent: 60}}
             defaultValue="Just a single line..."
             />
         </div>
