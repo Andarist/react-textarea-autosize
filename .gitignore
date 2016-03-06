@@ -3,4 +3,5 @@ components
 example/bundle.js
 example/node_modules
 example/.git
+example/npm-debug.log
 lib
