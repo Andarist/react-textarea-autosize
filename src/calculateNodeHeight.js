@@ -25,6 +25,7 @@ const SIZING_STYLE = [
   'text-rendering',
   'text-transform',
   'width',
+  'text-indent',
   'padding-left',
   'padding-right',
   'border-width',
