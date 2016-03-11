@@ -126,6 +126,10 @@ export default class TextareaAutosize extends React.Component {
     }
   }
 
+  addEventListener(type, listener, useCapture) {
+    this._rootDOMNode.addEventListener(type, listener, useCapture)
+  }
+
   _onRootDOMNode(node) {
     this._rootDOMNode = node;
   }
