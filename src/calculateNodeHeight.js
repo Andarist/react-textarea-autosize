@@ -3,7 +3,7 @@
  */
 
 const HIDDEN_TEXTAREA_STYLE = `
-  min-height:none !important;
+  min-height:0 !important;
   max-height:none !important;
   height:0 !important;
   visibility:hidden !important;
