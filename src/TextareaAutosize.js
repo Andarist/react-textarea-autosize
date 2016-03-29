@@ -21,6 +21,11 @@ export default class TextareaAutosize extends React.Component {
     onChange: React.PropTypes.func,
 
     /**
+     * Callback on key press.
+     */
+    onKeyPress: React.PropTypes.func,
+
+    /**
      * Callback on height changes.
      */
     onHeightChange: React.PropTypes.func,
@@ -52,6 +57,7 @@ export default class TextareaAutosize extends React.Component {
 
   static defaultProps = {
     onChange: emptyFunction,
+    onKeyPress: emptyFunction,
     onHeightChange: emptyFunction,
     useCacheForDOMMeasurements: false
   }
@@ -71,7 +77,7 @@ export default class TextareaAutosize extends React.Component {
   }
 
   render() {
-    let {valueLink, onChange, ...props} = this.props;
+    let {valueLink, onChange, onKeyPress, ...props} = this.props;
     props = {...props};
     if (typeof valueLink === 'object') {
       props.value = this.props.valueLink.value;
@@ -90,6 +96,7 @@ export default class TextareaAutosize extends React.Component {
       <textarea
         {...props}
         onChange={this._onChange}
+        onKeyPress={onKeyPress}
         ref={this._onRootDOMNode}
         />
     );
