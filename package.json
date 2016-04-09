@@ -8,6 +8,12 @@
     "url": "http://andreypopp.com"
   },
   "homepage": "https://github.com/andreypopp/react-textarea-autosize",
+  "eslintConfig": {
+    "extends": "prometheusresearch"
+  },
+  "babel": {
+    "presets": ["prometheusresearch"]
+  },
   "keywords": [
     "react",
     "react-component",
@@ -25,11 +31,11 @@
     "url": "git://github.com/andreypopp/react-textarea-autosize.git"
   },
   "devDependencies": {
-    "react": "^15.0.0",
-    "babel": "^5.1.0",
-    "babel-eslint": "^3.0.1",
-    "eslint": "^0.19.0",
-    "eslint-plugin-react": "^2.1.0"
+    "babel-cli": "^6.7.5",
+    "babel-preset-prometheusresearch": "^0.1.0",
+    "eslint": "^2.7.0",
+    "eslint-config-prometheusresearch": "^0.2.0",
+    "react": "^15.0.0"
   },
   "dependencies": {}
 }
