@@ -7,7 +7,11 @@ Autosize](http://www.jacklmoore.com/autosize/)!
 This module supports IE9 and above. PR welcome to add IE8 support.
 
 ```javascript
-var Textarea = require('react-textarea-autosize');
+import Textarea from 'react-textarea-autosize';
+
+// If you use CommonJS syntax:
+//
+// var Textarea = require('react-textarea-autosize').default;
 
 React.renderComponent(
   <div>
