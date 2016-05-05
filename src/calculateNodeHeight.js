@@ -40,7 +40,6 @@ export default function calculateNodeHeight(
     value,
     useCache = false,
     minRows = null, maxRows = null) {
-  console.log('calculateNodeHeight', JSON.stringify(value));
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
     document.body.appendChild(hiddenTextarea);
