@@ -37,9 +37,10 @@ let hiddenTextarea;
 
 export default function calculateNodeHeight(
     uiTextNode,
-    value = null,
+    value,
     useCache = false,
     minRows = null, maxRows = null) {
+  console.log('calculateNodeHeight', JSON.stringify(value));
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
     document.body.appendChild(hiddenTextarea);
@@ -56,7 +57,7 @@ export default function calculateNodeHeight(
   // text-lines will not calculated properly as the shadow will technically be
   // narrower for content
   hiddenTextarea.setAttribute('style', sizingStyle + ';' + HIDDEN_TEXTAREA_STYLE);
-  hiddenTextarea.value = value !== null ? value : uiTextNode.value || uiTextNode.placeholder || '';
+  hiddenTextarea.value = value;
 
   let minHeight = -Infinity;
   let maxHeight = Infinity;
