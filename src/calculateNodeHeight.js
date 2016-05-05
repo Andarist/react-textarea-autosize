@@ -35,13 +35,16 @@ const SIZING_STYLE = [
 let computedStyleCache = {};
 let hiddenTextarea;
 
-export default function calculateNodeHeight(uiTextNode,
+export default function calculateNodeHeight(
+    uiTextNode,
+    value = null,
     useCache = false,
     minRows = null, maxRows = null) {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
     document.body.appendChild(hiddenTextarea);
   }
+  console.log('calculateNodeHeight', value);
 
   // Copy all CSS properties that have an impact on the height of the content in
   // the textbox
@@ -54,7 +57,7 @@ export default function calculateNodeHeight(uiTextNode,
   // text-lines will not calculated properly as the shadow will technically be
   // narrower for content
   hiddenTextarea.setAttribute('style', sizingStyle + ';' + HIDDEN_TEXTAREA_STYLE);
-  hiddenTextarea.value = uiTextNode.value || uiTextNode.placeholder || '';
+  hiddenTextarea.value = value !== null ? value : uiTextNode.value || uiTextNode.placeholder || '';
 
   let minHeight = -Infinity;
   let maxHeight = Infinity;
