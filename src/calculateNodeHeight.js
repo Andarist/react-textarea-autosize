@@ -35,7 +35,9 @@ const SIZING_STYLE = [
 let computedStyleCache = {};
 let hiddenTextarea;
 
-export default function calculateNodeHeight(uiTextNode,
+export default function calculateNodeHeight(
+    uiTextNode,
+    value,
     useCache = false,
     minRows = null, maxRows = null) {
   if (!hiddenTextarea) {
@@ -54,7 +56,7 @@ export default function calculateNodeHeight(uiTextNode,
   // text-lines will not calculated properly as the shadow will technically be
   // narrower for content
   hiddenTextarea.setAttribute('style', sizingStyle + ';' + HIDDEN_TEXTAREA_STYLE);
-  hiddenTextarea.value = uiTextNode.value || uiTextNode.placeholder || '';
+  hiddenTextarea.value = value;
 
   let minHeight = -Infinity;
   let maxHeight = Infinity;
