@@ -44,7 +44,6 @@ export default function calculateNodeHeight(
     hiddenTextarea = document.createElement('textarea');
     document.body.appendChild(hiddenTextarea);
   }
-  console.log('calculateNodeHeight', value);
 
   // Copy all CSS properties that have an impact on the height of the content in
   // the textbox
