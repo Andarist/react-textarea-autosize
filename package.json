@@ -11,11 +11,6 @@
   "eslintConfig": {
     "extends": "prometheusresearch"
   },
-  "babel": {
-    "presets": [
-      "prometheusresearch"
-    ]
-  },
   "keywords": [
     "react",
     "react-component",
