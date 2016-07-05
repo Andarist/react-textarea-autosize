@@ -71,10 +71,18 @@ export default class TextareaAutosize extends React.Component {
   }
 
   render() {
-    let {valueLink, ...props} = this.props;
-    props = {...props};
+    /* eslint-disable no-unused-vars */
+    let {
+      valueLink,
+      minRows,
+      maxRows,
+      onHeightChange,
+      useCacheForDOMMeasurements,
+      ...props,
+    } = this.props;
+    /* eslint-enable */
     if (typeof valueLink === 'object') {
-      props.value = this.props.valueLink.value;
+      props.value = valueLink.value;
     }
     props.style = {
       ...props.style,
