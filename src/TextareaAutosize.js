@@ -73,6 +73,9 @@ export default class TextareaAutosize extends React.Component {
   render() {
     let {valueLink, ...props} = this.props;
     props = {...props};
+    // Remove unknown props https://fb.me/react-unknown-prop
+    delete props.onHeightChange;
+    delete props.useCacheForDOMMeasurements;
     if (typeof valueLink === 'object') {
       props.value = this.props.valueLink.value;
     }
