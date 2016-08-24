@@ -1,5 +1,5 @@
 .DELETE_ON_ERROR:
-BIN = ./node_modules/.bin
+BIN = ../node_modules/.bin
 
 build: bundle.js
 
