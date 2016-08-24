@@ -18,7 +18,7 @@ publish:
 	git push -f git@github.com:andreypopp/react-textarea-autosize.git gh-pages
 
 bundle.js: index.js ../src/TextareaAutosize.js ../src/calculateNodeHeight.js
-	@$(BIN)/browserify --debug --transform [ babelify --stage 0 ] ./index.js > $@
+	@$(BIN)/browserify --debug --transform [ babelify --no-sourceMaps ] ./index.js > $@
 
 watch:
-	@$(BIN)/watchify -v --debug --transform [ babelify --stage 0 ] ./index.js -o ./bundle.js
+	@$(BIN)/watchify -v --debug --transform [ babelify --no-sourceMaps ] ./index.js -o ./bundle.js
