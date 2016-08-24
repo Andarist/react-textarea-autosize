@@ -32,6 +32,7 @@
     "babel-preset-prometheusresearch": "^0.1.0",
     "eslint": "^3.3.1",
     "eslint-config-prometheusresearch": "^0.2.0",
+    "eslint-plugin-react": "^6.1.2",
     "react": "^15.3.1"
   }
 }
