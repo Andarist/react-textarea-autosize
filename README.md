@@ -4,7 +4,7 @@ Drop-in replacement for the textarea component which automatically resizes texta
 A native React version of the popular [jQuery
 Autosize](http://www.jacklmoore.com/autosize/)!
 
-This module supports IE9 and above. PR welcome to add IE8 support.
+This module supports IE9 and above.
 
 ```javascript
 import Textarea from 'react-textarea-autosize';
