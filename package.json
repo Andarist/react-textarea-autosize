@@ -23,7 +23,6 @@
     "watchify": "^3.7.0"
   },
   "files": [
-    "lib/calculateNodeHeight.js",
-    "lib/TextareaAutosize.js"
+    "lib"
   ]
 }
