@@ -38,5 +38,9 @@
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "watchify": "^3.7.0"
-  }
+  },
+  "files": [
+    "lib/calculateNodeHeight.js",
+    "lib/TextareaAutosize.js"
+  ]
 }
