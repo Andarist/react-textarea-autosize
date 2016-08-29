@@ -8,7 +8,7 @@
   "main": "lib/TextareaAutosize.js",
   "author": "Andrey Popp <8mayday@gmail.com> (https://andreypopp.com/)",
   "scripts": {
-    "prepublish": "make clean build"
+    "prepublish": "make clean build || true"
   },
   "peerDependencies": {
     "react": ">=0.14.0 <16.0.0"
