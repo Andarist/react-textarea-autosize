@@ -10,6 +10,9 @@
   "scripts": {
     "prepublish": "make clean build"
   },
+  "peerDependencies": {
+    "react": ">=0.14.0 <16.0.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.11.4",
     "babel-preset-prometheusresearch": "^0.1.0",
