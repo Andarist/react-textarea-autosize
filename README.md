@@ -26,7 +26,7 @@ React.renderComponent(
 
 ## Demo
 
-http://andreypopp.github.io/react-textarea-autosize/
+https://andreypopp.github.io/react-textarea-autosize/
 
 ## Development
 
