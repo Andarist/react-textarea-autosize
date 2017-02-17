@@ -47,7 +47,12 @@ export default class TextareaAutosize extends React.Component {
     /**
      * Maximum number of rows to show.
      */
-    maxRows: React.PropTypes.number
+    maxRows: React.PropTypes.number,
+
+    /**
+     * Allows an owner to retrieve the DOM node.
+     */
+    inputRef: React.PropTypes.func
   }
 
   static defaultProps = {
@@ -134,6 +139,7 @@ export default class TextareaAutosize extends React.Component {
 
   _onRootDOMNode(node) {
     this._rootDOMNode = node;
+    if (this.props.inputRef) this.props.inputRef(node);
   }
 
   _onChange(e) {
