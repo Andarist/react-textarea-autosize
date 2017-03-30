@@ -82,21 +82,27 @@ export default class TextareaAutosize extends React.Component {
       maxRows: _maxRows,
       onHeightChange: _onHeightChange,
       useCacheForDOMMeasurements: _useCacheForDOMMeasurements,
+      inputRef, // eslint-disable-line
       ...props,
     } = this.props;
+
     if (typeof valueLink === 'object') {
       props.value = valueLink.value;
     }
+
     props.style = {
       ...props.style,
       height: this.state.height || 0,
     };
+
     let maxHeight = Math.max(
       props.style.maxHeight ? props.style.maxHeight : Infinity,
       this.state.maxHeight);
+
     if (maxHeight < this.state.height) {
       props.style.overflow = 'hidden';
     }
+
     return (
       <textarea
         {...props}
