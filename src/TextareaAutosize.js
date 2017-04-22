@@ -5,7 +5,7 @@
 import React from 'react';
 import calculateNodeHeight from './calculateNodeHeight';
 
-const emptyFunction = function() {};
+const noop = () => {};
 
 export default class TextareaAutosize extends React.Component {
 
@@ -56,8 +56,8 @@ export default class TextareaAutosize extends React.Component {
   }
 
   static defaultProps = {
-    onChange: emptyFunction,
-    onHeightChange: emptyFunction,
+    onChange: noop,
+    onHeightChange: noop,
     useCacheForDOMMeasurements: false
   }
 
@@ -68,11 +68,6 @@ export default class TextareaAutosize extends React.Component {
       minHeight: -Infinity,
       maxHeight: Infinity
     };
-    this._onNextFrameActionId = null;
-    this._rootDOMNode = null;
-    this._onChange = this._onChange.bind(this);
-    this._resizeComponent = this._resizeComponent.bind(this);
-    this._onRootDOMNode = this._onRootDOMNode.bind(this);
   }
 
   render() {
@@ -92,8 +87,9 @@ export default class TextareaAutosize extends React.Component {
       height: this.state.height || 0,
     };
     let maxHeight = Math.max(
-      props.style.maxHeight ? props.style.maxHeight : Infinity,
-      this.state.maxHeight);
+      props.style.maxHeight || Infinity,
+      this.state.maxHeight
+    );
     if (maxHeight < this.state.height) {
       props.style.overflow = 'hidden';
     }
@@ -102,7 +98,7 @@ export default class TextareaAutosize extends React.Component {
         {...props}
         onChange={this._onChange}
         ref={this._onRootDOMNode}
-        />
+      />
     );
   }
 
@@ -137,26 +133,25 @@ export default class TextareaAutosize extends React.Component {
     }
   }
 
-  _onRootDOMNode(node) {
+  _onRootDOMNode = node => {
     this._rootDOMNode = node;
     if (this.props.inputRef) this.props.inputRef(node);
   }
 
-  _onChange(e) {
+  _onChange = event => {
     this._resizeComponent();
     let {valueLink, onChange} = this.props;
     if (valueLink) {
-      valueLink.requestChange(e.target.value);
+      valueLink.requestChange(event.target.value);
     } else {
-      onChange(e);
+      onChange(event);
     }
   }
 
-  _resizeComponent() {
-    let {useCacheForDOMMeasurements} = this.props;
+  _resizeComponent = () => {
     this.setState(calculateNodeHeight(
       this._rootDOMNode,
-      useCacheForDOMMeasurements,
+      this.props.useCacheForDOMMeasurements,
       this.props.rows || this.props.minRows,
       this.props.maxRows));
   }

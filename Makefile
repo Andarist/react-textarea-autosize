@@ -1,12 +1,13 @@
 BIN = node_modules/.bin
 SRC = $(wildcard src/*.js)
 LIB = $(SRC:src/%=lib/%)
+ES = $(SRC:src/%=es/%)
 TESTS = $(wildcard src/__tests__/*-test.js)
 
 BABEL_OPTS = \
 	--sourceMaps=inline
 
-build: $(LIB)
+build: $(LIB) $(ES)
 
 test::
 	@echo No tests...
@@ -36,6 +37,11 @@ publish: build
 	@npm publish
 
 lib/%.js: src/%.js
-	@echo "building $@"
+	@echo "building cjs $@"
 	@mkdir -p $(@D)
-	@$(BIN)/babel $(BABEL_OPTS) -o $@ $<
+	@$(BIN)/cross-env BABEL_ENV=cjs $(BIN)/babel $(BABEL_OPTS) -o $@ $<
+
+es/%.js: src/%.js
+	@echo "building es $@"
+	@mkdir -p $(@D)
+	@$(BIN)/cross-env BABEL_ENV=es $(BIN)/babel $(BABEL_OPTS) -o $@ $<

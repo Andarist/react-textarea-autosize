@@ -2,4 +2,5 @@
 *.log
 example/bundle.js
 lib
+es
 node_modules

@@ -6,6 +6,8 @@
   "repository": "andreypopp/react-textarea-autosize",
   "license": "MIT",
   "main": "lib/TextareaAutosize.js",
+  "module": "es/TextareaAutosize.js",
+  "jsnext:main": "es/TextareaAutosize.js",
   "author": "Andrey Popp <8mayday@gmail.com> (https://andreypopp.com/)",
   "scripts": {
     "prepublish": "make clean build || true"
@@ -14,10 +16,11 @@
     "react": ">=0.14.0 <16.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.11.4",
-    "babel-preset-prometheusresearch": "^0.1.0",
-    "babelify": "^7.3.0",
-    "browserify": "^13.1.0",
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "cross-env": "^4.0.0",
     "eslint": "^3.3.1",
     "eslint-config-prometheusresearch": "^0.2.0",
     "eslint-plugin-react": "^6.1.2",
@@ -26,6 +29,7 @@
     "watchify": "^3.7.0"
   },
   "files": [
+    "es",
     "lib"
   ]
 }
