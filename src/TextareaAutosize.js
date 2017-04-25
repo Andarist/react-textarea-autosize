@@ -218,6 +218,13 @@ export default class TextareaAutosize extends React.Component {
     this._rootDOMNode.blur();
   }
 
+  /**
+   * Selects the contents of <textarea /> DOM element.
+   */
+  select() {
+    this._rootDOMNode.select();
+  }
+
 }
 
 function onNextFrame(cb) {
