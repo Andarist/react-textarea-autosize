@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import calculateNodeHeight from './calculateNodeHeight';
 
 const emptyFunction = function() {};
+const blacklistProps = ['onHeightChange', 'useCacheForDOMMeasurements', 'minRows', 'maxRows'];
 
 export default class TextareaAutosize extends React.Component {
 
@@ -98,9 +99,18 @@ export default class TextareaAutosize extends React.Component {
     if (maxHeight < this.state.height) {
       props.style.overflow = 'hidden';
     }
+
+    const filteredProps = Object.keys(props).reduce((acc, prop) => {
+      if (blacklistProps.indexOf(prop) === -1) {
+        acc[prop] = props[prop];
+      }
+
+      return acc;
+    }, {});
+
     return (
       <textarea
-        {...props}
+        {...filteredProps}
         onChange={this._onChange}
         ref={this._onRootDOMNode}
         />
