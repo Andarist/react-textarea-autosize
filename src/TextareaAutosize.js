@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import calculateNodeHeight from './calculateNodeHeight';
 
 const emptyFunction = function() {};
@@ -13,17 +14,17 @@ export default class TextareaAutosize extends React.Component {
     /**
      * Current textarea value.
      */
-    value: React.PropTypes.string,
+    value: PropTypes.string,
 
     /**
      * Callback on value change.
      */
-    onChange: React.PropTypes.func,
+    onChange: PropTypes.func,
 
     /**
      * Callback on height changes.
      */
-    onHeightChange: React.PropTypes.func,
+    onHeightChange: PropTypes.func,
 
     /**
      * Try to cache DOM measurements performed by component so that we don't
@@ -32,27 +33,27 @@ export default class TextareaAutosize extends React.Component {
      * This optimization doesn't work if we dynamically style <textarea />
      * component.
      */
-    useCacheForDOMMeasurements: React.PropTypes.bool,
+    useCacheForDOMMeasurements: PropTypes.bool,
 
     /**
      * Minimal numbder of rows to show.
      */
-    rows: React.PropTypes.number,
+    rows: PropTypes.number,
 
     /**
      * Alias for `rows`.
      */
-    minRows: React.PropTypes.number,
+    minRows: PropTypes.number,
 
     /**
      * Maximum number of rows to show.
      */
-    maxRows: React.PropTypes.number,
+    maxRows: PropTypes.number,
 
     /**
      * Allows an owner to retrieve the DOM node.
      */
-    inputRef: React.PropTypes.func
+    inputRef: PropTypes.func
   }
 
   static defaultProps = {

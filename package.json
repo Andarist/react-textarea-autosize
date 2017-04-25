@@ -27,5 +27,8 @@
   },
   "files": [
     "lib"
-  ]
+  ],
+  "dependencies": {
+    "prop-types": "^15.5.8"
+  }
 }
