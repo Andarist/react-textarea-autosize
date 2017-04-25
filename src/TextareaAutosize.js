@@ -2,7 +2,9 @@
  * <TextareaAutosize />
  */
 
+import omit from 'lodash.omit';
 import React from 'react';
+
 import calculateNodeHeight from './calculateNodeHeight';
 
 const emptyFunction = function() {};
@@ -83,7 +85,8 @@ export default class TextareaAutosize extends React.Component {
       onHeightChange: _onHeightChange,
       useCacheForDOMMeasurements: _useCacheForDOMMeasurements,
       ...props,
-    } = this.props;
+    } = omit(this.props, ['inputRef']);
+    
     if (typeof valueLink === 'object') {
       props.value = valueLink.value;
     }
@@ -139,7 +142,9 @@ export default class TextareaAutosize extends React.Component {
 
   _onRootDOMNode(node) {
     this._rootDOMNode = node;
-    if (this.props.inputRef) this.props.inputRef(node);
+    if (this.props.inputRef) {
+      this.props.inputRef(node);
+    }
   }
 
   _onChange(e) {
