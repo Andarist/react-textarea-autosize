@@ -98,9 +98,16 @@ export default class TextareaAutosize extends React.Component {
     if (maxHeight < this.state.height) {
       props.style.overflow = 'hidden';
     }
+
+    const clonedProps = Object.assign({}, this.props);
+    delete clonedProps.onHeightChange;
+    delete clonedProps.useCacheForDOMMeasurements;
+    delete clonedProps.minRows;
+    delete clonedProps.maxRows;
+
     return (
       <textarea
-        {...props}
+        {...clonedProps}
         onChange={this._onChange}
         ref={this._onRootDOMNode}
         />
