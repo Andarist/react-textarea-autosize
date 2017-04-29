@@ -146,7 +146,6 @@ export default class TextareaAutosize extends React.Component {
   }
 
   _onChange = event => {
-    this._resizeComponent();
     let {valueLink, onChange} = this.props;
     if (valueLink) {
       valueLink.requestChange(event.target.value);
