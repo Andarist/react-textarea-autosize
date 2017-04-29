@@ -83,7 +83,7 @@ export default class TextareaAutosize extends React.Component {
       maxRows: _maxRows,
       onHeightChange: _onHeightChange,
       useCacheForDOMMeasurements: _useCacheForDOMMeasurements,
-      inputRef, // eslint-disable-line
+      inputRef: _inputRef,
       ...props,
     } = this.props;
 
