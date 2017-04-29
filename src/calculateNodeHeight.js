@@ -2,17 +2,17 @@
  * calculateNodeHeight(uiTextNode, useCache = false)
  */
 
-const HIDDEN_TEXTAREA_STYLE = `
-  min-height:0 !important;
-  max-height:none !important;
-  height:0 !important;
-  visibility:hidden !important;
-  overflow:hidden !important;
-  position:absolute !important;
-  z-index:-1000 !important;
-  top:0 !important;
-  right:0 !important
-`;
+const HIDDEN_TEXTAREA_STYLE = {
+  'min-height': '0',
+  'max-height': 'none',
+  'height': '0',
+  'visibility': 'hidden',
+  'overflow': 'hidden',
+  'position': 'absolute',
+  'z-index': '-1000',
+  'top': '0',
+  'right': '0'
+};
 
 const SIZING_STYLE = [
   'letter-spacing',
@@ -53,7 +53,12 @@ export default function calculateNodeHeight(uiTextNode,
   // Need to have the overflow attribute to hide the scrollbar otherwise
   // text-lines will not calculated properly as the shadow will technically be
   // narrower for content
-  hiddenTextarea.setAttribute('style', sizingStyle + ';' + HIDDEN_TEXTAREA_STYLE);
+  Object.keys(sizingStyle).map((key) => {
+    hiddenTextarea.style[key] = sizingStyle[key];
+  });
+  Object.keys(HIDDEN_TEXTAREA_STYLE).map((key) => {
+    hiddenTextarea.style.setProperty(key, HIDDEN_TEXTAREA_STYLE[key], 'important');
+  });
   hiddenTextarea.value = uiTextNode.value || uiTextNode.placeholder || 'x';
 
   let minHeight = -Infinity;
@@ -120,8 +125,10 @@ function calculateNodeStyling(node, useCache = false) {
   );
 
   let sizingStyle = SIZING_STYLE
-    .map(name => `${name}:${style.getPropertyValue(name)}`)
-    .join(';');
+    .reduce((obj, name) => {
+      obj[name] = style.getPropertyValue(name);
+      return obj;
+    }, {});
 
   let nodeInfo = {
     sizingStyle,
