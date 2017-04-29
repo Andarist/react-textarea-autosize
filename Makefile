@@ -16,7 +16,7 @@ lint::
 	@$(BIN)/eslint $(SRC)
 
 clean:
-	@rm -f $(LIB)
+	@rm -f $(LIB) $(ES)
 
 sloc:
 	@$(BIN)/sloc ./src
