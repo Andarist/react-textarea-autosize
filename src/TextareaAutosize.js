@@ -65,7 +65,7 @@ export default class TextareaAutosize extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      height: null,
+      height: (props.style && props.style.height) || 0,
       minHeight: -Infinity,
       maxHeight: Infinity
     };
@@ -88,7 +88,7 @@ export default class TextareaAutosize extends React.Component {
 
     props.style = {
       ...props.style,
-      height: this.state.height || 0,
+      height: this.state.height,
     };
 
     let maxHeight = Math.max(
