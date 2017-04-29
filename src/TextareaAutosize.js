@@ -69,7 +69,6 @@ export default class TextareaAutosize extends React.Component {
       minHeight: -Infinity,
       maxHeight: Infinity
     };
-    this._onNextFrameActionId = null;
     this._rootDOMNode = null;
     this._onChange = this._onChange.bind(this);
     this._resizeComponent = this._resizeComponent.bind(this);
@@ -120,8 +119,7 @@ export default class TextareaAutosize extends React.Component {
 
   componentWillReceiveProps() {
     // Re-render with the new content then recalculate the height as required.
-    this._clearNextFrame();
-    this._onNextFrameActionId = onNextFrame(this._resizeComponent);
+    this._resizeComponent();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -134,14 +132,7 @@ export default class TextareaAutosize extends React.Component {
   componentWillUnmount() {
     // Remove any scheduled events to prevent manipulating the node after it's
     // been unmounted.
-    this._clearNextFrame();
     window.removeEventListener('resize', this._resizeComponent);
-  }
-
-  _clearNextFrame() {
-    if (this._onNextFrameActionId) {
-      clearNextFrameAction(this._onNextFrameActionId);
-    }
   }
 
   _onRootDOMNode(node) {
@@ -224,19 +215,4 @@ export default class TextareaAutosize extends React.Component {
     this._rootDOMNode.blur();
   }
 
-}
-
-function onNextFrame(cb) {
-  if (window.requestAnimationFrame) {
-    return window.requestAnimationFrame(cb);
-  }
-  return window.setTimeout(cb, 1);
-}
-
-function clearNextFrameAction(nextFrameId) {
-  if (window.cancelAnimationFrame) {
-    window.cancelAnimationFrame(nextFrameId);
-  } else {
-    window.clearTimeout(nextFrameId);
-  }
 }
