@@ -69,6 +69,8 @@ export default class TextareaAutosize extends React.Component {
       minHeight: -Infinity,
       maxHeight: Infinity
     };
+
+    this._controlled = typeof props.value === 'string';
   }
 
   render() {
@@ -146,6 +148,9 @@ export default class TextareaAutosize extends React.Component {
   }
 
   _onChange = event => {
+    if (!this._controlled) {
+      this._resizeComponent();
+    }
     let {valueLink, onChange} = this.props;
     if (valueLink) {
       valueLink.requestChange(event.target.value);
