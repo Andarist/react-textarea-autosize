@@ -156,11 +156,18 @@ export default class TextareaAutosize extends React.Component {
   }
 
   _resizeComponent = () => {
-    this.setState(calculateNodeHeight(
+    let {height, minHeight, maxHeight} = calculateNodeHeight(
       this._rootDOMNode,
       this.props.useCacheForDOMMeasurements,
       this.props.rows || this.props.minRows,
-      this.props.maxRows));
+      this.props.maxRows);
+    if (
+      this.state.height !== height ||
+      this.state.minHeight !== minHeight ||
+      this.state.maxHeight !== maxHeight
+    ) {
+      this.setState({height, minHeight, maxHeight});
+    }
   }
 
   /**
