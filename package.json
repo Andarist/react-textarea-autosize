@@ -5,12 +5,23 @@
   "keywords": "autosize, grow, react, react-component, textarea",
   "repository": "andreypopp/react-textarea-autosize",
   "license": "MIT",
-  "main": "lib/TextareaAutosize.js",
-  "module": "es/TextareaAutosize.js",
-  "jsnext:main": "es/TextareaAutosize.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
   "author": "Andrey Popp <8mayday@gmail.com> (https://andreypopp.com/)",
   "scripts": {
-    "prepublish": "make clean build || true"
+    "build": "npm run build:es && npm run build:cjs && npm run build:umd",
+    "build:es": "rimraf es && cross-env BABEL_ENV=es babel src --out-dir es --sourceMaps=inline",
+    "build:cjs": "rimraf lib && cross-env BABEL_ENV=cjs babel src --out-dir lib --sourceMaps=inline",
+    "build:umd": "rimraf dist && npm run build:umd:prod && npm run build:umd:dev",
+    "build:umd:prod": "cross-env BABEL_ENV=es NODE_ENV=production rollup -c -i src/index.js -o dist/react-textarea-autosize.min.js",
+    "build:umd:dev": "cross-env BABEL_ENV=es NODE_ENV=development rollup -c -i src/index.js -o dist/react-textarea-autosize.js",
+    "clean": "rimraf es && rimraf lib && rimraf dist",
+    "lint": "eslint src",
+    "prerelease": "npm run lint && npm run build",
+    "release:patch": "npm run prerelease && npm version patch && git push --follow-tags && npm publish",
+    "release:minor": "npm run prerelease && npm version minor && git push --follow-tags && npm publish",
+    "release:major": "npm run prerelease && npm version major && git push --follow-tags && npm publish"
   },
   "peerDependencies": {
     "react": ">=0.14.0 <16.0.0"
@@ -27,8 +38,12 @@
     "eslint-plugin-react": "^6.1.2",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
+    "rimraf": "^2.6.1",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-uglify": "^1.0.2",
     "watchify": "^3.7.0"
   },
   "files": [
