@@ -41,6 +41,8 @@ export default function calculateNodeHeight(uiTextNode,
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
     document.body.appendChild(hiddenTextarea);
+  } else if (hiddenTextarea.parentNode === null) {
+    document.body.appendChild(hiddenTextarea);
   }
 
   // Copy all CSS properties that have an impact on the height of the content in
