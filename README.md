@@ -30,18 +30,12 @@ https://andreypopp.github.io/react-textarea-autosize/
 
 ## Development
 
-To prepare release patch, minor or major version:
+To release patch, minor or major version:
 
-    % make release-patch
-    % make release-minor
-    % make release-major
+    % npm run release:patch
+    % npm run release:minor
+    % npm run release:major
 
-This will run eslint, test runner, compile sources from `src/` to `lib/` and `es/`, bump a
+This will run eslint, compile sources from `src/` to `lib/`, `es/` and `dist/`, bump a
 version in `package.json` and then create a new git commit with tag. If tests or
-linter fails — commit won't be created.
-
-To publish prepared release:
-
-    % make publish
-
-This publishes to npm and pushes a tag to github.
+linter fails — commit won't be created. If tasks succeed it publishes to npm and pushes a tag to github.
