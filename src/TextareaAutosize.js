@@ -236,6 +236,15 @@ export default class TextareaAutosize extends React.Component {
     this._rootDOMNode.blur();
   }
 
+  /**
+   * Convenience method to retrieve the textarea node.
+   * <Textarea ref = "area" />
+   * let node = this.refs.area.getTextareaDOMNode();
+   */
+  getTextareaDOMNode() {
+    return this._rootDOMNode;
+  }
+
 }
 
 function onNextFrame(cb) {
