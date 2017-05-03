@@ -34,14 +34,14 @@ const SIZING_STYLE = [
 
 let computedStyleCache = {};
 let hiddenTextarea;
-const hiddenTextareaId = 'react-textarea-autosize-textarea-for-calculations';
 
 export default function calculateNodeHeight(uiTextNode,
     useCache = false,
     minRows = null, maxRows = null) {
-  hiddenTextarea = document.getElementById(hiddenTextareaId);
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
+    document.body.appendChild(hiddenTextarea);
+  } else if (hiddenTextarea.parentNode === null) {
     document.body.appendChild(hiddenTextarea);
   }
 
