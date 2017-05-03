@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
@@ -26,11 +27,14 @@
     "eslint-plugin-react": "^6.1.2",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
+    "rollup": "^0.36.3",
+    "rollup-plugin-babel": "^2.7.1",
     "watchify": "^3.7.0"
   },
   "files": [
     "es",
-    "lib"
+    "lib",
+    "dist"
   ],
   "dependencies": {
     "prop-types": "^15.5.8"

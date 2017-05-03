@@ -7,7 +7,7 @@ TESTS = $(wildcard src/__tests__/*-test.js)
 BABEL_OPTS = \
 	--sourceMaps=inline
 
-build: $(LIB) $(ES)
+build: $(LIB) $(ES) build-min
 
 test::
 	@echo No tests...
@@ -16,7 +16,7 @@ lint::
 	@$(BIN)/eslint $(SRC)
 
 clean:
-	@rm -f $(LIB) $(ES)
+	@rm -rf $(LIB) $(ES)
 
 sloc:
 	@$(BIN)/sloc ./src
@@ -35,6 +35,10 @@ release = npm version $(1)
 publish: build
 	@git push --tags origin HEAD:master
 	@npm publish
+
+build-min: $(LIB)
+	@echo "building dist/TextareaAutosize.min.js"
+	@$(BIN)/cross-env BABEL_ENV=es NODE_ENV=production $(BIN)/rollup -c
 
 lib/%.js: src/%.js
 	@echo "building cjs $@"
