@@ -28,7 +28,8 @@ const SIZING_STYLE = [
   'text-indent',
   'padding-left',
   'padding-right',
-  'border-width',
+  'border-left-width',
+  'border-right-width',
   'box-sizing'
 ];
 
