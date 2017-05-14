@@ -11,6 +11,11 @@ PropTypes = 'default' in PropTypes ? PropTypes['default'] : PropTypes;
  * calculateNodeHeight(uiTextNode, useCache = false)
  */
 
+var isIE = document.documentElement.currentStyle;
+var documentStyle = window.getComputedStyle(document.documentElement);
+// TODO: remove prefixed - they are probably obsolete, were introduced in by df79cf502630744d40233b64cad01770e5584610 in 2014
+var boxSizingProp = documentStyle.getPropertyValue('box-sizing') ? 'box-sizing' : documentStyle.getPropertyValue('-moz-box-sizing') ? '-moz-box-sizing' : documentStyle.getPropertyValue('-webkit-box-sizing') ? '-webkit-box-sizing' : 'box-sizing';
+
 var HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
   'max-height': 'none',
@@ -23,7 +28,7 @@ var HIDDEN_TEXTAREA_STYLE = {
   'right': '0'
 };
 
-var SIZING_STYLE = ['letter-spacing', 'line-height', 'padding-top', 'padding-bottom', 'font-family', 'font-weight', 'font-size', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-left', 'padding-right', 'border-width', 'box-sizing'];
+var SIZING_STYLE = ['letter-spacing', 'line-height', 'font-family', 'font-weight', 'font-size', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width', boxSizingProp];
 
 var computedStyleCache = {};
 var hiddenTextarea = void 0;
@@ -99,6 +104,7 @@ function calculateNodeHeight(uiTextNode) {
 function calculateNodeStyling(node) {
   var useCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
+  // TODO: generate id in constructor + clear cache in componentWillUnmount
   var nodeRef = node.getAttribute('id') || node.getAttribute('data-reactid') || node.getAttribute('name');
 
   if (useCache && computedStyleCache[nodeRef]) {
@@ -107,16 +113,22 @@ function calculateNodeStyling(node) {
 
   var style = window.getComputedStyle(node);
 
-  var boxSizing = style.getPropertyValue('box-sizing') || style.getPropertyValue('-moz-box-sizing') || style.getPropertyValue('-webkit-box-sizing');
-
-  var paddingSize = parseFloat(style.getPropertyValue('padding-bottom')) + parseFloat(style.getPropertyValue('padding-top'));
-
-  var borderSize = parseFloat(style.getPropertyValue('border-bottom-width')) + parseFloat(style.getPropertyValue('border-top-width'));
-
   var sizingStyle = SIZING_STYLE.reduce(function (obj, name) {
     obj[name] = style.getPropertyValue(name);
     return obj;
   }, {});
+
+  var boxSizing = sizingStyle[boxSizingProp];
+
+  // IE (Edge has already correct behaviour) returns content width as computed width
+  // so we need to add manually padding and border widths
+  if (isIE && boxSizing === 'border-box') {
+    sizingStyle.width = parseFloat(sizingStyle.width) + parseFloat(style['border-right-width']) + parseFloat(style['border-left-width']) + parseFloat(style['padding-right']) + parseFloat(style['padding-left']) + 'px';
+  }
+
+  var paddingSize = parseFloat(sizingStyle['padding-bottom']) + parseFloat(sizingStyle['padding-top']);
+
+  var borderSize = parseFloat(sizingStyle['border-bottom-width']) + parseFloat(sizingStyle['border-top-width']);
 
   var nodeInfo = {
     sizingStyle: sizingStyle,
