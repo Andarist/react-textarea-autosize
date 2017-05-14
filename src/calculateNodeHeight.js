@@ -2,6 +2,16 @@
  * calculateNodeHeight(uiTextNode, useCache = false)
  */
 
+const isIE = document.documentElement.currentStyle;
+const documentStyle = window.getComputedStyle(document.documentElement);
+// TODO: remove prefixed - they are probably obsolete, were introduced in by df79cf502630744d40233b64cad01770e5584610 in 2014
+const boxSizingProp = (
+    documentStyle.getPropertyValue('box-sizing')          ? 'box-sizing'
+  : documentStyle.getPropertyValue('-moz-box-sizing')     ? '-moz-box-sizing'
+  : documentStyle.getPropertyValue('-webkit-box-sizing')  ? '-webkit-box-sizing'
+  : 'box-sizing'
+);
+
 const HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
   'max-height': 'none',
@@ -17,8 +27,6 @@ const HIDDEN_TEXTAREA_STYLE = {
 const SIZING_STYLE = [
   'letter-spacing',
   'line-height',
-  'padding-top',
-  'padding-bottom',
   'font-family',
   'font-weight',
   'font-size',
@@ -26,11 +34,15 @@ const SIZING_STYLE = [
   'text-transform',
   'width',
   'text-indent',
-  'padding-left',
+  'padding-top',
   'padding-right',
-  'border-left-width',
+  'padding-bottom',
+  'padding-left',
+  'border-top-width',
   'border-right-width',
-  'box-sizing'
+  'border-bottom-width',
+  'border-left-width',
+  boxSizingProp
 ];
 
 let computedStyleCache = {};
@@ -99,7 +111,8 @@ export default function calculateNodeHeight(uiTextNode,
 }
 
 function calculateNodeStyling(node, useCache = false) {
-  let nodeRef = (
+  // TODO: generate id in constructor + clear cache in componentWillUnmount
+  const nodeRef = (
     node.getAttribute('id') ||
     node.getAttribute('data-reactid') ||
     node.getAttribute('name')
@@ -109,23 +122,7 @@ function calculateNodeStyling(node, useCache = false) {
     return computedStyleCache[nodeRef];
   }
 
-  let style = window.getComputedStyle(node);
-
-  let boxSizing = (
-    style.getPropertyValue('box-sizing') ||
-    style.getPropertyValue('-moz-box-sizing') ||
-    style.getPropertyValue('-webkit-box-sizing')
-  );
-
-  let paddingSize = (
-    parseFloat(style.getPropertyValue('padding-bottom')) +
-    parseFloat(style.getPropertyValue('padding-top'))
-  );
-
-  let borderSize = (
-    parseFloat(style.getPropertyValue('border-bottom-width')) +
-    parseFloat(style.getPropertyValue('border-top-width'))
-  );
+  const style = window.getComputedStyle(node);
 
   let sizingStyle = SIZING_STYLE
     .reduce((obj, name) => {
@@ -133,7 +130,31 @@ function calculateNodeStyling(node, useCache = false) {
       return obj;
     }, {});
 
-  let nodeInfo = {
+  const boxSizing = sizingStyle[boxSizingProp];
+
+  // IE (Edge has already correct behaviour) returns content width as computed width
+  // so we need to add manually padding and border widths
+  if (isIE && boxSizing === 'border-box') {
+    sizingStyle.width = (
+        parseFloat(sizingStyle.width)
+      + parseFloat(style['border-right-width'])
+      + parseFloat(style['border-left-width'])
+      + parseFloat(style['padding-right'])
+      + parseFloat(style['padding-left'])
+    ) + 'px';
+  }
+
+  const paddingSize = (
+    parseFloat(sizingStyle['padding-bottom']) +
+    parseFloat(sizingStyle['padding-top'])
+  );
+
+  const borderSize = (
+    parseFloat(sizingStyle['border-bottom-width']) +
+    parseFloat(sizingStyle['border-top-width'])
+  );
+
+  const nodeInfo = {
     sizingStyle,
     paddingSize,
     borderSize,
