@@ -10,11 +10,16 @@ PropTypes = 'default' in PropTypes ? PropTypes['default'] : PropTypes;
 /**
  * calculateNodeHeight(uiTextNode, useCache = false)
  */
-
-var isIE = document.documentElement.currentStyle;
-var documentStyle = window.getComputedStyle(document.documentElement);
-// TODO: remove prefixed - they are probably obsolete, were introduced in by df79cf502630744d40233b64cad01770e5584610 in 2014
-var boxSizingProp = documentStyle.getPropertyValue('box-sizing') ? 'box-sizing' : documentStyle.getPropertyValue('-moz-box-sizing') ? '-moz-box-sizing' : documentStyle.getPropertyValue('-webkit-box-sizing') ? '-webkit-box-sizing' : 'box-sizing';
+var browser = typeof window !== 'undefined' && typeof document !== 'undefined';
+var isIE = browser ? !!document.documentElement.currentStyle : false;
+var boxSizingProp = function () {
+  if (!browser) {
+    return 'box-sizing';
+  }
+  var documentStyle = window.getComputedStyle(document.documentElement);
+  // TODO: remove prefixed - they are probably obsolete, were introduced in by df79cf502630744d40233b64cad01770e5584610 in 2014
+  return documentStyle.getPropertyValue('box-sizing') ? 'box-sizing' : documentStyle.getPropertyValue('-moz-box-sizing') ? '-moz-box-sizing' : documentStyle.getPropertyValue('-webkit-box-sizing') ? '-webkit-box-sizing' : 'box-sizing';
+}();
 
 var HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',

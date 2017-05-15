@@ -1,16 +1,21 @@
 /**
  * calculateNodeHeight(uiTextNode, useCache = false)
  */
-
-const isIE = document.documentElement.currentStyle;
-const documentStyle = window.getComputedStyle(document.documentElement);
-// TODO: remove prefixed - they are probably obsolete, were introduced in by df79cf502630744d40233b64cad01770e5584610 in 2014
-const boxSizingProp = (
-    documentStyle.getPropertyValue('box-sizing')          ? 'box-sizing'
-  : documentStyle.getPropertyValue('-moz-box-sizing')     ? '-moz-box-sizing'
-  : documentStyle.getPropertyValue('-webkit-box-sizing')  ? '-webkit-box-sizing'
-  : 'box-sizing'
-);
+const browser = typeof window !== 'undefined' && typeof document !== 'undefined';
+const isIE = browser ? !!document.documentElement.currentStyle : false;
+const boxSizingProp = (() => {
+  if (!browser) {
+    return 'box-sizing';
+  }
+  const documentStyle = window.getComputedStyle(document.documentElement);
+  // TODO: remove prefixed - they are probably obsolete, were introduced in by df79cf502630744d40233b64cad01770e5584610 in 2014
+  return (
+      documentStyle.getPropertyValue('box-sizing')          ? 'box-sizing'
+    : documentStyle.getPropertyValue('-moz-box-sizing')     ? '-moz-box-sizing'
+    : documentStyle.getPropertyValue('-webkit-box-sizing')  ? '-webkit-box-sizing'
+    : 'box-sizing'
+  );
+})();
 
 const HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
