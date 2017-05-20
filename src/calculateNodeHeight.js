@@ -100,7 +100,6 @@ export default function calculateNodeHeight(uiTextNode, uid,
 }
 
 function calculateNodeStyling(node, uid, useCache = false) {
-  // TODO: generate id in constructor + clear cache in componentWillUnmount
   if (useCache && computedStyleCache[uid]) {
     return computedStyleCache[uid];
   }
