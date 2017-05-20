@@ -1,7 +1,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TextareaAutosize from '../src/TextareaAutosize';
+import TextareaAutosize from '../src';
 
 class Demo extends React.Component {
 
