@@ -9,6 +9,7 @@ PropTypes = 'default' in PropTypes ? PropTypes['default'] : PropTypes;
 
 var browser = typeof window !== 'undefined' && typeof document !== 'undefined';
 var isIE = browser ? !!document.documentElement.currentStyle : false;
+var hiddenTextarea = browser && document.createElement('textarea');
 
 var HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
@@ -25,17 +26,14 @@ var HIDDEN_TEXTAREA_STYLE = {
 var SIZING_STYLE = ['letter-spacing', 'line-height', 'font-family', 'font-weight', 'font-size', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width', 'box-sizing'];
 
 var computedStyleCache = {};
-var hiddenTextarea = void 0;
 
 function calculateNodeHeight(uiTextNode, uid) {
   var useCache = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var minRows = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
   var maxRows = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 
-  if (typeof hiddenTextarea === 'undefined') {
-    hiddenTextarea = document.createElement('textarea');
-    document.body.appendChild(hiddenTextarea);
-  } else if (hiddenTextarea.parentNode === null) {
+
+  if (hiddenTextarea.parentNode === null) {
     document.body.appendChild(hiddenTextarea);
   }
 
@@ -73,10 +71,11 @@ function calculateNodeHeight(uiTextNode, uid) {
     height = height - paddingSize;
   }
 
+  // measure height of a textarea with a single row
+  hiddenTextarea.value = 'x';
+  var singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
+
   if (minRows !== null || maxRows !== null) {
-    // measure height of a textarea with a single row
-    hiddenTextarea.value = 'x';
-    var singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
     if (minRows !== null) {
       minHeight = singleRowHeight * minRows;
       if (boxSizing === 'border-box') {
@@ -92,13 +91,15 @@ function calculateNodeHeight(uiTextNode, uid) {
       height = Math.min(maxHeight, height);
     }
   }
-  return { height: height, minHeight: minHeight, maxHeight: maxHeight };
+
+  var rowCount = Math.floor(height / singleRowHeight);
+
+  return { height: height, minHeight: minHeight, maxHeight: maxHeight, rowCount: rowCount };
 }
 
 function calculateNodeStyling(node, uid) {
   var useCache = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-  // TODO: generate id in constructor + clear cache in componentWillUnmount
   if (useCache && computedStyleCache[uid]) {
     return computedStyleCache[uid];
   }
@@ -312,7 +313,10 @@ var TextareaAutosize = function (_React$Component) {
       var _calculateNodeHeight = calculateNodeHeight(_this._rootDOMNode, _this._uid, _this.props.useCacheForDOMMeasurements, _this.props.minRows, _this.props.maxRows),
           height = _calculateNodeHeight.height,
           minHeight = _calculateNodeHeight.minHeight,
-          maxHeight = _calculateNodeHeight.maxHeight;
+          maxHeight = _calculateNodeHeight.maxHeight,
+          rowCount = _calculateNodeHeight.rowCount;
+
+      _this.rowCount = rowCount;
 
       if (_this.state.height !== height || _this.state.minHeight !== minHeight || _this.state.maxHeight !== maxHeight) {
         _this.setState({ height: height, minHeight: minHeight, maxHeight: maxHeight });
@@ -368,7 +372,7 @@ var TextareaAutosize = function (_React$Component) {
 
   TextareaAutosize.prototype.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
     if (this.state.height !== prevState.height) {
-      this.props.onHeightChange(this.state.height);
+      this.props.onHeightChange(this.state.height, this);
     }
   };
 

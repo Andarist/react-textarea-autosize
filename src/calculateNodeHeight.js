@@ -75,10 +75,11 @@ export default function calculateNodeHeight(uiTextNode, uid,
     height = height - paddingSize;
   }
 
+  // measure height of a textarea with a single row
+  hiddenTextarea.value = 'x';
+  const singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
+
   if (minRows !== null || maxRows !== null) {
-    // measure height of a textarea with a single row
-    hiddenTextarea.value = 'x';
-    const singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
     if (minRows !== null) {
       minHeight = singleRowHeight * minRows;
       if (boxSizing === 'border-box') {
@@ -94,7 +95,10 @@ export default function calculateNodeHeight(uiTextNode, uid,
       height = Math.min(maxHeight, height);
     }
   }
-  return { height, minHeight, maxHeight };
+
+  const rowCount = Math.floor(height / singleRowHeight);
+
+  return { height, minHeight, maxHeight, rowCount };
 }
 
 function calculateNodeStyling(node, uid, useCache = false) {
