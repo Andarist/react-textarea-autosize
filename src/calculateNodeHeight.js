@@ -1,21 +1,6 @@
-/**
- * calculateNodeHeight(uiTextNode, useCache = false)
- */
 const browser = typeof window !== 'undefined' && typeof document !== 'undefined';
 const isIE = browser ? !!document.documentElement.currentStyle : false;
-const boxSizingProp = (() => {
-  if (!browser) {
-    return 'box-sizing';
-  }
-  const documentStyle = window.getComputedStyle(document.documentElement);
-  // TODO: remove prefixed - they are probably obsolete, were introduced in by df79cf502630744d40233b64cad01770e5584610 in 2014
-  return (
-      documentStyle.getPropertyValue('box-sizing')          ? 'box-sizing'
-    : documentStyle.getPropertyValue('-moz-box-sizing')     ? '-moz-box-sizing'
-    : documentStyle.getPropertyValue('-webkit-box-sizing')  ? '-webkit-box-sizing'
-    : 'box-sizing'
-  );
-})();
+const hiddenTextarea = browser && document.createElement('textarea');
 
 const HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
@@ -47,25 +32,22 @@ const SIZING_STYLE = [
   'border-right-width',
   'border-bottom-width',
   'border-left-width',
-  boxSizingProp
+  'box-sizing'
 ];
 
 let computedStyleCache = {};
-let hiddenTextarea;
 
-export default function calculateNodeHeight(uiTextNode,
+export default function calculateNodeHeight(uiTextNode, uid,
     useCache = false,
     minRows = null, maxRows = null) {
-  if (!hiddenTextarea) {
-    hiddenTextarea = document.createElement('textarea');
-    document.body.appendChild(hiddenTextarea);
-  } else if (hiddenTextarea.parentNode === null) {
+
+  if (hiddenTextarea.parentNode === null) {
     document.body.appendChild(hiddenTextarea);
   }
 
   // Copy all CSS properties that have an impact on the height of the content in
   // the textbox
-  let {
+  const {
     paddingSize, borderSize,
     boxSizing, sizingStyle
   } = calculateNodeStyling(uiTextNode, useCache);
@@ -73,10 +55,10 @@ export default function calculateNodeHeight(uiTextNode,
   // Need to have the overflow attribute to hide the scrollbar otherwise
   // text-lines will not calculated properly as the shadow will technically be
   // narrower for content
-  Object.keys(sizingStyle).map((key) => {
+  Object.keys(sizingStyle).forEach((key) => {
     hiddenTextarea.style[key] = sizingStyle[key];
   });
-  Object.keys(HIDDEN_TEXTAREA_STYLE).map((key) => {
+  Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(key => {
     hiddenTextarea.style.setProperty(key, HIDDEN_TEXTAREA_STYLE[key], 'important');
   });
   hiddenTextarea.value = uiTextNode.value || uiTextNode.placeholder || 'x';
@@ -93,10 +75,11 @@ export default function calculateNodeHeight(uiTextNode,
     height = height - paddingSize;
   }
 
+  // measure height of a textarea with a single row
+  hiddenTextarea.value = 'x';
+  const singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
+
   if (minRows !== null || maxRows !== null) {
-    // measure height of a textarea with a single row
-    hiddenTextarea.value = 'x';
-    let singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
     if (minRows !== null) {
       minHeight = singleRowHeight * minRows;
       if (boxSizing === 'border-box') {
@@ -112,19 +95,15 @@ export default function calculateNodeHeight(uiTextNode,
       height = Math.min(maxHeight, height);
     }
   }
-  return {height, minHeight, maxHeight};
+
+  const rowCount = Math.floor(height / singleRowHeight);
+
+  return { height, minHeight, maxHeight, rowCount };
 }
 
-function calculateNodeStyling(node, useCache = false) {
-  // TODO: generate id in constructor + clear cache in componentWillUnmount
-  const nodeRef = (
-    node.getAttribute('id') ||
-    node.getAttribute('data-reactid') ||
-    node.getAttribute('name')
-  );
-
-  if (useCache && computedStyleCache[nodeRef]) {
-    return computedStyleCache[nodeRef];
+function calculateNodeStyling(node, uid, useCache = false) {
+  if (useCache && computedStyleCache[uid]) {
+    return computedStyleCache[uid];
   }
 
   const style = window.getComputedStyle(node);
@@ -135,7 +114,7 @@ function calculateNodeStyling(node, useCache = false) {
       return obj;
     }, {});
 
-  const boxSizing = sizingStyle[boxSizingProp];
+  const boxSizing = sizingStyle['box-sizing'];
 
   // IE (Edge has already correct behaviour) returns content width as computed width
   // so we need to add manually padding and border widths
@@ -166,9 +145,11 @@ function calculateNodeStyling(node, useCache = false) {
     boxSizing
   };
 
-  if (useCache && nodeRef) {
-    computedStyleCache[nodeRef] = nodeInfo;
+  if (useCache) {
+    computedStyleCache[uid] = nodeInfo;
   }
 
   return nodeInfo;
 }
+
+export const purgeCache = uid => delete computedStyleCache[uid];

@@ -7,19 +7,9 @@
 React = 'default' in React ? React['default'] : React;
 PropTypes = 'default' in PropTypes ? PropTypes['default'] : PropTypes;
 
-/**
- * calculateNodeHeight(uiTextNode, useCache = false)
- */
 var browser = typeof window !== 'undefined' && typeof document !== 'undefined';
 var isIE = browser ? !!document.documentElement.currentStyle : false;
-var boxSizingProp = function () {
-  if (!browser) {
-    return 'box-sizing';
-  }
-  var documentStyle = window.getComputedStyle(document.documentElement);
-  // TODO: remove prefixed - they are probably obsolete, were introduced in by df79cf502630744d40233b64cad01770e5584610 in 2014
-  return documentStyle.getPropertyValue('box-sizing') ? 'box-sizing' : documentStyle.getPropertyValue('-moz-box-sizing') ? '-moz-box-sizing' : documentStyle.getPropertyValue('-webkit-box-sizing') ? '-webkit-box-sizing' : 'box-sizing';
-}();
+var hiddenTextarea = browser && document.createElement('textarea');
 
 var HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
@@ -33,20 +23,17 @@ var HIDDEN_TEXTAREA_STYLE = {
   'right': '0'
 };
 
-var SIZING_STYLE = ['letter-spacing', 'line-height', 'font-family', 'font-weight', 'font-size', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width', boxSizingProp];
+var SIZING_STYLE = ['letter-spacing', 'line-height', 'font-family', 'font-weight', 'font-size', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width', 'box-sizing'];
 
 var computedStyleCache = {};
-var hiddenTextarea = void 0;
 
-function calculateNodeHeight(uiTextNode) {
-  var useCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var minRows = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var maxRows = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+function calculateNodeHeight(uiTextNode, uid) {
+  var useCache = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var minRows = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var maxRows = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 
-  if (!hiddenTextarea) {
-    hiddenTextarea = document.createElement('textarea');
-    document.body.appendChild(hiddenTextarea);
-  } else if (hiddenTextarea.parentNode === null) {
+
+  if (hiddenTextarea.parentNode === null) {
     document.body.appendChild(hiddenTextarea);
   }
 
@@ -64,10 +51,10 @@ function calculateNodeHeight(uiTextNode) {
   // narrower for content
 
 
-  Object.keys(sizingStyle).map(function (key) {
+  Object.keys(sizingStyle).forEach(function (key) {
     hiddenTextarea.style[key] = sizingStyle[key];
   });
-  Object.keys(HIDDEN_TEXTAREA_STYLE).map(function (key) {
+  Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(function (key) {
     hiddenTextarea.style.setProperty(key, HIDDEN_TEXTAREA_STYLE[key], 'important');
   });
   hiddenTextarea.value = uiTextNode.value || uiTextNode.placeholder || 'x';
@@ -84,10 +71,11 @@ function calculateNodeHeight(uiTextNode) {
     height = height - paddingSize;
   }
 
+  // measure height of a textarea with a single row
+  hiddenTextarea.value = 'x';
+  var singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
+
   if (minRows !== null || maxRows !== null) {
-    // measure height of a textarea with a single row
-    hiddenTextarea.value = 'x';
-    var singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
     if (minRows !== null) {
       minHeight = singleRowHeight * minRows;
       if (boxSizing === 'border-box') {
@@ -103,17 +91,17 @@ function calculateNodeHeight(uiTextNode) {
       height = Math.min(maxHeight, height);
     }
   }
-  return { height: height, minHeight: minHeight, maxHeight: maxHeight };
+
+  var rowCount = Math.floor(height / singleRowHeight);
+
+  return { height: height, minHeight: minHeight, maxHeight: maxHeight, rowCount: rowCount };
 }
 
-function calculateNodeStyling(node) {
-  var useCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+function calculateNodeStyling(node, uid) {
+  var useCache = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-  // TODO: generate id in constructor + clear cache in componentWillUnmount
-  var nodeRef = node.getAttribute('id') || node.getAttribute('data-reactid') || node.getAttribute('name');
-
-  if (useCache && computedStyleCache[nodeRef]) {
-    return computedStyleCache[nodeRef];
+  if (useCache && computedStyleCache[uid]) {
+    return computedStyleCache[uid];
   }
 
   var style = window.getComputedStyle(node);
@@ -123,7 +111,7 @@ function calculateNodeStyling(node) {
     return obj;
   }, {});
 
-  var boxSizing = sizingStyle[boxSizingProp];
+  var boxSizing = sizingStyle['box-sizing'];
 
   // IE (Edge has already correct behaviour) returns content width as computed width
   // so we need to add manually padding and border widths
@@ -142,28 +130,26 @@ function calculateNodeStyling(node) {
     boxSizing: boxSizing
   };
 
-  if (useCache && nodeRef) {
-    computedStyleCache[nodeRef] = nodeInfo;
+  if (useCache) {
+    computedStyleCache[uid] = nodeInfo;
   }
 
   return nodeInfo;
 }
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+var purgeCache = function purgeCache(uid) {
+  return delete computedStyleCache[uid];
 };
 
+function autoInc() {
+  var seed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
+  return function () {
+    return ++seed;
+  };
+}
 
-
-
-
-
-
-
-
+var uid = autoInc();
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -171,23 +157,7 @@ var classCallCheck = function (instance, Constructor) {
   }
 };
 
-var createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
 
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
 
 
 
@@ -209,7 +179,7 @@ var _extends = Object.assign || function (target) {
   return target;
 };
 
-var get$1 = function get$1(object, property, receiver) {
+var get = function get(object, property, receiver) {
   if (object === null) object = Function.prototype;
   var desc = Object.getOwnPropertyDescriptor(object, property);
 
@@ -219,7 +189,7 @@ var get$1 = function get$1(object, property, receiver) {
     if (parent === null) {
       return undefined;
     } else {
-      return get$1(parent, property, receiver);
+      return get(parent, property, receiver);
     }
   } else if ("value" in desc) {
     return desc.value;
@@ -280,14 +250,14 @@ var possibleConstructorReturn = function (self, call) {
 
 
 
-var set$1 = function set$1(object, property, value, receiver) {
+var set = function set(object, property, value, receiver) {
   var desc = Object.getOwnPropertyDescriptor(object, property);
 
   if (desc === undefined) {
     var parent = Object.getPrototypeOf(object);
 
     if (parent !== null) {
-      set$1(parent, property, value, receiver);
+      set(parent, property, value, receiver);
     }
   } else if ("value" in desc && desc.writable) {
     desc.value = value;
@@ -308,6 +278,10 @@ var set$1 = function set$1(object, property, value, receiver) {
 
 var noop = function noop() {};
 
+var _ref = window.requestAnimationFrame ? [window.requestAnimationFrame, window.cancelAnimationFrame] : [setTimeout, clearTimeout];
+var onNextFrame = _ref[0];
+var clearNextFrameAction = _ref[1];
+
 var TextareaAutosize = function (_React$Component) {
   inherits(TextareaAutosize, _React$Component);
 
@@ -318,33 +292,31 @@ var TextareaAutosize = function (_React$Component) {
 
     _this._onRootDOMNode = function (node) {
       _this._rootDOMNode = node;
-      if (_this.props.inputRef) _this.props.inputRef(node);
+
+      if (_this.props.inputRef) {
+        _this.props.inputRef(node);
+      }
     };
 
     _this._onChange = function (event) {
       if (!_this._controlled) {
         _this._resizeComponent();
       }
-      var _this$props = _this.props,
-          valueLink = _this$props.valueLink,
-          onChange = _this$props.onChange;
-
-      if (valueLink) {
-        valueLink.requestChange(event.target.value);
-      } else {
-        onChange(event);
-      }
+      _this.props.onChange(event);
     };
 
     _this._resizeComponent = function () {
-      if (!_this._rootDOMNode) {
+      if (typeof _this._rootDOMNode === 'undefined') {
         return;
       }
 
-      var _calculateNodeHeight = calculateNodeHeight(_this._rootDOMNode, _this.props.useCacheForDOMMeasurements, _this.props.rows || _this.props.minRows, _this.props.maxRows),
+      var _calculateNodeHeight = calculateNodeHeight(_this._rootDOMNode, _this._uid, _this.props.useCacheForDOMMeasurements, _this.props.minRows, _this.props.maxRows),
           height = _calculateNodeHeight.height,
           minHeight = _calculateNodeHeight.minHeight,
-          maxHeight = _calculateNodeHeight.maxHeight;
+          maxHeight = _calculateNodeHeight.maxHeight,
+          rowCount = _calculateNodeHeight.rowCount;
+
+      _this.rowCount = rowCount;
 
       if (_this.state.height !== height || _this.state.minHeight !== minHeight || _this.state.maxHeight !== maxHeight) {
         _this.setState({ height: height, minHeight: minHeight, maxHeight: maxHeight });
@@ -357,24 +329,20 @@ var TextareaAutosize = function (_React$Component) {
       maxHeight: Infinity
     };
 
+    _this._uid = uid();
     _this._controlled = typeof props.value === 'string';
     return _this;
   }
 
   TextareaAutosize.prototype.render = function render() {
     var _props = this.props,
-        valueLink = _props.valueLink,
         _minRows = _props.minRows,
         _maxRows = _props.maxRows,
         _onHeightChange = _props.onHeightChange,
         _useCacheForDOMMeasurements = _props.useCacheForDOMMeasurements,
         _inputRef = _props.inputRef,
-        props = objectWithoutProperties(_props, ['valueLink', 'minRows', 'maxRows', 'onHeightChange', 'useCacheForDOMMeasurements', 'inputRef']);
+        props = objectWithoutProperties(_props, ['minRows', 'maxRows', 'onHeightChange', 'useCacheForDOMMeasurements', 'inputRef']);
 
-
-    if ((typeof valueLink === 'undefined' ? 'undefined' : _typeof(valueLink)) === 'object') {
-      props.value = valueLink.value;
-    }
 
     props.style = _extends({}, props.style, {
       height: this.state.height
@@ -398,148 +366,36 @@ var TextareaAutosize = function (_React$Component) {
   };
 
   TextareaAutosize.prototype.componentWillReceiveProps = function componentWillReceiveProps() {
-    // Re-render with the new content then recalculate the height as required.
     this._clearNextFrame();
     this._onNextFrameActionId = onNextFrame(this._resizeComponent);
   };
 
   TextareaAutosize.prototype.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
-    // Invoke callback when old height does not equal to new one.
     if (this.state.height !== prevState.height) {
-      this.props.onHeightChange(this.state.height);
+      this.props.onHeightChange(this.state.height, this);
     }
   };
 
   TextareaAutosize.prototype.componentWillUnmount = function componentWillUnmount() {
-    // Remove any scheduled events to prevent manipulating the node after it's
-    // been unmounted.
     this._clearNextFrame();
     window.removeEventListener('resize', this._resizeComponent);
+    purgeCache(this._uid);
   };
 
   TextareaAutosize.prototype._clearNextFrame = function _clearNextFrame() {
-    if (this._onNextFrameActionId) {
-      clearNextFrameAction(this._onNextFrameActionId);
-    }
+    clearNextFrameAction(this._onNextFrameActionId);
   };
 
-  /**
-   * Put focus on a <textarea /> DOM element.
-   */
-  TextareaAutosize.prototype.focus = function focus() {
-    this._rootDOMNode.focus();
-  };
-
-  /**
-   * Shifts focus away from a <textarea /> DOM element.
-   */
-
-
-  TextareaAutosize.prototype.blur = function blur() {
-    this._rootDOMNode.blur();
-  };
-
-  createClass(TextareaAutosize, [{
-    key: 'value',
-
-
-    /**
-     * Read the current value of <textarea /> from DOM.
-     */
-    get: function get() {
-      return this._rootDOMNode.value;
-    }
-
-    /**
-     * Set the current value of <textarea /> DOM node.
-     */
-    ,
-    set: function set(val) {
-      this._rootDOMNode.value = val;
-    }
-
-    /**
-     * Read the current selectionStart of <textarea /> from DOM.
-     */
-
-  }, {
-    key: 'selectionStart',
-    get: function get() {
-      return this._rootDOMNode.selectionStart;
-    }
-
-    /**
-     * Set the current selectionStart of <textarea /> DOM node.
-     */
-    ,
-    set: function set(selectionStart) {
-      this._rootDOMNode.selectionStart = selectionStart;
-    }
-
-    /**
-     * Read the current selectionEnd of <textarea /> from DOM.
-     */
-
-  }, {
-    key: 'selectionEnd',
-    get: function get() {
-      return this._rootDOMNode.selectionEnd;
-    }
-
-    /**
-     * Set the current selectionEnd of <textarea /> DOM node.
-     */
-    ,
-    set: function set(selectionEnd) {
-      this._rootDOMNode.selectionEnd = selectionEnd;
-    }
-  }]);
   return TextareaAutosize;
 }(React.Component);
 
 TextareaAutosize.propTypes = {
-  /**
-   * Current textarea value.
-   */
   value: PropTypes.string,
-
-  /**
-   * Callback on value change.
-   */
   onChange: PropTypes.func,
-
-  /**
-   * Callback on height changes.
-   */
   onHeightChange: PropTypes.func,
-
-  /**
-   * Try to cache DOM measurements performed by component so that we don't
-   * touch DOM when it's not needed.
-   *
-   * This optimization doesn't work if we dynamically style <textarea />
-   * component.
-   */
   useCacheForDOMMeasurements: PropTypes.bool,
-
-  /**
-   * Minimal numbder of rows to show.
-   */
-  rows: PropTypes.number,
-
-  /**
-   * Alias for `rows`.
-   */
   minRows: PropTypes.number,
-
-  /**
-   * Maximum number of rows to show.
-   */
   maxRows: PropTypes.number,
-
-  /**
-   * Allows an owner to retrieve the DOM node.
-   */
   inputRef: PropTypes.func
 };
 TextareaAutosize.defaultProps = {
@@ -547,20 +403,6 @@ TextareaAutosize.defaultProps = {
   onHeightChange: noop,
   useCacheForDOMMeasurements: false
 };
-function onNextFrame(cb) {
-  if (window.requestAnimationFrame) {
-    return window.requestAnimationFrame(cb);
-  }
-  return window.setTimeout(cb, 1);
-}
-
-function clearNextFrameAction(nextFrameId) {
-  if (window.cancelAnimationFrame) {
-    window.cancelAnimationFrame(nextFrameId);
-  } else {
-    window.clearTimeout(nextFrameId);
-  }
-}
 
 return TextareaAutosize;
 
