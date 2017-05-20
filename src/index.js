@@ -44,7 +44,6 @@ export default class TextareaAutosize extends React.Component {
 
   render() {
     let {
-      valueLink,
       minRows: _minRows,
       maxRows: _maxRows,
       onHeightChange: _onHeightChange,
@@ -52,10 +51,6 @@ export default class TextareaAutosize extends React.Component {
       inputRef: _inputRef,
       ...props,
     } = this.props;
-
-    if (typeof valueLink === 'object') {
-      props.value = valueLink.value;
-    }
 
     props.style = {
       ...props.style,
@@ -118,12 +113,7 @@ export default class TextareaAutosize extends React.Component {
     if (!this._controlled) {
       this._resizeComponent();
     }
-    let {valueLink, onChange} = this.props;
-    if (valueLink) {
-      valueLink.requestChange(event.target.value);
-    } else {
-      onChange(event);
-    }
+    this.props.onChange(event);
   }
 
   _resizeComponent = () => {

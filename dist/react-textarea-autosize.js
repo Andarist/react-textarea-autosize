@@ -150,22 +150,6 @@ function autoInc() {
 
 var uid = autoInc();
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
-
-
-
-
-
-
-
-
-
-
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -317,15 +301,7 @@ var TextareaAutosize = function (_React$Component) {
       if (!_this._controlled) {
         _this._resizeComponent();
       }
-      var _this$props = _this.props,
-          valueLink = _this$props.valueLink,
-          onChange = _this$props.onChange;
-
-      if (valueLink) {
-        valueLink.requestChange(event.target.value);
-      } else {
-        onChange(event);
-      }
+      _this.props.onChange(event);
     };
 
     _this._resizeComponent = function () {
@@ -356,18 +332,13 @@ var TextareaAutosize = function (_React$Component) {
 
   TextareaAutosize.prototype.render = function render() {
     var _props = this.props,
-        valueLink = _props.valueLink,
         _minRows = _props.minRows,
         _maxRows = _props.maxRows,
         _onHeightChange = _props.onHeightChange,
         _useCacheForDOMMeasurements = _props.useCacheForDOMMeasurements,
         _inputRef = _props.inputRef,
-        props = objectWithoutProperties(_props, ['valueLink', 'minRows', 'maxRows', 'onHeightChange', 'useCacheForDOMMeasurements', 'inputRef']);
+        props = objectWithoutProperties(_props, ['minRows', 'maxRows', 'onHeightChange', 'useCacheForDOMMeasurements', 'inputRef']);
 
-
-    if ((typeof valueLink === 'undefined' ? 'undefined' : _typeof(valueLink)) === 'object') {
-      props.value = valueLink.value;
-    }
 
     props.style = _extends({}, props.style, {
       height: this.state.height
