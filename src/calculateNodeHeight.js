@@ -1,5 +1,6 @@
 const browser = typeof window !== 'undefined' && typeof document !== 'undefined';
 const isIE = browser ? !!document.documentElement.currentStyle : false;
+const hiddenTextarea = browser && document.createElement('textarea');
 
 const HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
@@ -35,15 +36,12 @@ const SIZING_STYLE = [
 ];
 
 let computedStyleCache = {};
-let hiddenTextarea;
 
 export default function calculateNodeHeight(uiTextNode, uid,
     useCache = false,
     minRows = null, maxRows = null) {
-  if (typeof hiddenTextarea === 'undefined') {
-    hiddenTextarea = document.createElement('textarea');
-    document.body.appendChild(hiddenTextarea);
-  } else if (hiddenTextarea.parentNode === null) {
+
+  if (hiddenTextarea.parentNode === null) {
     document.body.appendChild(hiddenTextarea);
   }
 
@@ -80,7 +78,7 @@ export default function calculateNodeHeight(uiTextNode, uid,
   if (minRows !== null || maxRows !== null) {
     // measure height of a textarea with a single row
     hiddenTextarea.value = 'x';
-    let singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
+    const singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
     if (minRows !== null) {
       minHeight = singleRowHeight * minRows;
       if (boxSizing === 'border-box') {

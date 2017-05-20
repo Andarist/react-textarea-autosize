@@ -87,7 +87,7 @@ export default class TextareaAutosize extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.height !== prevState.height) {
-      this.props.onHeightChange(this.state.height);
+      this.props.onHeightChange(this.state.height, this);
     }
   }
 
