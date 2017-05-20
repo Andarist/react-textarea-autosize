@@ -1,17 +1,18 @@
-const browser = typeof window !== 'undefined' && typeof document !== 'undefined';
+const browser =
+  typeof window !== 'undefined' && typeof document !== 'undefined';
 const isIE = browser ? !!document.documentElement.currentStyle : false;
 const hiddenTextarea = browser && document.createElement('textarea');
 
 const HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
   'max-height': 'none',
-  'height': '0',
-  'visibility': 'hidden',
-  'overflow': 'hidden',
-  'position': 'absolute',
+  height: '0',
+  visibility: 'hidden',
+  overflow: 'hidden',
+  position: 'absolute',
   'z-index': '-1000',
-  'top': '0',
-  'right': '0'
+  top: '0',
+  right: '0',
 };
 
 const SIZING_STYLE = [
@@ -32,15 +33,18 @@ const SIZING_STYLE = [
   'border-right-width',
   'border-bottom-width',
   'border-left-width',
-  'box-sizing'
+  'box-sizing',
 ];
 
 let computedStyleCache = {};
 
-export default function calculateNodeHeight(uiTextNode, uid,
-    useCache = false,
-    minRows = null, maxRows = null) {
-
+export default function calculateNodeHeight(
+  uiTextNode,
+  uid,
+  useCache = false,
+  minRows = null,
+  maxRows = null,
+) {
   if (hiddenTextarea.parentNode === null) {
     document.body.appendChild(hiddenTextarea);
   }
@@ -48,18 +52,24 @@ export default function calculateNodeHeight(uiTextNode, uid,
   // Copy all CSS properties that have an impact on the height of the content in
   // the textbox
   const {
-    paddingSize, borderSize,
-    boxSizing, sizingStyle
+    paddingSize,
+    borderSize,
+    boxSizing,
+    sizingStyle,
   } = calculateNodeStyling(uiTextNode, useCache);
 
   // Need to have the overflow attribute to hide the scrollbar otherwise
   // text-lines will not calculated properly as the shadow will technically be
   // narrower for content
-  Object.keys(sizingStyle).forEach((key) => {
+  Object.keys(sizingStyle).forEach(key => {
     hiddenTextarea.style[key] = sizingStyle[key];
   });
   Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(key => {
-    hiddenTextarea.style.setProperty(key, HIDDEN_TEXTAREA_STYLE[key], 'important');
+    hiddenTextarea.style.setProperty(
+      key,
+      HIDDEN_TEXTAREA_STYLE[key],
+      'important',
+    );
   });
   hiddenTextarea.value = uiTextNode.value || uiTextNode.placeholder || 'x';
 
@@ -108,41 +118,38 @@ function calculateNodeStyling(node, uid, useCache = false) {
 
   const style = window.getComputedStyle(node);
 
-  let sizingStyle = SIZING_STYLE
-    .reduce((obj, name) => {
-      obj[name] = style.getPropertyValue(name);
-      return obj;
-    }, {});
+  let sizingStyle = SIZING_STYLE.reduce((obj, name) => {
+    obj[name] = style.getPropertyValue(name);
+    return obj;
+  }, {});
 
   const boxSizing = sizingStyle['box-sizing'];
 
   // IE (Edge has already correct behaviour) returns content width as computed width
   // so we need to add manually padding and border widths
   if (isIE && boxSizing === 'border-box') {
-    sizingStyle.width = (
-        parseFloat(sizingStyle.width)
-      + parseFloat(style['border-right-width'])
-      + parseFloat(style['border-left-width'])
-      + parseFloat(style['padding-right'])
-      + parseFloat(style['padding-left'])
-    ) + 'px';
+    sizingStyle.width =
+      parseFloat(sizingStyle.width) +
+      parseFloat(style['border-right-width']) +
+      parseFloat(style['border-left-width']) +
+      parseFloat(style['padding-right']) +
+      parseFloat(style['padding-left']) +
+      'px';
   }
 
-  const paddingSize = (
+  const paddingSize =
     parseFloat(sizingStyle['padding-bottom']) +
-    parseFloat(sizingStyle['padding-top'])
-  );
+    parseFloat(sizingStyle['padding-top']);
 
-  const borderSize = (
+  const borderSize =
     parseFloat(sizingStyle['border-bottom-width']) +
-    parseFloat(sizingStyle['border-top-width'])
-  );
+    parseFloat(sizingStyle['border-top-width']);
 
   const nodeInfo = {
     sizingStyle,
     paddingSize,
     borderSize,
-    boxSizing
+    boxSizing,
   };
 
   if (useCache) {

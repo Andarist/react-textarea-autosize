@@ -9,9 +9,9 @@ import uid from './uid';
 
 const noop = () => {};
 
-const [ onNextFrame, clearNextFrameAction ] = window.requestAnimationFrame
-  ? [ window.requestAnimationFrame, window.cancelAnimationFrame ]
-  : [ setTimeout, clearTimeout ];
+const [onNextFrame, clearNextFrameAction] = window.requestAnimationFrame
+  ? [window.requestAnimationFrame, window.cancelAnimationFrame]
+  : [setTimeout, clearTimeout];
 
 export default class TextareaAutosize extends React.Component {
   static propTypes = {
@@ -21,14 +21,14 @@ export default class TextareaAutosize extends React.Component {
     useCacheForDOMMeasurements: PropTypes.bool,
     minRows: PropTypes.number,
     maxRows: PropTypes.number,
-    inputRef: PropTypes.func
-  }
+    inputRef: PropTypes.func,
+  };
 
   static defaultProps = {
     onChange: noop,
     onHeightChange: noop,
-    useCacheForDOMMeasurements: false
-  }
+    useCacheForDOMMeasurements: false,
+  };
 
   _resizeLock = false;
 
@@ -37,7 +37,7 @@ export default class TextareaAutosize extends React.Component {
     this.state = {
       height: (props.style && props.style.height) || 0,
       minHeight: -Infinity,
-      maxHeight: Infinity
+      maxHeight: Infinity,
     };
 
     this._uid = uid();
@@ -51,7 +51,7 @@ export default class TextareaAutosize extends React.Component {
       onHeightChange: _onHeightChange,
       useCacheForDOMMeasurements: _useCacheForDOMMeasurements,
       inputRef: _inputRef,
-      ...props,
+      ...props
     } = this.props;
 
     props.style = {
@@ -61,7 +61,7 @@ export default class TextareaAutosize extends React.Component {
 
     let maxHeight = Math.max(
       props.style.maxHeight || Infinity,
-      this.state.maxHeight
+      this.state.maxHeight,
     );
 
     if (maxHeight < this.state.height) {
@@ -119,14 +119,14 @@ export default class TextareaAutosize extends React.Component {
     if (this.props.inputRef) {
       this.props.inputRef(node);
     }
-  }
+  };
 
   _onChange = event => {
     if (!this._controlled) {
       this._resizeComponent();
     }
     this.props.onChange(event);
-  }
+  };
 
   _resizeComponent = (callback = noop) => {
     if (typeof this._rootDOMNode === 'undefined') {
@@ -138,7 +138,7 @@ export default class TextareaAutosize extends React.Component {
       this._uid,
       this.props.useCacheForDOMMeasurements,
       this.props.minRows,
-      this.props.maxRows
+      this.props.maxRows,
     );
 
     this.rowCount = rowCount;
@@ -148,7 +148,7 @@ export default class TextareaAutosize extends React.Component {
       this.state.minHeight !== minHeight ||
       this.state.maxHeight !== maxHeight
     ) {
-      this.setState({height, minHeight, maxHeight}, callback);
+      this.setState({ height, minHeight, maxHeight }, callback);
     }
-  }
+  };
 }

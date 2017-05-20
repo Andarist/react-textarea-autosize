@@ -14,13 +14,13 @@ var hiddenTextarea = browser && document.createElement('textarea');
 var HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
   'max-height': 'none',
-  'height': '0',
-  'visibility': 'hidden',
-  'overflow': 'hidden',
-  'position': 'absolute',
+  height: '0',
+  visibility: 'hidden',
+  overflow: 'hidden',
+  position: 'absolute',
   'z-index': '-1000',
-  'top': '0',
-  'right': '0'
+  top: '0',
+  right: '0'
 };
 
 var SIZING_STYLE = ['letter-spacing', 'line-height', 'font-family', 'font-weight', 'font-size', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width', 'box-sizing'];
@@ -31,7 +31,6 @@ function calculateNodeHeight(uiTextNode, uid) {
   var useCache = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var minRows = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
   var maxRows = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-
 
   if (hiddenTextarea.parentNode === null) {
     document.body.appendChild(hiddenTextarea);
