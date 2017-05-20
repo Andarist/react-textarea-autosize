@@ -1,6 +1,3 @@
-/**
- * calculateNodeHeight(uiTextNode, useCache = false)
- */
 const browser = typeof window !== 'undefined' && typeof document !== 'undefined';
 const isIE = browser ? !!document.documentElement.currentStyle : false;
 
@@ -40,7 +37,7 @@ const SIZING_STYLE = [
 let computedStyleCache = {};
 let hiddenTextarea;
 
-export default function calculateNodeHeight(uiTextNode,
+export default function calculateNodeHeight(uiTextNode, uid,
     useCache = false,
     minRows = null, maxRows = null) {
   if (typeof hiddenTextarea === 'undefined') {
@@ -52,7 +49,7 @@ export default function calculateNodeHeight(uiTextNode,
 
   // Copy all CSS properties that have an impact on the height of the content in
   // the textbox
-  let {
+  const {
     paddingSize, borderSize,
     boxSizing, sizingStyle
   } = calculateNodeStyling(uiTextNode, useCache);
@@ -99,19 +96,13 @@ export default function calculateNodeHeight(uiTextNode,
       height = Math.min(maxHeight, height);
     }
   }
-  return {height, minHeight, maxHeight};
+  return { height, minHeight, maxHeight };
 }
 
-function calculateNodeStyling(node, useCache = false) {
+function calculateNodeStyling(node, uid, useCache = false) {
   // TODO: generate id in constructor + clear cache in componentWillUnmount
-  const nodeRef = (
-    node.getAttribute('id') ||
-    node.getAttribute('data-reactid') ||
-    node.getAttribute('name')
-  );
-
-  if (useCache && computedStyleCache[nodeRef]) {
-    return computedStyleCache[nodeRef];
+  if (useCache && computedStyleCache[uid]) {
+    return computedStyleCache[uid];
   }
 
   const style = window.getComputedStyle(node);
@@ -153,9 +144,11 @@ function calculateNodeStyling(node, useCache = false) {
     boxSizing
   };
 
-  if (useCache && nodeRef) {
-    computedStyleCache[nodeRef] = nodeInfo;
+  if (useCache) {
+    computedStyleCache[uid] = nodeInfo;
   }
 
   return nodeInfo;
 }
+
+export const purgeCache = uid => delete computedStyleCache[uid];

@@ -7,9 +7,6 @@
 React = 'default' in React ? React['default'] : React;
 PropTypes = 'default' in PropTypes ? PropTypes['default'] : PropTypes;
 
-/**
- * calculateNodeHeight(uiTextNode, useCache = false)
- */
 var browser = typeof window !== 'undefined' && typeof document !== 'undefined';
 var isIE = browser ? !!document.documentElement.currentStyle : false;
 
@@ -30,10 +27,10 @@ var SIZING_STYLE = ['letter-spacing', 'line-height', 'font-family', 'font-weight
 var computedStyleCache = {};
 var hiddenTextarea = void 0;
 
-function calculateNodeHeight(uiTextNode) {
-  var useCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var minRows = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var maxRows = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+function calculateNodeHeight(uiTextNode, uid) {
+  var useCache = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var minRows = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var maxRows = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 
   if (typeof hiddenTextarea === 'undefined') {
     hiddenTextarea = document.createElement('textarea');
@@ -98,14 +95,12 @@ function calculateNodeHeight(uiTextNode) {
   return { height: height, minHeight: minHeight, maxHeight: maxHeight };
 }
 
-function calculateNodeStyling(node) {
-  var useCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+function calculateNodeStyling(node, uid) {
+  var useCache = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
   // TODO: generate id in constructor + clear cache in componentWillUnmount
-  var nodeRef = node.getAttribute('id') || node.getAttribute('data-reactid') || node.getAttribute('name');
-
-  if (useCache && computedStyleCache[nodeRef]) {
-    return computedStyleCache[nodeRef];
+  if (useCache && computedStyleCache[uid]) {
+    return computedStyleCache[uid];
   }
 
   var style = window.getComputedStyle(node);
@@ -134,12 +129,26 @@ function calculateNodeStyling(node) {
     boxSizing: boxSizing
   };
 
-  if (useCache && nodeRef) {
-    computedStyleCache[nodeRef] = nodeInfo;
+  if (useCache) {
+    computedStyleCache[uid] = nodeInfo;
   }
 
   return nodeInfo;
 }
+
+var purgeCache = function purgeCache(uid) {
+  return delete computedStyleCache[uid];
+};
+
+function autoInc() {
+  var seed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+  return function () {
+    return ++seed;
+  };
+}
+
+var uid = autoInc();
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
@@ -324,7 +333,7 @@ var TextareaAutosize = function (_React$Component) {
         return;
       }
 
-      var _calculateNodeHeight = calculateNodeHeight(_this._rootDOMNode, _this.props.useCacheForDOMMeasurements, _this.props.minRows, _this.props.maxRows),
+      var _calculateNodeHeight = calculateNodeHeight(_this._rootDOMNode, _this._uid, _this.props.useCacheForDOMMeasurements, _this.props.minRows, _this.props.maxRows),
           height = _calculateNodeHeight.height,
           minHeight = _calculateNodeHeight.minHeight,
           maxHeight = _calculateNodeHeight.maxHeight;
@@ -340,6 +349,7 @@ var TextareaAutosize = function (_React$Component) {
       maxHeight: Infinity
     };
 
+    _this._uid = uid();
     _this._controlled = typeof props.value === 'string';
     return _this;
   }
@@ -394,6 +404,7 @@ var TextareaAutosize = function (_React$Component) {
   TextareaAutosize.prototype.componentWillUnmount = function componentWillUnmount() {
     this._clearNextFrame();
     window.removeEventListener('resize', this._resizeComponent);
+    purgeCache(this._uid);
   };
 
   TextareaAutosize.prototype._clearNextFrame = function _clearNextFrame() {

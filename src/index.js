@@ -4,7 +4,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import calculateNodeHeight from './calculateNodeHeight';
+import calculateNodeHeight, { purgeCache } from './calculateNodeHeight';
+import uid from './uid';
 
 const noop = () => {};
 
@@ -37,6 +38,7 @@ export default class TextareaAutosize extends React.Component {
       maxHeight: Infinity
     };
 
+    this._uid = uid();
     this._controlled = typeof props.value === 'string';
   }
 
@@ -97,6 +99,7 @@ export default class TextareaAutosize extends React.Component {
   componentWillUnmount() {
     this._clearNextFrame();
     window.removeEventListener('resize', this._resizeComponent);
+    purgeCache(this._uid);
   }
 
   _clearNextFrame() {
@@ -130,6 +133,7 @@ export default class TextareaAutosize extends React.Component {
 
     const { height, minHeight, maxHeight } = calculateNodeHeight(
       this._rootDOMNode,
+      this._uid,
       this.props.useCacheForDOMMeasurements,
       this.props.minRows,
       this.props.maxRows
