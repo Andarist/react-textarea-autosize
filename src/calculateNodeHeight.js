@@ -3,19 +3,6 @@
  */
 const browser = typeof window !== 'undefined' && typeof document !== 'undefined';
 const isIE = browser ? !!document.documentElement.currentStyle : false;
-const boxSizingProp = (() => {
-  if (!browser) {
-    return 'box-sizing';
-  }
-  const documentStyle = window.getComputedStyle(document.documentElement);
-  // TODO: remove prefixed - they are probably obsolete, were introduced in by df79cf502630744d40233b64cad01770e5584610 in 2014
-  return (
-      documentStyle.getPropertyValue('box-sizing')          ? 'box-sizing'
-    : documentStyle.getPropertyValue('-moz-box-sizing')     ? '-moz-box-sizing'
-    : documentStyle.getPropertyValue('-webkit-box-sizing')  ? '-webkit-box-sizing'
-    : 'box-sizing'
-  );
-})();
 
 const HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
@@ -47,7 +34,7 @@ const SIZING_STYLE = [
   'border-right-width',
   'border-bottom-width',
   'border-left-width',
-  boxSizingProp
+  'box-sizing'
 ];
 
 let computedStyleCache = {};
@@ -135,7 +122,7 @@ function calculateNodeStyling(node, useCache = false) {
       return obj;
     }, {});
 
-  const boxSizing = sizingStyle[boxSizingProp];
+  const boxSizing = sizingStyle['box-sizing'];
 
   // IE (Edge has already correct behaviour) returns content width as computed width
   // so we need to add manually padding and border widths

@@ -12,14 +12,6 @@ PropTypes = 'default' in PropTypes ? PropTypes['default'] : PropTypes;
  */
 var browser = typeof window !== 'undefined' && typeof document !== 'undefined';
 var isIE = browser ? !!document.documentElement.currentStyle : false;
-var boxSizingProp = function () {
-  if (!browser) {
-    return 'box-sizing';
-  }
-  var documentStyle = window.getComputedStyle(document.documentElement);
-  // TODO: remove prefixed - they are probably obsolete, were introduced in by df79cf502630744d40233b64cad01770e5584610 in 2014
-  return documentStyle.getPropertyValue('box-sizing') ? 'box-sizing' : documentStyle.getPropertyValue('-moz-box-sizing') ? '-moz-box-sizing' : documentStyle.getPropertyValue('-webkit-box-sizing') ? '-webkit-box-sizing' : 'box-sizing';
-}();
 
 var HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
@@ -33,7 +25,7 @@ var HIDDEN_TEXTAREA_STYLE = {
   'right': '0'
 };
 
-var SIZING_STYLE = ['letter-spacing', 'line-height', 'font-family', 'font-weight', 'font-size', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width', boxSizingProp];
+var SIZING_STYLE = ['letter-spacing', 'line-height', 'font-family', 'font-weight', 'font-size', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width', 'box-sizing'];
 
 var computedStyleCache = {};
 var hiddenTextarea = void 0;
@@ -123,7 +115,7 @@ function calculateNodeStyling(node) {
     return obj;
   }, {});
 
-  var boxSizing = sizingStyle[boxSizingProp];
+  var boxSizing = sizingStyle['box-sizing'];
 
   // IE (Edge has already correct behaviour) returns content width as computed width
   // so we need to add manually padding and border widths
