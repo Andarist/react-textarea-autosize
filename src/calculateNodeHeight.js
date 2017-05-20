@@ -43,7 +43,7 @@ let hiddenTextarea;
 export default function calculateNodeHeight(uiTextNode,
     useCache = false,
     minRows = null, maxRows = null) {
-  if (!hiddenTextarea) {
+  if (typeof hiddenTextarea === 'undefined') {
     hiddenTextarea = document.createElement('textarea');
     document.body.appendChild(hiddenTextarea);
   } else if (hiddenTextarea.parentNode === null) {
@@ -60,10 +60,10 @@ export default function calculateNodeHeight(uiTextNode,
   // Need to have the overflow attribute to hide the scrollbar otherwise
   // text-lines will not calculated properly as the shadow will technically be
   // narrower for content
-  Object.keys(sizingStyle).map((key) => {
+  Object.keys(sizingStyle).forEach((key) => {
     hiddenTextarea.style[key] = sizingStyle[key];
   });
-  Object.keys(HIDDEN_TEXTAREA_STYLE).map((key) => {
+  Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(key => {
     hiddenTextarea.style.setProperty(key, HIDDEN_TEXTAREA_STYLE[key], 'important');
   });
   hiddenTextarea.value = uiTextNode.value || uiTextNode.placeholder || 'x';
