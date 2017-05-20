@@ -290,6 +290,8 @@ var TextareaAutosize = function (_React$Component) {
 
     var _this = possibleConstructorReturn(this, _React$Component.call(this, props));
 
+    _this._resizeLock = false;
+
     _this._onRootDOMNode = function (node) {
       _this._rootDOMNode = node;
 
@@ -306,6 +308,8 @@ var TextareaAutosize = function (_React$Component) {
     };
 
     _this._resizeComponent = function () {
+      var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : noop;
+
       if (typeof _this._rootDOMNode === 'undefined') {
         return;
       }
@@ -319,7 +323,7 @@ var TextareaAutosize = function (_React$Component) {
       _this.rowCount = rowCount;
 
       if (_this.state.height !== height || _this.state.minHeight !== minHeight || _this.state.maxHeight !== maxHeight) {
-        _this.setState({ height: height, minHeight: minHeight, maxHeight: maxHeight });
+        _this.setState({ height: height, minHeight: minHeight, maxHeight: maxHeight }, callback);
       }
     };
 
@@ -361,8 +365,22 @@ var TextareaAutosize = function (_React$Component) {
   };
 
   TextareaAutosize.prototype.componentDidMount = function componentDidMount() {
+    var _this2 = this;
+
     this._resizeComponent();
-    window.addEventListener('resize', this._resizeComponent);
+    // Working around Firefox bug which runs resize listeners even when other JS is running at the same moment
+    // causing competing rerenders (due to setState in the listener) in React.
+    // More can be found here - facebook/react#6324
+    this._resizeListener = function () {
+      if (_this2._resizeLock) {
+        return;
+      }
+      _this2._resizeLock = true;
+      _this2._resizeComponent(function () {
+        return _this2._resizeLock = false;
+      });
+    };
+    window.addEventListener('resize', this._resizeListener);
   };
 
   TextareaAutosize.prototype.componentWillReceiveProps = function componentWillReceiveProps() {
@@ -378,7 +396,7 @@ var TextareaAutosize = function (_React$Component) {
 
   TextareaAutosize.prototype.componentWillUnmount = function componentWillUnmount() {
     this._clearNextFrame();
-    window.removeEventListener('resize', this._resizeComponent);
+    window.removeEventListener('resize', this._resizeListener);
     purgeCache(this._uid);
   };
 

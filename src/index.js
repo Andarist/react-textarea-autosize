@@ -30,6 +30,8 @@ export default class TextareaAutosize extends React.Component {
     useCacheForDOMMeasurements: false
   }
 
+  _resizeLock = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -77,7 +79,17 @@ export default class TextareaAutosize extends React.Component {
 
   componentDidMount() {
     this._resizeComponent();
-    window.addEventListener('resize', this._resizeComponent);
+    // Working around Firefox bug which runs resize listeners even when other JS is running at the same moment
+    // causing competing rerenders (due to setState in the listener) in React.
+    // More can be found here - facebook/react#6324
+    this._resizeListener = () => {
+      if (this._resizeLock) {
+        return;
+      }
+      this._resizeLock = true;
+      this._resizeComponent(() => (this._resizeLock = false));
+    };
+    window.addEventListener('resize', this._resizeListener);
   }
 
   componentWillReceiveProps() {
@@ -93,7 +105,7 @@ export default class TextareaAutosize extends React.Component {
 
   componentWillUnmount() {
     this._clearNextFrame();
-    window.removeEventListener('resize', this._resizeComponent);
+    window.removeEventListener('resize', this._resizeListener);
     purgeCache(this._uid);
   }
 
@@ -116,7 +128,7 @@ export default class TextareaAutosize extends React.Component {
     this.props.onChange(event);
   }
 
-  _resizeComponent = () => {
+  _resizeComponent = (callback = noop) => {
     if (typeof this._rootDOMNode === 'undefined') {
       return;
     }
@@ -136,7 +148,7 @@ export default class TextareaAutosize extends React.Component {
       this.state.minHeight !== minHeight ||
       this.state.maxHeight !== maxHeight
     ) {
-      this.setState({height, minHeight, maxHeight});
+      this.setState({height, minHeight, maxHeight}, callback);
     }
   }
 }
