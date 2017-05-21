@@ -38,17 +38,20 @@ function calculateNodeHeight(uiTextNode, uid) {
 
   // Copy all CSS properties that have an impact on the height of the content in
   // the textbox
+  var nodeStyling = calculateNodeStyling(uiTextNode, useCache);
 
-  var _calculateNodeStyling = calculateNodeStyling(uiTextNode, useCache),
-      paddingSize = _calculateNodeStyling.paddingSize,
-      borderSize = _calculateNodeStyling.borderSize,
-      boxSizing = _calculateNodeStyling.boxSizing,
-      sizingStyle = _calculateNodeStyling.sizingStyle;
+  if (nodeStyling === null) {
+    return null;
+  }
+
+  var paddingSize = nodeStyling.paddingSize,
+      borderSize = nodeStyling.borderSize,
+      boxSizing = nodeStyling.boxSizing,
+      sizingStyle = nodeStyling.sizingStyle;
 
   // Need to have the overflow attribute to hide the scrollbar otherwise
   // text-lines will not calculated properly as the shadow will technically be
   // narrower for content
-
 
   Object.keys(sizingStyle).forEach(function (key) {
     hiddenTextarea.style[key] = sizingStyle[key];
@@ -104,6 +107,10 @@ function calculateNodeStyling(node, uid) {
   }
 
   var style = window.getComputedStyle(node);
+
+  if (style === null) {
+    return null;
+  }
 
   var sizingStyle = SIZING_STYLE.reduce(function (obj, name) {
     obj[name] = style.getPropertyValue(name);
@@ -313,11 +320,17 @@ var TextareaAutosize = function (_React$Component) {
         return;
       }
 
-      var _calculateNodeHeight = calculateNodeHeight(_this._rootDOMNode, _this._uid, _this.props.useCacheForDOMMeasurements, _this.props.minRows, _this.props.maxRows),
-          height = _calculateNodeHeight.height,
-          minHeight = _calculateNodeHeight.minHeight,
-          maxHeight = _calculateNodeHeight.maxHeight,
-          rowCount = _calculateNodeHeight.rowCount;
+      var nodeHeight = calculateNodeHeight(_this._rootDOMNode, _this._uid, _this.props.useCacheForDOMMeasurements, _this.props.minRows, _this.props.maxRows);
+
+      if (nodeHeight === null) {
+        return;
+      }
+
+      var height = nodeHeight.height,
+          minHeight = nodeHeight.minHeight,
+          maxHeight = nodeHeight.maxHeight,
+          rowCount = nodeHeight.rowCount;
+
 
       _this.rowCount = rowCount;
 

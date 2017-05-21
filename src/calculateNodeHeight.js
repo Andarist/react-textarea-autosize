@@ -51,12 +51,13 @@ export default function calculateNodeHeight(
 
   // Copy all CSS properties that have an impact on the height of the content in
   // the textbox
-  const {
-    paddingSize,
-    borderSize,
-    boxSizing,
-    sizingStyle,
-  } = calculateNodeStyling(uiTextNode, useCache);
+  const nodeStyling = calculateNodeStyling(uiTextNode, useCache);
+
+  if (nodeStyling === null) {
+    return null;
+  }
+
+  const { paddingSize, borderSize, boxSizing, sizingStyle } = nodeStyling;
 
   // Need to have the overflow attribute to hide the scrollbar otherwise
   // text-lines will not calculated properly as the shadow will technically be
@@ -117,6 +118,10 @@ function calculateNodeStyling(node, uid, useCache = false) {
   }
 
   const style = window.getComputedStyle(node);
+
+  if (style === null) {
+    return null;
+  }
 
   let sizingStyle = SIZING_STYLE.reduce((obj, name) => {
     obj[name] = style.getPropertyValue(name);
