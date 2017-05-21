@@ -16,6 +16,8 @@
     "build:umd": "rimraf dist && npm run build:umd:prod && npm run build:umd:dev",
     "build:umd:prod": "cross-env BABEL_ENV=es NODE_ENV=production rollup -c -i src/index.js -o dist/react-textarea-autosize.min.js",
     "build:umd:dev": "cross-env BABEL_ENV=es NODE_ENV=development rollup -c -i src/index.js -o dist/react-textarea-autosize.js",
+    "docs:build": "cross-env BABEL_ENV=es NODE_ENV=development rollup -c example/rollup.config.js -i example/index.js -o example/bundle.js",
+    "docs:publish": "npm run docs:build && cd example && git init && git commit --allow-empty -m 'update docs' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update docs' && git push git@github.com:andreypopp/react-textarea-autosize gh-pages --force",
     "clean": "rimraf es && rimraf lib && rimraf dist",
     "lint": "eslint src",
     "precommit": "lint-staged",
@@ -45,10 +47,10 @@
     "rimraf": "^2.6.1",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
-    "rollup-plugin-uglify": "^1.0.2",
-    "watchify": "^3.7.0"
+    "rollup-plugin-uglify": "^1.0.2"
   },
   "files": [
     "es",
