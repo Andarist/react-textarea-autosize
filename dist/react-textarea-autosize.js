@@ -396,8 +396,12 @@ var TextareaAutosize = function (_React$Component) {
   };
 
   TextareaAutosize.prototype.componentWillReceiveProps = function componentWillReceiveProps() {
+    var _this3 = this;
+
     this._clearNextFrame();
-    this._onNextFrameActionId = onNextFrame(this._resizeComponent);
+    this._onNextFrameActionId = onNextFrame(function () {
+      return _this3._resizeComponent();
+    });
   };
 
   TextareaAutosize.prototype.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
