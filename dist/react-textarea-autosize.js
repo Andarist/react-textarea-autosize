@@ -7,9 +7,10 @@
 React = 'default' in React ? React['default'] : React;
 PropTypes = 'default' in PropTypes ? PropTypes['default'] : PropTypes;
 
-var browser = typeof window !== 'undefined' && typeof document !== 'undefined';
-var isIE = browser ? !!document.documentElement.currentStyle : false;
-var hiddenTextarea = browser && document.createElement('textarea');
+var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
+
+var isIE = isBrowser ? !!document.documentElement.currentStyle : false;
+var hiddenTextarea = isBrowser && document.createElement('textarea');
 
 var HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
@@ -284,7 +285,7 @@ var set = function set(object, property, value, receiver) {
 
 var noop = function noop() {};
 
-var _ref = window.requestAnimationFrame ? [window.requestAnimationFrame, window.cancelAnimationFrame] : [setTimeout, clearTimeout];
+var _ref = isBrowser && window.requestAnimationFrame ? [window.requestAnimationFrame, window.cancelAnimationFrame] : [setTimeout, clearTimeout];
 var onNextFrame = _ref[0];
 var clearNextFrameAction = _ref[1];
 

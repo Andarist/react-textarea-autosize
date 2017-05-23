@@ -1,7 +1,6 @@
-const browser =
-  typeof window !== 'undefined' && typeof document !== 'undefined';
-const isIE = browser ? !!document.documentElement.currentStyle : false;
-const hiddenTextarea = browser && document.createElement('textarea');
+import isBrowser from './isBrowser';
+const isIE = isBrowser ? !!document.documentElement.currentStyle : false;
+const hiddenTextarea = isBrowser && document.createElement('textarea');
 
 const HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',

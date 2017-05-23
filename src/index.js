@@ -5,11 +5,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import calculateNodeHeight, { purgeCache } from './calculateNodeHeight';
+import isBrowser from './isBrowser';
 import uid from './uid';
 
 const noop = () => {};
 
-const [onNextFrame, clearNextFrameAction] = window.requestAnimationFrame
+const [onNextFrame, clearNextFrameAction] = isBrowser &&
+  window.requestAnimationFrame
   ? [window.requestAnimationFrame, window.cancelAnimationFrame]
   : [setTimeout, clearTimeout];
 
