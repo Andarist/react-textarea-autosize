@@ -39,7 +39,7 @@ function calculateNodeHeight(uiTextNode, uid) {
 
   // Copy all CSS properties that have an impact on the height of the content in
   // the textbox
-  var nodeStyling = calculateNodeStyling(uiTextNode, useCache);
+  var nodeStyling = calculateNodeStyling(uiTextNode, uid, useCache);
 
   if (nodeStyling === null) {
     return null;

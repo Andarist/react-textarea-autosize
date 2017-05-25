@@ -50,7 +50,7 @@ export default function calculateNodeHeight(
 
   // Copy all CSS properties that have an impact on the height of the content in
   // the textbox
-  const nodeStyling = calculateNodeStyling(uiTextNode, useCache);
+  const nodeStyling = calculateNodeStyling(uiTextNode, uid, useCache);
 
   if (nodeStyling === null) {
     return null;
