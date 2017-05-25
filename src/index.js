@@ -132,6 +132,7 @@ export default class TextareaAutosize extends React.Component {
 
   _resizeComponent = (callback = noop) => {
     if (typeof this._rootDOMNode === 'undefined') {
+      callback();
       return;
     }
 
@@ -144,6 +145,7 @@ export default class TextareaAutosize extends React.Component {
     );
 
     if (nodeHeight === null) {
+      callback();
       return;
     }
 
@@ -157,6 +159,9 @@ export default class TextareaAutosize extends React.Component {
       this.state.maxHeight !== maxHeight
     ) {
       this.setState({ height, minHeight, maxHeight }, callback);
+      return;
     }
+
+    callback();
   };
 }

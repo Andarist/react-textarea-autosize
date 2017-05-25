@@ -318,12 +318,14 @@ var TextareaAutosize = function (_React$Component) {
       var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : noop;
 
       if (typeof _this._rootDOMNode === 'undefined') {
+        callback();
         return;
       }
 
       var nodeHeight = calculateNodeHeight(_this._rootDOMNode, _this._uid, _this.props.useCacheForDOMMeasurements, _this.props.minRows, _this.props.maxRows);
 
       if (nodeHeight === null) {
+        callback();
         return;
       }
 
@@ -337,7 +339,10 @@ var TextareaAutosize = function (_React$Component) {
 
       if (_this.state.height !== height || _this.state.minHeight !== minHeight || _this.state.maxHeight !== maxHeight) {
         _this.setState({ height: height, minHeight: minHeight, maxHeight: maxHeight }, callback);
+        return;
       }
+
+      callback();
     };
 
     _this.state = {
