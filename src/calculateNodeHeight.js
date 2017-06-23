@@ -20,6 +20,7 @@ const SIZING_STYLE = [
   'font-family',
   'font-weight',
   'font-size',
+  'font-style',
   'text-rendering',
   'text-transform',
   'width',
