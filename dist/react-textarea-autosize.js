@@ -33,7 +33,7 @@ function calculateNodeHeight(uiTextNode, uid) {
   var minRows = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
   var maxRows = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 
-  if (hiddenTextarea.parentNode === null) {
+  if (!document.body.contains(hiddenTextarea)) {
     document.body.appendChild(hiddenTextarea);
   }
 
