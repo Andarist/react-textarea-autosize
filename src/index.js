@@ -164,4 +164,8 @@ export default class TextareaAutosize extends React.Component {
 
     callback();
   };
+
+  focus = () => {
+    this._rootDOMNode.focus();
+  };
 }
