@@ -28,7 +28,7 @@
     "release:major": "npm run prerelease && npm version major && git push --follow-tags && npm publish"
   },
   "peerDependencies": {
-    "react": ">=0.14.0 <16.0.0"
+    "react": ">=0.14.0 <17.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
