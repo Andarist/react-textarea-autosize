@@ -112,7 +112,9 @@ export default class TextareaAutosize extends React.Component {
   }
 
   _clearNextFrame() {
-    clearNextFrameAction(this._onNextFrameActionId);
+    if (this._onNextFrameActionId) {
+      clearNextFrameAction(this._onNextFrameActionId);
+    }
   }
 
   _onRootDOMNode = node => {
