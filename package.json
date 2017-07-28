@@ -23,9 +23,9 @@
     "prepare": "npm run build",
     "precommit": "lint-staged && run-p build:umd:** && git add dist",
     "prerelease": "npm run lint",
-    "release:patch": "npm run prerelease && npm version patch && git push --follow-tags && npm publish",
-    "release:minor": "npm run prerelease && npm version minor && git push --follow-tags && npm publish",
-    "release:major": "npm run prerelease && npm version major && git push --follow-tags && npm publish"
+    "release:patch": "npm run prerelease && npm version patch && npm publish && git push --follow-tags",
+    "release:minor": "npm run prerelease && npm version minor && npm publish && git push --follow-tags",
+    "release:major": "npm run prerelease && npm version major && npm publish && git push --follow-tags"
   },
   "peerDependencies": {
     "react": ">=0.14.0 <17.0.0"
