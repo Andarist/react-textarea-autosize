@@ -22,7 +22,7 @@
     "lint": "eslint src",
     "prepare": "npm run build",
     "precommit": "lint-staged && run-p build:umd:** && git add dist",
-    "prerelease": "npm run lint && npm run prepare",
+    "prerelease": "npm run lint",
     "release:patch": "npm run prerelease && npm version patch && git push --follow-tags && npm publish",
     "release:minor": "npm run prerelease && npm version minor && git push --follow-tags && npm publish",
     "release:major": "npm run prerelease && npm version major && git push --follow-tags && npm publish"
