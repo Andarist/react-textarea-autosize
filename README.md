@@ -1,3 +1,6 @@
+[![npm version](https://img.shields.io/npm/v/react-textarea-autosize.svg)](https://www.npmjs.com/package/react-textarea-autosize)
+[![npm](https://img.shields.io/npm/dm/react-textarea-autosize.svg)](https://www.npmjs.com/package/react-textarea-autosize)
+
 # react-textarea-autosize
 
 Drop-in replacement for the textarea component which automatically resizes textarea as content changes.
