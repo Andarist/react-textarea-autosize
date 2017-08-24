@@ -123,10 +123,15 @@ function calculateNodeStyling(node, uid, useCache = false) {
     return null;
   }
 
-  let sizingStyle = SIZING_STYLE.reduce((obj, name) => {
-    obj[name] = style.getPropertyValue(name);
-    return obj;
-  }, {});
+  let sizingStyle;
+  try {
+    sizingStyle = SIZING_STYLE.reduce((obj, name) => {
+      obj[name] = style.getPropertyValue(name);
+      return obj;
+    }, {});
+  } catch (e) {
+    return null;
+  }
 
   const boxSizing = sizingStyle['box-sizing'];
 
