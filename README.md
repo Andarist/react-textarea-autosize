@@ -31,6 +31,18 @@ React.renderComponent(
 
 https://andreypopp.github.io/react-textarea-autosize/
 
+## FAQ
+
+### How to test it with jest and react-test-renderer
+
+Because [jest](https://github.com/facebook/jest) provides polyfills for DOM objects by requiring [jsdom](https://github.com/tmpvar/jsdom) and [react-test-renderer](https://www.npmjs.com/package/react-test-renderer) doesn't provide refs for rendered components out of the box (calling ref callbacks with `null`), you need to supply a mocked ref in your tests. You can do it like this (more can be read [here](https://github.com/facebook/react/issues/7740#issuecomment-247335106)):
+```js
+const tree = renderer.create(
+  <Textarea />,
+  { createNodeMock: () => document.createElement('textarea') }
+).toJSON();
+```
+
 ## Development
 
 To release patch, minor or major version:
