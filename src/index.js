@@ -16,7 +16,7 @@ const [onNextFrame, clearNextFrameAction] =
       window.requestAnimationFrame.bind(window),
       window.cancelAnimationFrame.bind(window),
     ]
-    : [(f, ticks) => setTimeout(f, ticks), id => clearTimeout(id)];
+    : [setTimeout, clearTimeout];
 
 export default class TextareaAutosize extends React.Component {
   static propTypes = {
