@@ -10,10 +10,13 @@ import uid from './uid';
 
 const noop = () => {};
 
-const [onNextFrame, clearNextFrameAction] = isBrowser &&
-  window.requestAnimationFrame
-  ? [window.requestAnimationFrame, window.cancelAnimationFrame]
-  : [setTimeout, clearTimeout];
+const [onNextFrame, clearNextFrameAction] =
+  isBrowser && window.requestAnimationFrame
+    ? [
+      window.requestAnimationFrame.bind(window),
+      window.cancelAnimationFrame.bind(window),
+    ]
+    : [window.setTimeout.bind(window), window.clearTimeout.bind(window)];
 
 export default class TextareaAutosize extends React.Component {
   static propTypes = {
