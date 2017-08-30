@@ -238,7 +238,11 @@ var possibleConstructorReturn = function (self, call) {
 
 var noop = function noop() {};
 
-var _ref = isBrowser && window.requestAnimationFrame ? [window.requestAnimationFrame.bind(window), window.cancelAnimationFrame.bind(window)] : [window.setTimeout.bind(window), window.clearTimeout.bind(window)];
+var _ref = isBrowser && window.requestAnimationFrame ? [window.requestAnimationFrame.bind(window), window.cancelAnimationFrame.bind(window)] : [function (f, ticks) {
+  return setTimeout(f, ticks);
+}, function (id) {
+  return clearTimeout(id);
+}];
 var onNextFrame = _ref[0];
 var clearNextFrameAction = _ref[1];
 
