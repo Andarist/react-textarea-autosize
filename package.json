@@ -8,6 +8,7 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "jsnext:main": "es/index.js",
+  "unpkg": "dist/react-textarea-autosize.min.js",
   "author": "Andrey Popp <8mayday@gmail.com> (https://andreypopp.com/)",
   "scripts": {
     "prebuild": "npm run clean",
