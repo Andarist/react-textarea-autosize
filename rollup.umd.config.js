@@ -4,8 +4,10 @@ import uglify from 'rollup-plugin-uglify';
 const env = process.env.NODE_ENV;
 
 const umdConfig = Object.assign({}, config, {
-  format: 'umd',
-  moduleName: 'TextareaAutosize',
+  output: Object.assign({}, config.output, {
+    format: 'umd',
+    name: 'TextareaAutosize',
+  }),
   globals: {
     react: 'React',
     'prop-types': 'PropTypes'

@@ -5,7 +5,9 @@ import replace from 'rollup-plugin-replace';
 const env = process.env.NODE_ENV;
 
 const config = {
-  format: process.env.BABEL_ENV,
+  output: {
+    format: process.env.BABEL_ENV,
+  },
   plugins: [
     nodeResolve({
       jsnext: true
