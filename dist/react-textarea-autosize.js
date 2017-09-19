@@ -113,10 +113,15 @@ function calculateNodeStyling(node, uid) {
     return null;
   }
 
-  var sizingStyle = SIZING_STYLE.reduce(function (obj, name) {
-    obj[name] = style.getPropertyValue(name);
-    return obj;
-  }, {});
+  var sizingStyle = void 0;
+  try {
+    sizingStyle = SIZING_STYLE.reduce(function (obj, name) {
+      obj[name] = style.getPropertyValue(name);
+      return obj;
+    }, {});
+  } catch (e) {
+    return null;
+  }
 
   var boxSizing = sizingStyle['box-sizing'];
 
