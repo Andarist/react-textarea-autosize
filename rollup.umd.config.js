@@ -1,4 +1,5 @@
 import config from './rollup.config.js';
+import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
 
 const env = process.env.NODE_ENV;
@@ -13,6 +14,12 @@ const umdConfig = Object.assign({}, config, {
     'prop-types': 'PropTypes'
   },
 });
+
+config.plugins.push(
+  replace({
+    'process.env.NODE_ENV': JSON.stringify(env)
+  })
+);
 
 if (env === 'production') {
   config.plugins.push(

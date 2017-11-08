@@ -10,10 +10,18 @@ import uid from './uid';
 
 const noop = () => {};
 
-const [onNextFrame, clearNextFrameAction] = isBrowser &&
-  window.requestAnimationFrame
-  ? [window.requestAnimationFrame, window.cancelAnimationFrame]
-  : [setTimeout, clearTimeout];
+// IE11 has a problem with eval source maps, can be reproduced with:
+// eval('"use strict"; var onNextFrame = window.cancelAnimationFrame; onNextFrame(4);')
+// so we bind window as context in dev modes
+const [onNextFrame, clearNextFrameAction] =
+  isBrowser && window.requestAnimationFrame
+    ? process.env.NODE_ENV !== 'development'
+      ? [window.requestAnimationFrame, window.cancelAnimationFrame]
+      : [
+        window.requestAnimationFrame.bind(window),
+        window.cancelAnimationFrame.bind(window),
+      ]
+    : [setTimeout, clearTimeout];
 
 export default class TextareaAutosize extends React.Component {
   static propTypes = {
