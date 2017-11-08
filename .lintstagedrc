@@ -3,5 +3,6 @@
     "prettier --single-quote --trailing-comma=all --write",
     "eslint --fix",
     "git add"
-  ]
+  ],
+  "*.md": ["prettier --write", "git add"]
 }
