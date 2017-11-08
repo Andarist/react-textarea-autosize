@@ -9,7 +9,7 @@
   "module": "es/index.js",
   "jsnext:main": "es/index.js",
   "unpkg": "dist/react-textarea-autosize.min.js",
-  "author": "Andrey Popp <8mayday@gmail.com> (https://andreypopp.com/)",
+  "author": "Andrey Popp <8mayday@gmail.com> (httsps://andreypopp.com/)",
   "scripts": {
     "prebuild": "npm run clean",
     "build": "run-p build:**",
@@ -22,7 +22,7 @@
     "clean": "rimraf es && rimraf lib && rimraf dist",
     "lint": "eslint src",
     "prepare": "npm run build",
-    "precommit": "lint-staged && run-p build:umd:** && git add dist",
+    "precommit": "lint-staged",
     "prerelease": "npm run lint",
     "release:patch": "npm run prerelease && npm version patch && npm publish && git push --follow-tags",
     "release:minor": "npm run prerelease && npm version minor && npm publish && git push --follow-tags",
