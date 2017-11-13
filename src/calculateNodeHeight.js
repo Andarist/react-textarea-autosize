@@ -21,6 +21,7 @@ const SIZING_STYLE = [
   'font-weight',
   'font-size',
   'font-style',
+  'tab-size',
   'text-rendering',
   'text-transform',
   'width',
