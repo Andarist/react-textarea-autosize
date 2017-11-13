@@ -72,7 +72,7 @@ var HIDDEN_TEXTAREA_STYLE = {
   top: '0',
   right: '0'
 };
-var SIZING_STYLE = ['letter-spacing', 'line-height', 'font-family', 'font-weight', 'font-size', 'font-style', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width', 'box-sizing'];
+var SIZING_STYLE = ['letter-spacing', 'line-height', 'font-family', 'font-weight', 'font-size', 'font-style', 'tab-size', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width', 'box-sizing'];
 var computedStyleCache = {};
 function calculateNodeHeight(uiTextNode, uid, useCache, minRows, maxRows) {
   if (useCache === void 0) {
@@ -221,7 +221,10 @@ var uid = autoInc();
 /**
  * <TextareaAutosize />
  */
-var noop = function noop() {};
+var noop = function noop() {}; // IE11 has a problem with eval source maps, can be reproduced with:
+// eval('"use strict"; var onNextFrame = window.cancelAnimationFrame; onNextFrame(4);')
+// so we bind window as context in dev modes
+
 
 var _ref = isBrowser && window.requestAnimationFrame ? [window.requestAnimationFrame.bind(window), window.cancelAnimationFrame.bind(window)] : [setTimeout, clearTimeout];
 var onNextFrame = _ref[0];
