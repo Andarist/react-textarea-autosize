@@ -2,7 +2,11 @@ const loose = true
 
 module.exports = {
   presets: [
-  	['@babel/env', { loose, modules: false }],
+  	['@babel/env', {
+  		loose,
+  		modules: false,
+  		exclude: ['transform-typeof-symbol'],
+  	}],
   	'@babel/react',
   ],
   plugins: [
