@@ -33,6 +33,17 @@ https://andreypopp.github.io/react-textarea-autosize/
 
 ## FAQ
 
+### How to focus
+
+Get a ref to inner textarea:
+```js
+<Textarea inputRef={(tag) => this.textarea = tag} />
+```
+And then call a focus on that ref:
+```js
+this.textarea.focus()
+```
+
 ### How to test it with jest and react-test-renderer
 
 Because [jest](https://github.com/facebook/jest) provides polyfills for DOM
