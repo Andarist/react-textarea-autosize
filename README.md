@@ -44,6 +44,12 @@ And then call a focus on that ref:
 this.textarea.focus()
 ```
 
+To autofocus:
+```js
+<Textarea autoFocus />
+```
+(all HTML attributes are passed to innner textarea)
+
 ### How to test it with jest and react-test-renderer
 
 Because [jest](https://github.com/facebook/jest) provides polyfills for DOM
