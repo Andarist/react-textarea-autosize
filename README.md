@@ -48,7 +48,7 @@ To autofocus:
 ```js
 <Textarea autoFocus />
 ```
-(all HTML attributes are passed to innner textarea)
+(all HTML attributes are passed to inner textarea)
 
 ### How to test it with jest and react-test-renderer
 
