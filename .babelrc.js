@@ -5,7 +5,6 @@ module.exports = {
   	['@babel/env', {
   		loose,
   		modules: false,
-  		exclude: ['transform-typeof-symbol'],
   	}],
   	'@babel/react',
   ],
