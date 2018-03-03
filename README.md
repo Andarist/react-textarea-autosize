@@ -36,18 +36,23 @@ https://andreypopp.github.io/react-textarea-autosize/
 ### How to focus
 
 Get a ref to inner textarea:
+
 ```js
-<Textarea inputRef={(tag) => this.textarea = tag} />
+<Textarea inputRef={tag => (this.textarea = tag)} />
 ```
+
 And then call a focus on that ref:
+
 ```js
-this.textarea.focus()
+this.textarea.focus();
 ```
 
 To autofocus:
+
 ```js
 <Textarea autoFocus />
 ```
+
 (all HTML attributes are passed to inner textarea)
 
 ### How to test it with jest and react-test-renderer
@@ -76,7 +81,7 @@ To release patch, minor or major version:
     % npm run release:minor
     % npm run release:major
 
-This will run eslint, compile sources from `src/` to `lib/`, `es/` and `dist/`,
-bump a version in `package.json` and then create a new git commit with tag. If
-tests or linter fails — commit won't be created. If tasks succeed it publishes
-to npm and pushes a tag to github.
+This will run eslint, compile sources from `src/` to `dist/`, bump a version in
+`package.json` and then create a new git commit with tag. If tests or linter
+fails — commit won't be created. If tasks succeed it publishes to npm and
+pushes a tag to github.
