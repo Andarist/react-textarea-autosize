@@ -131,6 +131,11 @@ function calculateNodeStyling(node, uid, useCache = false) {
 
   const boxSizing = sizingStyle['box-sizing'];
 
+  // probably node is detached from DOM, can't read computed dimensions
+  if (boxSizing === '') {
+    return null;
+  }
+
   // IE (Edge has already correct behaviour) returns content width as computed width
   // so we need to add manually padding and border widths
   if (isIE && boxSizing === 'border-box') {
