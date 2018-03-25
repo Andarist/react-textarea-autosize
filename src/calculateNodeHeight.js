@@ -1,6 +1,6 @@
 import isBrowser from './isBrowser';
+
 const isIE = isBrowser ? !!document.documentElement.currentStyle : false;
-const hiddenTextarea = isBrowser && document.createElement('textarea');
 
 const HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
@@ -38,6 +38,15 @@ const SIZING_STYLE = [
 ];
 
 let computedStyleCache = {};
+const hiddenTextarea = isBrowser && document.createElement('textarea');
+
+const forceHiddenStyles = node => {
+  Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(key => {
+    node.style.setProperty(key, HIDDEN_TEXTAREA_STYLE[key], 'important');
+  });
+};
+
+forceHiddenStyles(hiddenTextarea);
 
 export default function calculateNodeHeight(
   uiTextNode,
@@ -66,13 +75,7 @@ export default function calculateNodeHeight(
   Object.keys(sizingStyle).forEach(key => {
     hiddenTextarea.style[key] = sizingStyle[key];
   });
-  Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(key => {
-    hiddenTextarea.style.setProperty(
-      key,
-      HIDDEN_TEXTAREA_STYLE[key],
-      'important',
-    );
-  });
+  forceHiddenStyles(hiddenTextarea);
   hiddenTextarea.value = uiTextNode.value || uiTextNode.placeholder || 'x';
 
   let minHeight = -Infinity;
