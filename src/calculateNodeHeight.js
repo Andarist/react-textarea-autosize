@@ -46,7 +46,9 @@ const forceHiddenStyles = node => {
   });
 };
 
-forceHiddenStyles(hiddenTextarea);
+if (isBrowser) {
+  forceHiddenStyles(hiddenTextarea);
+}
 
 export default function calculateNodeHeight(
   uiTextNode,
