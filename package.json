@@ -13,7 +13,7 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "rollup -c",
-    "docs:build": "cross-env BABEL_ENV=es NODE_ENV=development rollup -c example/rollup.config.js -i example/index.js -o example/bundle.js",
+    "docs:build": "cross-env BABEL_ENV=es NODE_ENV=development rollup -c example/rollup.config.js",
     "docs:publish": "npm run docs:build && cd example && rimraf .git && git init && git commit --allow-empty -m 'update docs' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update docs' && git push git@github.com:andreypopp/react-textarea-autosize gh-pages --force",
     "clean": "rimraf dist",
     "lint": "eslint src",

@@ -6,15 +6,19 @@ import replace from 'rollup-plugin-replace';
 const env = process.env.NODE_ENV;
 
 const config = {
-  format: 'umd',
+  input: 'example/index.js',
+  output: {
+    file: 'example/bundle.js',
+    format: 'umd',
+  },
   plugins: [
     nodeResolve({
       jsnext: true
     }),
-    commonjs(),
     babel({
       exclude: 'node_modules/**',
     }),
+    commonjs(),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
     })
