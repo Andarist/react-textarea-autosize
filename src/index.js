@@ -25,16 +25,17 @@ const [onNextFrame, clearNextFrameAction] =
 
 export default class TextareaAutosize extends React.Component {
   static propTypes = {
-    value: PropTypes.string,
+    inputRef: PropTypes.func,
+    maxRows: PropTypes.number,
+    minRows: PropTypes.number,
     onChange: PropTypes.func,
     onHeightChange: PropTypes.func,
     useCacheForDOMMeasurements: PropTypes.bool,
-    minRows: PropTypes.number,
-    maxRows: PropTypes.number,
-    inputRef: PropTypes.func,
+    value: PropTypes.string,
   };
 
   static defaultProps = {
+    inputRef: noop,
     onChange: noop,
     onHeightChange: noop,
     useCacheForDOMMeasurements: false,
@@ -56,11 +57,11 @@ export default class TextareaAutosize extends React.Component {
 
   render() {
     let {
-      minRows: _minRows,
+      inputRef: _inputRef,
       maxRows: _maxRows,
+      minRows: _minRows,
       onHeightChange: _onHeightChange,
       useCacheForDOMMeasurements: _useCacheForDOMMeasurements,
-      inputRef: _inputRef,
       ...props
     } = this.props;
 
@@ -103,8 +104,10 @@ export default class TextareaAutosize extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this._clearNextFrame();
-    this._onNextFrameActionId = onNextFrame(() => this._resizeComponent());
+    if (prevProps !== this.props) {
+      this._clearNextFrame();
+      this._onNextFrameActionId = onNextFrame(() => this._resizeComponent());
+    }
 
     if (this.state.height !== prevState.height) {
       this.props.onHeightChange(this.state.height, this);
@@ -123,10 +126,7 @@ export default class TextareaAutosize extends React.Component {
 
   _onRootDOMNode = node => {
     this._rootDOMNode = node;
-
-    if (this.props.inputRef) {
-      this.props.inputRef(node);
-    }
+    this.props.inputRef(node);
   };
 
   _onChange = event => {
