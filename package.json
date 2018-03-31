@@ -9,6 +9,7 @@
   "module": "dist/react-textarea-autosize.es.js",
   "jsnext:main": "dist/react-textarea-autosize.es.js",
   "unpkg": "dist/react-textarea-autosize.min.js",
+  "sideEffects": false,
   "author": "Andrey Popp <8mayday@gmail.com> (httsps://andreypopp.com/)",
   "scripts": {
     "prebuild": "npm run clean",
