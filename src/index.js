@@ -64,10 +64,12 @@ export default class TextareaAutosize extends React.Component {
       useCacheForDOMMeasurements: _useCacheForDOMMeasurements,
       ...props
     } = this.props;
-
+    
+    const height = this.state.height || (props.style && props.style.height) ? props.style.height : 'auto';
+    
     props.style = {
       ...props.style,
-      height: this.state.height,
+      height,
     };
 
     let maxHeight = Math.max(
