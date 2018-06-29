@@ -33,6 +33,9 @@ const createConfig = ({
       {
         name: 'TextareaAutosize',
         exports: 'named',
+        globals: {
+          react: 'React',
+        },
       }
     )),
     plugins: [
@@ -56,9 +59,6 @@ const createConfig = ({
       })
     ].filter(Boolean),
     external: makeExternalPredicate(umd ? external : allExternal),
-    globals: {
-      react: 'React',
-    }
   };
 };
 
