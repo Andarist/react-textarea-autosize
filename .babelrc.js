@@ -10,7 +10,7 @@ module.exports = {
   ],
   plugins: [
   	['@babel/proposal-class-properties', { loose }],
-  	'@babel/proposal-object-rest-spread',
+  	['@babel/proposal-object-rest-spread', { loose }],
     ['transform-react-remove-prop-types', { mode: 'unsafe-wrap' }],
   ]
 }
