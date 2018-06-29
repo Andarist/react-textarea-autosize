@@ -4,5 +4,5 @@
     "eslint --fix",
     "git add"
   ],
-  "*.md": ["prettier --write", "git add"]
+  "*.md": ["prettier --prose-wrap always --write", "git add"]
 }
