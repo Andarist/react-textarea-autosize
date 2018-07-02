@@ -96,21 +96,20 @@ export default function calculateNodeHeight(
   hiddenTextarea.value = 'x';
   const singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
 
-  if (minRows !== null || maxRows !== null) {
-    if (minRows !== null) {
-      minHeight = singleRowHeight * minRows;
-      if (boxSizing === 'border-box') {
-        minHeight = minHeight + paddingSize + borderSize;
-      }
-      height = Math.max(minHeight, height);
+  if (minRows !== null) {
+    minHeight = singleRowHeight * minRows;
+    if (boxSizing === 'border-box') {
+      minHeight = minHeight + paddingSize + borderSize;
     }
-    if (maxRows !== null) {
-      maxHeight = singleRowHeight * maxRows;
-      if (boxSizing === 'border-box') {
-        maxHeight = maxHeight + paddingSize + borderSize;
-      }
-      height = Math.min(maxHeight, height);
+    height = Math.max(minHeight, height);
+  }
+
+  if (maxRows !== null) {
+    maxHeight = singleRowHeight * maxRows;
+    if (boxSizing === 'border-box') {
+      maxHeight = maxHeight + paddingSize + borderSize;
     }
+    height = Math.min(maxHeight, height);
   }
 
   const rowCount = Math.floor(height / singleRowHeight);
