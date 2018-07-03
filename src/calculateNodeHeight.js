@@ -96,6 +96,10 @@ export default function calculateNodeHeight(
   hiddenTextarea.value = 'x';
   const singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
 
+  // Stores the value's rows count rendered in `hiddenTextarea`,
+  // regardless if `maxRows` or `minRows` props are passed
+  const valueRowCount = Math.floor(height / singleRowHeight);
+
   if (minRows !== null || maxRows !== null) {
     if (minRows !== null) {
       minHeight = singleRowHeight * minRows;
@@ -115,7 +119,7 @@ export default function calculateNodeHeight(
 
   const rowCount = Math.floor(height / singleRowHeight);
 
-  return { height, minHeight, maxHeight, rowCount };
+  return { height, minHeight, maxHeight, rowCount, valueRowCount };
 }
 
 function calculateNodeStyling(node, uid, useCache = false) {
