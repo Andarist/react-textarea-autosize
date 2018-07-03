@@ -1,6 +1,6 @@
-import isBrowser from './isBrowser';
-
-const isIE = isBrowser ? !!document.documentElement.currentStyle : false;
+const isIE = process.env.BROWSER
+  ? !!document.documentElement.currentStyle
+  : false;
 
 const HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
@@ -38,7 +38,8 @@ const SIZING_STYLE = [
 ];
 
 let computedStyleCache = {};
-const hiddenTextarea = isBrowser && document.createElement('textarea');
+const hiddenTextarea =
+  process.env.BROWSER && document.createElement('textarea');
 
 const forceHiddenStyles = node => {
   Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(key => {
@@ -46,7 +47,7 @@ const forceHiddenStyles = node => {
   });
 };
 
-if (isBrowser) {
+if (process.env.BROWSER) {
   forceHiddenStyles(hiddenTextarea);
 }
 

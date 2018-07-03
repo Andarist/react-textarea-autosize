@@ -9,7 +9,10 @@ const pipe = (...funcs) =>
   funcs.reduceRight((piped, next) => (...args) => piped(next(...args)));
 
 const getSize = pipe(
-  dir => path.join(dir, require(path.join(dir, 'package.json')).module),
+  dir => {
+    const pkg = require(path.join(dir, 'package.json'));
+    return path.join(dir, pkg.browser[pkg.module]);
+  },
   file => fs.readFileSync(file, 'utf-8'),
   code =>
     transform(code, {

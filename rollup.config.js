@@ -20,10 +20,20 @@ const makeExternalPredicate = externalArr => {
 
 const createConfig = ({
   output,
+  browser = true,
+  server = false,
   umd = false,
   env,
 } = {}) => {
   const min = env === 'production';
+
+  if (browser && server) {
+    throw new Error('Bundle cannot target both `browser` & `server` at the same time. Pass `true` only to one of these options.');
+  }
+
+  if (!browser && !server) {
+    throw new Error('Bundle must target `browser` or `server` environment. Pass `true` to one of these options.');
+  }
 
   return {
     input: 'src/index.js',
@@ -46,9 +56,15 @@ const createConfig = ({
         exclude: 'node_modules/**',
       }),
       commonjs(),
-      env && replace({
-        'process.env.NODE_ENV': JSON.stringify(env)
-      }),
+      replace(Object.assign(
+        env
+          ? {'process.env.NODE_ENV': JSON.stringify(env)}
+          : {},
+        {
+          'process.env.BROWSER': JSON.stringify(browser),
+          'process.env.SERVER': JSON.stringify(server),
+        }
+      )),
       min && uglify({
         compress: {
           pure_getters: true,
@@ -65,9 +81,17 @@ const createConfig = ({
 export default [
   createConfig({
     output: [
+      { file: pkg.browser[pkg.main], format: 'cjs' },
+      { file: pkg.browser[pkg.module], format: 'esm' },
+    ]
+  }),
+  createConfig({
+    output: [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'esm' },
-    ]
+    ],
+    server: true,
+    browser: false,
   }),
   createConfig({
     output: { file: pkg.unpkg.replace(/\.min\.js$/, '.js'), format: 'umd' },
