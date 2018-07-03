@@ -169,3 +169,6 @@ export default class TextareaAutosize extends React.Component {
     callback();
   };
 }
+
+// Exports calculateNodeHeight function to be accessible externally
+export { default as calculateNodeHeight } from './calculateNodeHeight';
