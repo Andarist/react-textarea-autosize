@@ -57,6 +57,13 @@ export default function calculateNodeHeight(
   minRows = null,
   maxRows = null,
 ) {
+
+  // hiddenTextarea can be false if not running in browser context,
+  // which can cause tests to fail when accessing undefined style property.
+  if (!hiddenTextarea) {
+    return null;
+  }
+
   if (hiddenTextarea.parentNode === null) {
     document.body.appendChild(hiddenTextarea);
   }
