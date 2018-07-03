@@ -2,7 +2,5 @@
 *.log
 example/bundle.js
 example/.nojekyll
-lib
-es
 dist
 node_modules

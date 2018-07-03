@@ -1,6 +1,6 @@
-import isBrowser from './isBrowser';
-
-const isIE = isBrowser ? !!document.documentElement.currentStyle : false;
+const isIE = process.env.BROWSER
+  ? !!document.documentElement.currentStyle
+  : false;
 
 const HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
@@ -38,7 +38,8 @@ const SIZING_STYLE = [
 ];
 
 let computedStyleCache = {};
-const hiddenTextarea = isBrowser && document.createElement('textarea');
+const hiddenTextarea =
+  process.env.BROWSER && document.createElement('textarea');
 
 const forceHiddenStyles = node => {
   Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(key => {
@@ -46,7 +47,7 @@ const forceHiddenStyles = node => {
   });
 };
 
-if (isBrowser) {
+if (process.env.BROWSER) {
   forceHiddenStyles(hiddenTextarea);
 }
 
@@ -95,26 +96,25 @@ export default function calculateNodeHeight(
   // measure height of a textarea with a single row
   hiddenTextarea.value = 'x';
   const singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
-
+  
   // Stores the value's rows count rendered in `hiddenTextarea`,
   // regardless if `maxRows` or `minRows` props are passed
   const valueRowCount = Math.floor(height / singleRowHeight);
+  
+  if (minRows !== null) {
+    minHeight = singleRowHeight * minRows;
+    if (boxSizing === 'border-box') {
+      minHeight = minHeight + paddingSize + borderSize;
+    }
+    height = Math.max(minHeight, height);
+  }
 
-  if (minRows !== null || maxRows !== null) {
-    if (minRows !== null) {
-      minHeight = singleRowHeight * minRows;
-      if (boxSizing === 'border-box') {
-        minHeight = minHeight + paddingSize + borderSize;
-      }
-      height = Math.max(minHeight, height);
+  if (maxRows !== null) {
+    maxHeight = singleRowHeight * maxRows;
+    if (boxSizing === 'border-box') {
+      maxHeight = maxHeight + paddingSize + borderSize;
     }
-    if (maxRows !== null) {
-      maxHeight = singleRowHeight * maxRows;
-      if (boxSizing === 'border-box') {
-        maxHeight = maxHeight + paddingSize + borderSize;
-      }
-      height = Math.min(maxHeight, height);
-    }
+    height = Math.min(maxHeight, height);
   }
 
   const rowCount = Math.floor(height / singleRowHeight);
@@ -179,4 +179,6 @@ function calculateNodeStyling(node, uid, useCache = false) {
   return nodeInfo;
 }
 
-export const purgeCache = uid => delete computedStyleCache[uid];
+export const purgeCache = uid => {
+  delete computedStyleCache[uid];
+};

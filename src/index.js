@@ -5,8 +5,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import calculateNodeHeight, { purgeCache } from './calculateNodeHeight';
-import isBrowser from './isBrowser';
-import uid from './uid';
 
 const noop = () => {};
 
@@ -14,7 +12,7 @@ const noop = () => {};
 // eval('"use strict"; var onNextFrame = window.cancelAnimationFrame; onNextFrame(4);')
 // so we bind window as context in dev modes
 const [onNextFrame, clearNextFrameAction] =
-  isBrowser && window.requestAnimationFrame
+  process.env.BROWSER && window.requestAnimationFrame
     ? process.env.NODE_ENV !== 'development'
       ? [window.requestAnimationFrame, window.cancelAnimationFrame]
       : [
@@ -22,6 +20,8 @@ const [onNextFrame, clearNextFrameAction] =
         window.cancelAnimationFrame.bind(window),
       ]
     : [setTimeout, clearTimeout];
+
+let uid = 0;
 
 export default class TextareaAutosize extends React.Component {
   static propTypes = {
@@ -41,8 +41,6 @@ export default class TextareaAutosize extends React.Component {
     useCacheForDOMMeasurements: false,
   };
 
-  _resizeLock = false;
-
   constructor(props) {
     super(props);
     this.state = {
@@ -51,12 +49,13 @@ export default class TextareaAutosize extends React.Component {
       maxHeight: Infinity,
     };
 
-    this._uid = uid();
-    this._controlled = typeof props.value === 'string';
+    this._uid = uid++;
+    this._controlled = props.value !== undefined;
+    this._resizeLock = false;
   }
 
   render() {
-    let {
+    const {
       inputRef: _inputRef,
       maxRows: _maxRows,
       minRows: _minRows,
@@ -70,7 +69,7 @@ export default class TextareaAutosize extends React.Component {
       height: this.state.height,
     };
 
-    let maxHeight = Math.max(
+    const maxHeight = Math.max(
       props.style.maxHeight || Infinity,
       this.state.maxHeight,
     );
@@ -79,13 +78,7 @@ export default class TextareaAutosize extends React.Component {
       props.style.overflow = 'hidden';
     }
 
-    return (
-      <textarea
-        {...props}
-        onChange={this._onChange}
-        ref={this._onRootDOMNode}
-      />
-    );
+    return <textarea {...props} onChange={this._onChange} ref={this._onRef} />;
   }
 
   componentDidMount() {
@@ -98,15 +91,17 @@ export default class TextareaAutosize extends React.Component {
         return;
       }
       this._resizeLock = true;
-      this._resizeComponent(() => (this._resizeLock = false));
+      this._resizeComponent(() => {
+        this._resizeLock = false;
+      });
     };
     window.addEventListener('resize', this._resizeListener);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
-      this._clearNextFrame();
-      this._onNextFrameActionId = onNextFrame(() => this._resizeComponent());
+      clearNextFrameAction(this._rafId);
+      this._rafId = onNextFrame(this._resizeComponent);
     }
 
     if (this.state.height !== prevState.height) {
@@ -115,17 +110,13 @@ export default class TextareaAutosize extends React.Component {
   }
 
   componentWillUnmount() {
-    this._clearNextFrame();
+    clearNextFrameAction(this._rafId);
     window.removeEventListener('resize', this._resizeListener);
     purgeCache(this._uid);
   }
 
-  _clearNextFrame() {
-    clearNextFrameAction(this._onNextFrameActionId);
-  }
-
-  _onRootDOMNode = node => {
-    this._rootDOMNode = node;
+  _onRef = node => {
+    this._ref = node;
     this.props.inputRef(node);
   };
 
@@ -137,13 +128,13 @@ export default class TextareaAutosize extends React.Component {
   };
 
   _resizeComponent = (callback = noop) => {
-    if (typeof this._rootDOMNode === 'undefined') {
+    if (!process.env.BROWSER) {
       callback();
       return;
     }
 
     const nodeHeight = calculateNodeHeight(
-      this._rootDOMNode,
+      this._ref,
       this._uid,
       this.props.useCacheForDOMMeasurements,
       this.props.minRows,
