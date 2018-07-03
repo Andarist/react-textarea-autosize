@@ -174,4 +174,6 @@ function calculateNodeStyling(node, uid, useCache = false) {
   return nodeInfo;
 }
 
-export const purgeCache = uid => delete computedStyleCache[uid];
+export const purgeCache = uid => {
+  delete computedStyleCache[uid];
+};
