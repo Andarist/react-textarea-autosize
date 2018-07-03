@@ -124,7 +124,7 @@ export default class TextareaAutosize extends React.Component {
     if (!this._controlled) {
       this._resizeComponent();
     }
-    this.props.onChange(event);
+    this.props.onChange(event, this);
   };
 
   _resizeComponent = (callback = noop) => {
