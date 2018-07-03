@@ -4,5 +4,10 @@
     "eslint --fix",
     "git add"
   ],
+  "scripts/**/*.js": [
+    "prettier --single-quote --write",
+    "eslint --fix",
+    "git add"
+  ],
   "*.md": ["prettier --prose-wrap always --write", "git add"]
 }

@@ -4,8 +4,9 @@
 # react-textarea-autosize
 
 Drop-in replacement for the textarea component which automatically resizes
-textarea as content changes. A native React version of the popular [jQuery
-Autosize](http://www.jacklmoore.com/autosize/)!
+textarea as content changes. A native React version of the popular
+[jQuery Autosize](http://www.jacklmoore.com/autosize/)! Weighs
+<span class="weight">1.93 KB</span> (minified & gzipped).
 
 This module supports IE9 and above.
 
@@ -83,5 +84,5 @@ To release patch, minor or major version:
 
 This will run eslint, compile sources from `src/` to `dist/`, bump a version in
 `package.json` and then create a new git commit with tag. If tests or linter
-fails — commit won't be created. If tasks succeed it publishes to npm and
-pushes a tag to github.
+fails — commit won't be created. If tasks succeed it publishes to npm and pushes
+a tag to github.
