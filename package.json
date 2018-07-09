@@ -5,14 +5,14 @@
   "keywords": "autosize, grow, react, react-component, textarea",
   "repository": "andreypopp/react-textarea-autosize",
   "license": "MIT",
-  "main": "dist/react-textarea-autosize.cjs.js",
-  "module": "dist/react-textarea-autosize.esm.js",
+  "main": "./dist/react-textarea-autosize.cjs.js",
+  "module": "./dist/react-textarea-autosize.esm.js",
   "browser": {
-    "dist/react-textarea-autosize.cjs.js": "dist/react-textarea-autosize.cjs.browser.js",
-    "dist/react-textarea-autosize.esm.js": "dist/react-textarea-autosize.esm.browser.js"
+    "./dist/react-textarea-autosize.cjs.js": "./dist/react-textarea-autosize.cjs.browser.js",
+    "./dist/react-textarea-autosize.esm.js": "./dist/react-textarea-autosize.esm.browser.js"
   },
-  "jsnext:main": "dist/react-textarea-autosize.esm.js",
-  "unpkg": "dist/react-textarea-autosize.min.js",
+  "jsnext:main": "./dist/react-textarea-autosize.esm.js",
+  "unpkg": "./dist/react-textarea-autosize.min.js",
   "sideEffects": false,
   "author": "Andrey Popp <8mayday@gmail.com> (httsps://andreypopp.com/)",
   "scripts": {
