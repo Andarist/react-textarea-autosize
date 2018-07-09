@@ -21,19 +21,10 @@ const makeExternalPredicate = externalArr => {
 const createConfig = ({
   output,
   browser = true,
-  server = false,
   umd = false,
   env,
 } = {}) => {
   const min = env === 'production';
-
-  if (browser && server) {
-    throw new Error('Bundle cannot target both `browser` & `server` at the same time. Pass `true` only to one of these options.');
-  }
-
-  if (!browser && !server) {
-    throw new Error('Bundle must target `browser` or `server` environment. Pass `true` to one of these options.');
-  }
 
   return {
     input: 'src/index.js',
@@ -62,7 +53,6 @@ const createConfig = ({
           : {},
         {
           'process.env.BROWSER': JSON.stringify(browser),
-          'process.env.SERVER': JSON.stringify(server),
         }
       )),
       min && uglify({
@@ -90,7 +80,6 @@ export default [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'esm' },
     ],
-    server: true,
     browser: false,
   }),
   createConfig({

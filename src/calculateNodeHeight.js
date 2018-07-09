@@ -1,6 +1,6 @@
-const isIE = process.env.BROWSER
-  ? !!document.documentElement.currentStyle
-  : false;
+import isBrowser from './isBrowser.macro';
+
+const isIE = isBrowser ? !!document.documentElement.currentStyle : false;
 
 const HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
@@ -38,8 +38,7 @@ const SIZING_STYLE = [
 ];
 
 let computedStyleCache = {};
-const hiddenTextarea =
-  process.env.BROWSER && document.createElement('textarea');
+const hiddenTextarea = isBrowser && document.createElement('textarea');
 
 const forceHiddenStyles = node => {
   Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(key => {
@@ -47,7 +46,7 @@ const forceHiddenStyles = node => {
   });
 };
 
-if (process.env.BROWSER) {
+if (isBrowser) {
   forceHiddenStyles(hiddenTextarea);
 }
 
@@ -96,11 +95,11 @@ export default function calculateNodeHeight(
   // measure height of a textarea with a single row
   hiddenTextarea.value = 'x';
   const singleRowHeight = hiddenTextarea.scrollHeight - paddingSize;
-  
+
   // Stores the value's rows count rendered in `hiddenTextarea`,
   // regardless if `maxRows` or `minRows` props are passed
   const valueRowCount = Math.floor(height / singleRowHeight);
-  
+
   if (minRows !== null) {
     minHeight = singleRowHeight * minRows;
     if (boxSizing === 'border-box') {

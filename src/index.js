@@ -5,6 +5,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import calculateNodeHeight, { purgeCache } from './calculateNodeHeight';
+import isBrowser from './isBrowser.macro';
 
 const noop = () => {};
 
@@ -12,7 +13,7 @@ const noop = () => {};
 // eval('"use strict"; var onNextFrame = window.cancelAnimationFrame; onNextFrame(4);')
 // so we bind window as context in dev modes
 const [onNextFrame, clearNextFrameAction] =
-  process.env.BROWSER && window.requestAnimationFrame
+  isBrowser && window.requestAnimationFrame
     ? process.env.NODE_ENV !== 'development'
       ? [window.requestAnimationFrame, window.cancelAnimationFrame]
       : [
@@ -128,7 +129,7 @@ export default class TextareaAutosize extends React.Component {
   };
 
   _resizeComponent = (callback = noop) => {
-    if (!process.env.BROWSER) {
+    if (!process.env.BROWSER && !this._ref) {
       callback();
       return;
     }
