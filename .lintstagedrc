@@ -1,13 +1,8 @@
 {
-  "src/**/*.js": [
-    "prettier --single-quote --trailing-comma=all --write",
+  "*.js": [
+    "prettier --write",
     "eslint --fix",
     "git add"
   ],
-  "scripts/**/*.js": [
-    "prettier --single-quote --write",
-    "eslint --fix",
-    "git add"
-  ],
-  "*.md": ["prettier --prose-wrap always --write", "git add"]
+  "*.md": ["prettier --write", "git add"]
 }
