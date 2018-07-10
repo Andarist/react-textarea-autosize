@@ -102,7 +102,10 @@ export default class TextareaAutosize extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
       clearNextFrameAction(this._rafId);
-      this._rafId = onNextFrame(this._resizeComponent);
+      // cant shorthen the callback because requestAnimationFrame calls it with current time
+      this._rafId = onNextFrame(() => {
+        this._resizeComponent();
+      });
     }
 
     if (this.state.height !== prevState.height) {
