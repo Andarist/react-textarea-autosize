@@ -6,12 +6,12 @@
 Drop-in replacement for the textarea component which automatically resizes
 textarea as content changes. A native React version of the popular
 [jQuery Autosize](http://www.jacklmoore.com/autosize/)! Weighs
-<span class="weight">1.92 KB</span> (minified & gzipped).
+<span class="weight">1.87 KB</span> (minified & gzipped).
 
 This module supports IE9 and above.
 
 ```javascript
-import Textarea from "react-textarea-autosize";
+import Textarea from 'react-textarea-autosize';
 
 // If you use CommonJS syntax:
 // var Textarea = require('react-textarea-autosize').default;
@@ -20,7 +20,7 @@ React.renderComponent(
   <div>
     <Textarea />
   </div>,
-  document.getElementById("element")
+  document.getElementById('element')
 );
 ```
 
@@ -69,7 +69,7 @@ provide refs for rendered components out of the box (calling ref callbacks with
 ```js
 const tree = renderer
   .create(<Textarea />, {
-    createNodeMock: () => document.createElement("textarea")
+    createNodeMock: () => document.createElement('textarea')
   })
   .toJSON();
 ```
