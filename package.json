@@ -22,7 +22,7 @@
     "docs:publish": "npm run docs:build && cd example && rimraf .git && git init && git commit --allow-empty -m 'update docs' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update docs' && git push git@github.com:andreypopp/react-textarea-autosize gh-pages --force",
     "clean": "rimraf dist",
     "lint": "eslint src",
-    "update:size": "npm run build && node scripts/update-size.js && git add README.md",
+    "update:size": "cross-env ROLLUP_BUILDS=browser npm run build && node scripts/update-size.js && git add README.md",
     "prepare": "npm run build",
     "precommit": "lint-staged && npm run update:size",
     "prerelease": "npm run lint",
