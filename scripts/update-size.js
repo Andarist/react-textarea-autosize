@@ -10,7 +10,7 @@ const readme = fs.readFileSync(readmePath, 'utf-8');
 const pkg = require(path.join(root, 'package.json'));
 const file = path.join(root, pkg.browser[pkg.module]);
 
-sizeLimit(file, { ignore: ['react'] }).then(bytes => {
+sizeLimit(file, { ignore: ['react', 'prop-types'] }).then(bytes => {
   const weight = formatBytes(bytes.gzip);
 
   fs.writeFileSync(
