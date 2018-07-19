@@ -25,10 +25,10 @@
     "update:size": "cross-env ROLLUP_BUILDS=browser npm run build && node scripts/update-size.js && git add README.md",
     "prepare": "npm run build",
     "precommit": "lint-staged && npm run update:size",
-    "prerelease": "npm run lint",
-    "release:patch": "npm run prerelease && npm version patch && npm publish && git push --follow-tags",
-    "release:minor": "npm run prerelease && npm version minor && npm publish && git push --follow-tags",
-    "release:major": "npm run prerelease && npm version major && npm publish && git push --follow-tags"
+    "preversion": "npm run lint",
+    "release:patch": "npm version patch && npm publish && git push --follow-tags",
+    "release:minor": "npm version minor && npm publish && git push --follow-tags",
+    "release:major": "npm version major && npm publish && git push --follow-tags"
   },
   "peerDependencies": {
     "react": ">=0.14.0 <17.0.0"
