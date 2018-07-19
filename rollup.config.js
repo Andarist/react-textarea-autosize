@@ -19,7 +19,7 @@ const makeExternalPredicate = externalArr => {
   return id => pattern.test(id);
 };
 
-const createConfig = ({ output, browser = true, umd = false, env } = {}) => {
+const createConfig = ({ output, browser = false, umd = false, env } = {}) => {
   const min = env === 'production';
 
   return {
@@ -68,14 +68,14 @@ const configs = {
     output: [
       { file: pkg.browser[pkg.main], format: 'cjs' },
       { file: pkg.browser[pkg.module], format: 'esm' }
-    ]
+    ],
+    browser: true
   },
   regular: {
     output: [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'esm' }
-    ],
-    browser: false
+    ]
   },
   umd_prod: {
     output: { file: pkg.unpkg.replace(/\.min\.js$/, '.js'), format: 'umd' },
