@@ -6,6 +6,7 @@ const file = path.join(__dirname, pkg.browser[pkg.module]);
 module.exports = [
   {
     path: file,
-    limit: '2.5 KB'
+    ignore: ['prop-types'],
+    limit: '2 KB'
   }
 ];
