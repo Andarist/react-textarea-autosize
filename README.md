@@ -6,7 +6,7 @@
 Drop-in replacement for the textarea component which automatically resizes
 textarea as content changes. A native React version of the popular
 [jQuery Autosize](http://www.jacklmoore.com/autosize/)! Weighs
-<span class="weight">1.87 KB</span> (minified & gzipped).
+<span class="weight">1.80 KB</span> (minified & gzipped).
 
 This module supports IE9 and above.
 
