@@ -5,22 +5,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import calculateNodeHeight, { purgeCache } from './calculateNodeHeight';
-import isBrowser from './isBrowser.macro';
 
 const noop = () => {};
-
-// IE11 has a problem with eval source maps, can be reproduced with:
-// eval('"use strict"; var onNextFrame = window.cancelAnimationFrame; onNextFrame(4);')
-// so we bind window as context in dev modes
-const [onNextFrame, clearNextFrameAction] =
-  isBrowser && window.requestAnimationFrame
-    ? process.env.NODE_ENV !== 'development'
-      ? [window.requestAnimationFrame, window.cancelAnimationFrame]
-      : [
-        window.requestAnimationFrame.bind(window),
-        window.cancelAnimationFrame.bind(window),
-      ]
-    : [setTimeout, clearTimeout];
 
 let uid = 0;
 
@@ -101,11 +87,7 @@ export default class TextareaAutosize extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
-      clearNextFrameAction(this._rafId);
-      // cant shorthen the callback because requestAnimationFrame calls it with current time
-      this._rafId = onNextFrame(() => {
-        this._resizeComponent();
-      });
+      this._resizeComponent();
     }
 
     if (this.state.height !== prevState.height) {
@@ -114,7 +96,6 @@ export default class TextareaAutosize extends React.Component {
   }
 
   componentWillUnmount() {
-    clearNextFrameAction(this._rafId);
     window.removeEventListener('resize', this._resizeListener);
     purgeCache(this._uid);
   }
