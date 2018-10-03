@@ -1,6 +1,6 @@
 {
-    "extends": "prometheusresearch",
-    "env": {
-      "jest": true
+  "extends": "prometheusresearch",
+  "env": {
+    "jest": true
   }
 }

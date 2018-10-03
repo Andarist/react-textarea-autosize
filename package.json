@@ -28,7 +28,7 @@
     "release:patch": "npm version patch && npm publish && git push --follow-tags",
     "release:minor": "npm version minor && npm publish && git push --follow-tags",
     "release:major": "npm version major && npm publish && git push --follow-tags",
-    "test": "jest"
+    "size": "size-limit"
   },
   "peerDependencies": {
     "react": ">=0.14.0 <17.0.0"
@@ -69,7 +69,6 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.1.2",
-    "jest": "^23.6.0",
     "prop-types": "^15.6.0"
   }
 }
