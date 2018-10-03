@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "8.11.3"
+  - "6.14.3"
+install:
+  - npm install
+script:
+  - npm prebuild
+  - npm prepare
+  - npm update:size
