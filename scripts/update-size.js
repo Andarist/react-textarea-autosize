@@ -24,3 +24,7 @@ sizeLimit(file, { ignore: ['react', 'prop-types'] }).then(bytes => {
   // eslint-disable-next-line no-console
   console.log(`\n📦  Measured weight: ${weight}.\n`);
 });
+
+module.exports = {
+  sizeLimit: sizeLimit
+};

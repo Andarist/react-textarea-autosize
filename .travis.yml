@@ -5,6 +5,7 @@ node_js:
 install:
   - npm install
 script:
+  - npm test
   - npm prebuild
   - npm prepare
-  - npm update:size
+  - npm run lint
