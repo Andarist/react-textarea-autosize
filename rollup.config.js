@@ -38,7 +38,14 @@ const createConfig = ({ output, browser = false, umd = false, env } = {}) => {
         jsnext: true
       }),
       babel({
-        exclude: 'node_modules/**'
+        exclude: 'node_modules/**',
+        runtimeHelpers: true,
+        plugins: [
+          [
+            '@babel/transform-runtime',
+            { useESModules: output.format !== 'cjs' }
+          ]
+        ]
       }),
       commonjs(),
       replace(
@@ -64,18 +71,19 @@ const createConfig = ({ output, browser = false, umd = false, env } = {}) => {
 };
 
 const configs = {
-  browser: {
-    output: [
-      { file: pkg.browser[pkg.main], format: 'cjs' },
-      { file: pkg.browser[pkg.module], format: 'esm' }
-    ],
+  browser_cjs: {
+    output: { file: pkg.browser[pkg.main], format: 'cjs' },
     browser: true
   },
-  regular: {
-    output: [
-      { file: pkg.main, format: 'cjs' },
-      { file: pkg.module, format: 'esm' }
-    ]
+  browser_esm: {
+    output: { file: pkg.browser[pkg.module], format: 'esm' },
+    browser: true
+  },
+  regular_cjs: {
+    output: { file: pkg.main, format: 'cjs' }
+  },
+  regular_esm: {
+    output: { file: pkg.module, format: 'esm' }
   },
   umd_prod: {
     output: { file: pkg.unpkg.replace(/\.min\.js$/, '.js'), format: 'umd' },
