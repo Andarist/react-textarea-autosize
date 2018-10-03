@@ -22,7 +22,7 @@
     "docs:publish": "npm run docs:build && cd example && rimraf .git && git init && git commit --allow-empty -m 'update docs' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update docs' && git push git@github.com:andreypopp/react-textarea-autosize gh-pages --force",
     "clean": "rimraf dist",
     "lint": "eslint src",
-    "update:size": "cross-env ROLLUP_BUILDS=browser npm run build && node scripts/update-size.js && git add README.md",
+    "update:size": "cross-env ROLLUP_BUILDS=browser_esm npm run build && node scripts/update-size.js && git add README.md",
     "prepare": "npm run build",
     "preversion": "npm run lint",
     "release:patch": "npm version patch && npm publish && git push --follow-tags",
@@ -37,6 +37,7 @@
     "@babel/helper-module-imports": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-plugin-macros": "^2.2.2",
@@ -66,6 +67,7 @@
     "dist"
   ],
   "dependencies": {
+    "@babel/runtime": "^7.1.2",
     "prop-types": "^15.6.0"
   }
 }
