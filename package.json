@@ -27,7 +27,8 @@
     "preversion": "npm run lint",
     "release:patch": "npm version patch && npm publish && git push --follow-tags",
     "release:minor": "npm version minor && npm publish && git push --follow-tags",
-    "release:major": "npm version major && npm publish && git push --follow-tags"
+    "release:major": "npm version major && npm publish && git push --follow-tags",
+    "size": "size-limit"
   },
   "peerDependencies": {
     "react": ">=0.14.0 <17.0.0"
@@ -47,7 +48,7 @@
     "eslint": "^4.12.0",
     "eslint-config-prometheusresearch": "^0.4.0",
     "eslint-plugin-react": "^7.5.1",
-    "format-bytes": "^1.0.1",
+    "bytes": "^3.0.0",
     "husky": "^1.0.1",
     "lint-staged": "^7.3.0",
     "prettier": "^1.13.7",

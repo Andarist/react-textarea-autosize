@@ -1,17 +1,18 @@
 const fs = require('fs');
 const path = require('path');
-const formatBytes = require('format-bytes');
 const sizeLimit = require('size-limit');
-
 const root = path.join(__dirname, '..');
 const readmePath = path.join(root, 'README.md');
 const readme = fs.readFileSync(readmePath, 'utf-8');
+const sizeConfig = require('../.size-limit')[0];
+const byte = require('bytes');
+sizeLimit(sizeConfig.path, sizeConfig).then(bytes => {
+  const weight = byte.format(bytes.gzip);
 
-const pkg = require(path.join(root, 'package.json'));
-const file = path.join(root, pkg.browser[pkg.module]);
-
-sizeLimit(file, { ignore: ['react', 'prop-types'] }).then(bytes => {
-  const weight = formatBytes(bytes.gzip);
+  if (bytes.gzip > byte.parse(sizeConfig.limit)) {
+    // eslint-disable-next-line no-console
+    console.warn(`\n⚠️  Project is now larger than ${sizeConfig.limit}\n`);
+  }
 
   fs.writeFileSync(
     readmePath,
