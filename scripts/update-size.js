@@ -7,9 +7,9 @@ const readme = fs.readFileSync(readmePath, 'utf-8');
 const sizeConfig = require('../.size-limit')[0];
 const byte = require('bytes');
 sizeLimit(sizeConfig.path, sizeConfig).then(bytes => {
-  const weight = byte(bytes.gzip);
+  const weight = byte.format(bytes.gzip);
 
-  if (byte(weight) > byte(sizeConfig.limit)) {
+  if (bytes.gzip > byte.parse(sizeConfig.limit)) {
     // eslint-disable-next-line no-console
     console.warn(`\n⚠️  Project is now larger than ${sizeConfig.limit}\n`);
   }
