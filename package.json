@@ -48,7 +48,7 @@
     "eslint": "^4.12.0",
     "eslint-config-prometheusresearch": "^0.4.0",
     "eslint-plugin-react": "^7.5.1",
-    "format-bytes": "^1.0.1",
+    "bytes": "^3.0.0",
     "husky": "^1.0.1",
     "lint-staged": "^7.3.0",
     "prettier": "^1.13.7",
