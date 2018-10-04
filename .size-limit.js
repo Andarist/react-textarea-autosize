@@ -6,7 +6,7 @@ const file = path.join(__dirname, pkg.browser[pkg.module]);
 module.exports = [
   {
     path: file,
-    ignore: ['prop-types'],
+    ignore: ['react', 'prop-types'],
     limit: '2 KB'
   }
 ];

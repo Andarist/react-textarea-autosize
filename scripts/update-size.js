@@ -6,14 +6,14 @@ const sizeLimit = require('size-limit');
 const root = path.join(__dirname, '..');
 const readmePath = path.join(root, 'README.md');
 const readme = fs.readFileSync(readmePath, 'utf-8');
-const sizeConfig = require('../.size-limit');
+const sizeConfig = require('../.size-limit')[0];
 
-sizeLimit(sizeConfig[0].path, sizeConfig[0].ignore).then(bytes => {
+sizeLimit(sizeConfig.path, sizeConfig).then(bytes => {
   const weight = formatBytes(bytes.gzip);
 
-  if (weight > sizeConfig[0].limit) {
+  if (weight > sizeConfig.limit) {
     // eslint-disable-next-line no-console
-    console.log(`\n⚠️  Project is now larger than ${sizeConfig[0].limit}\n`);
+    console.warn(`\n⚠️  Project is now larger than ${sizeConfig.limit}\n`);
   }
 
   fs.writeFileSync(
