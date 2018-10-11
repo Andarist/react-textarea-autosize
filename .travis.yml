@@ -3,3 +3,4 @@ node_js:
   - "8.11.3"
 script: 
   - npm run size
+  - npm run test
