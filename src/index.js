@@ -17,6 +17,7 @@ export default class TextareaAutosize extends React.Component {
     minRows: PropTypes.number,
     onChange: PropTypes.func,
     onHeightChange: PropTypes.func,
+    style: PropTypes.object,
     useCacheForDOMMeasurements: PropTypes.bool,
     value: PropTypes.string,
   };
