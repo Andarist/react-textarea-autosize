@@ -30,7 +30,7 @@
     "release:major": "npm version major && npm publish && git push --follow-tags",
     "size": "size-limit",
     "test": "jest",
-    "test:dev": "jest --watch"
+    "test:watch": "npm test -- --watch"
   },
   "peerDependencies": {
     "react": ">=0.14.0 <17.0.0"

@@ -1,3 +1,4 @@
+const test = process.env.NODE_ENV === 'test';
 const loose = true;
 
 module.exports = {
@@ -6,7 +7,7 @@ module.exports = {
       '@babel/env',
       {
         loose,
-        modules: false
+        modules: test ? 'commonjs' : false
       }
     ],
     '@babel/react'
@@ -16,10 +17,5 @@ module.exports = {
     ['@babel/proposal-object-rest-spread', { loose }],
     ['transform-react-remove-prop-types', { mode: 'unsafe-wrap' }],
     'macros'
-  ],
-  env: {
-    test: {
-      presets: ['@babel/env', '@babel/react']
-    }
-  }
+  ]
 };
