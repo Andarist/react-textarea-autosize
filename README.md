@@ -56,14 +56,14 @@ To autofocus:
 
 (all HTML attributes are passed to inner textarea)
 
-### How to test it with jest and react-test-renderer
+### How to test it with jest and react-test-renderer if you need ref
 
 Because [jest](https://github.com/facebook/jest) provides polyfills for DOM
 objects by requiring [jsdom](https://github.com/tmpvar/jsdom) and
 [react-test-renderer](https://www.npmjs.com/package/react-test-renderer) doesn't
 provide refs for rendered components out of the box (calling ref callbacks with
-`null`), you need to supply a mocked ref in your tests. You can do it like this
-(more can be read
+`null`), you need to supply a mocked ref in your tests in you need it for your tests.
+You can do it like this (more can be read
 [here](https://github.com/facebook/react/issues/7740#issuecomment-247335106)):
 
 ```js
