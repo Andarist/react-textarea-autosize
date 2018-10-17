@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextareaAutosize /> renders default component 1`] = `
+<DocumentFragment>
+  <textarea
+    style="height: 0px;"
+  />
+</DocumentFragment>
+`;
+
+exports[`<TextareaAutosize /> renders with height props passed in 1`] = `
+<DocumentFragment>
+  <textarea
+    style="height: 55px; max-height: 266px;"
+  />
+</DocumentFragment>
+`;
