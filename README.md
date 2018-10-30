@@ -32,6 +32,20 @@ React.renderComponent(
 
 https://andreypopp.github.io/react-textarea-autosize/
 
+## Props
+
+### Special props:
+
+| prop                         | type      | description                                                                                                                                    |
+| ---------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `inputRef`                   | `func`    | Function invoked with DOM node as argument. Default: `() => {}`                                                                                |
+| `maxRows`                    | `number`  | Maximum number of rows upto which the textarea can grow                                                                                        |
+| `minRows`                    | `number`  | Minimum number of rows to show for textarea                                                                                                    |
+| `onHeightChange`             | `func`    | Function invoked on textarea height change, with height as first argument and React component instance (`this`) as second. Default: `() => {}` |
+| `useCacheForDOMMeasurements` | `boolean` | Use object cache when computing height of textarea. Default: `false`                                                                           |
+
+Apart from these, the component accepts all props that are accepted by `<textarea/>`, like `style`, `onChange`, `value`, etc.
+
 ## FAQ
 
 ### How to focus
