@@ -66,6 +66,7 @@ export default function calculateNodeHeight(
   const nodeStyling = calculateNodeStyling(uiTextNode, uid, useCache);
 
   if (nodeStyling === null) {
+    hiddenTextarea.parentNode.removeChild(hiddenTextarea);
     return null;
   }
 
@@ -116,8 +117,9 @@ export default function calculateNodeHeight(
     height = Math.min(maxHeight, height);
   }
 
+  hiddenTextarea.parentNode.removeChild(hiddenTextarea);
   const rowCount = Math.floor(height / singleRowHeight);
-
+  
   return { height, minHeight, maxHeight, rowCount, valueRowCount };
 }
 
