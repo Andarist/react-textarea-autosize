@@ -12,7 +12,12 @@ let uid = 0;
 
 export default class TextareaAutosize extends React.Component {
   static propTypes = {
-    inputRef: PropTypes.func,
+    inputRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        current: PropTypes.any,
+      }),
+    ]),
     maxRows: PropTypes.number,
     minRows: PropTypes.number,
     onChange: PropTypes.func,
@@ -52,10 +57,7 @@ export default class TextareaAutosize extends React.Component {
       ...props
     } = this.props;
 
-    props.style = {
-      ...props.style,
-      height: this.state.height,
-    };
+    props.style = { ...props.style, height: this.state.height };
 
     const maxHeight = Math.max(
       props.style.maxHeight || Infinity,
@@ -103,7 +105,14 @@ export default class TextareaAutosize extends React.Component {
 
   _onRef = node => {
     this._ref = node;
-    this.props.inputRef(node);
+    const { inputRef } = this.props;
+
+    if (typeof inputRef === 'function') {
+      inputRef(node);
+      return;
+    }
+
+    inputRef.current = node;
   };
 
   _onChange = event => {
