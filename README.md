@@ -11,14 +11,14 @@ textarea as content changes. A native React version of the popular
 This module supports IE9 and above.
 
 ```javascript
-import Textarea from 'react-textarea-autosize';
+import TextareaAutosize from 'react-textarea-autosize';
 
 // If you use CommonJS syntax:
-// var Textarea = require('react-textarea-autosize').default;
+// var TextareaAutosize = require('react-textarea-autosize').default;
 
 React.renderComponent(
   <div>
-    <Textarea />
+    <TextareaAutosize />
   </div>,
   document.getElementById('element')
 );
@@ -53,7 +53,7 @@ Apart from these, the component accepts all props that are accepted by `<textare
 Get a ref to inner textarea:
 
 ```js
-<Textarea inputRef={tag => (this.textarea = tag)} />
+<TextareaAutosize inputRef={tag => (this.textarea = tag)} />
 ```
 
 And then call a focus on that ref:
@@ -65,7 +65,7 @@ this.textarea.focus();
 To autofocus:
 
 ```js
-<Textarea autoFocus />
+<TextareaAutosize autoFocus />
 ```
 
 (all HTML attributes are passed to inner textarea)
@@ -82,7 +82,7 @@ You can do it like this (more can be read
 
 ```js
 const tree = renderer
-  .create(<Textarea />, {
+  .create(<TextareaAutosize />, {
     createNodeMock: () => document.createElement('textarea')
   })
   .toJSON();
