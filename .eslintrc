@@ -2,7 +2,7 @@
   "extends": ["eslint:recommended", "prettier", "plugin:prettier/recommended", "plugin:react/recommended"],
   "parser": "babel-eslint",
   "env": {
-    "browser": true
+    "node": true
   },
   "plugins": ["react"],
   "rules": {
@@ -17,12 +17,18 @@
     "process": false
   },
   "overrides": [{
+    "files": ["src", "example/index.js"],
+    "env": {
+      "browser": true,
+      "node": false
+    }
+  }, {
     "files": "**/__tests__/**",
     "env": {
       "jest": true
     }
-  },{
-    "files": "*.macro.js",
+  }, {
+    "files": ["scripts", "*.macro.js"],
     "env": {
       "node": true
     }

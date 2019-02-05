@@ -7,6 +7,6 @@ module.exports = [
   {
     path: file,
     ignore: ['react', 'prop-types'],
-    limit: '2 KB'
-  }
+    limit: '2 KB',
+  },
 ];

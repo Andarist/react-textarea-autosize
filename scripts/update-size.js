@@ -18,8 +18,8 @@ sizeLimit(sizeConfig.path, sizeConfig).then(bytes => {
     readmePath,
     readme.replace(
       /<span class="weight">(.*?)<\/span>/,
-      `<span class="weight">${weight}</span>`
-    )
+      `<span class="weight">${weight}</span>`,
+    ),
   );
 
   // eslint-disable-next-line no-console

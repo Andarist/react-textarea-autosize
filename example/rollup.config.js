@@ -13,7 +13,7 @@ const config = {
   },
   plugins: [
     nodeResolve({
-      jsnext: true
+      jsnext: true,
     }),
     babel({
       exclude: 'node_modules/**',
@@ -21,7 +21,7 @@ const config = {
     commonjs(),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
-    })
+    }),
   ],
 };
 
