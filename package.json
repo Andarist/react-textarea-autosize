@@ -2,7 +2,13 @@
   "name": "react-textarea-autosize",
   "description": "textarea component for React which grows with content",
   "version": "7.1.0",
-  "keywords": "autosize, grow, react, react-component, textarea",
+  "keywords": [
+    "autosize",
+    "grow",
+    "react",
+    "react-component",
+    "textarea"
+  ],
   "repository": "andreypopp/react-textarea-autosize",
   "license": "MIT",
   "main": "./dist/react-textarea-autosize.cjs.js",
@@ -14,6 +20,9 @@
   "jsnext:main": "./dist/react-textarea-autosize.esm.js",
   "unpkg": "./dist/react-textarea-autosize.min.js",
   "sideEffects": false,
+  "files": [
+    "dist"
+  ],
   "author": "Andrey Popp <8mayday@gmail.com> (httsps://andreypopp.com/)",
   "scripts": {
     "prebuild": "npm run clean",
@@ -35,6 +44,10 @@
   "peerDependencies": {
     "react": ">=0.14.0 <17.0.0"
   },
+  "dependencies": {
+    "@babel/runtime": "^7.1.2",
+    "prop-types": "^15.6.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.1.0",
     "@babel/helper-module-imports": "^7.0.0",
@@ -44,20 +57,22 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge",
+    "babel-eslint": "11.0.0-beta.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-macros": "^2.2.2",
     "babel-plugin-transform-define": "^1.3.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.13",
     "bytes": "^3.0.0",
     "cross-env": "^5.0.1",
-    "eslint": "^4.12.0",
-    "eslint-config-prometheusresearch": "^0.4.0",
-    "eslint-plugin-react": "^7.5.1",
+    "eslint": "^5.13.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
     "husky": "^1.0.1",
     "jest": "^23.6.0",
     "jest-dom": "^2.1.0",
     "lint-staged": "^7.3.0",
-    "prettier": "^1.13.7",
+    "prettier": "^1.16.4",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-testing-library": "^5.2.0",
@@ -70,12 +85,5 @@
     "rollup-plugin-uglify": "^6.0.0",
     "size-limit": "^0.20.0",
     "terser": "^3.7.6"
-  },
-  "files": [
-    "dist"
-  ],
-  "dependencies": {
-    "@babel/runtime": "^7.1.2",
-    "prop-types": "^15.6.0"
   }
 }

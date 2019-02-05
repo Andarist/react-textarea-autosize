@@ -1,6 +1,30 @@
 {
-  "extends": "prometheusresearch",
+  "extends": ["eslint:recommended", "prettier", "plugin:prettier/recommended", "plugin:react/recommended"],
+  "parser": "babel-eslint",
   "env": {
-    "jest": true
-  }
+    "browser": true
+  },
+  "plugins": ["react"],
+  "rules": {
+    "no-unused-vars": ["error", { "varsIgnorePattern": "^_" }]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "globals": {
+    "process": false
+  },
+  "overrides": [{
+    "files": "**/__tests__/**",
+    "env": {
+      "jest": true
+    }
+  },{
+    "files": "*.macro.js",
+    "env": {
+      "node": true
+    }
+  }]
 }

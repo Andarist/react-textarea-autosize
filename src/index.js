@@ -2,8 +2,8 @@
  * <TextareaAutosize />
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import calculateNodeHeight, { purgeCache } from './calculateNodeHeight';
 
 const noop = () => {};

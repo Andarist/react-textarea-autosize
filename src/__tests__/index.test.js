@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { render } from 'react-testing-library';
 import TextareaAutosize from '../index';
 import 'jest-dom/extend-expect';
