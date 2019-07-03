@@ -127,6 +127,10 @@ export default class TextareaAutosize extends React.Component {
       callback();
       return;
     }
+    if (!this._ref) {
+      callback();
+      return;
+    }
 
     const nodeHeight = calculateNodeHeight(
       this._ref,
