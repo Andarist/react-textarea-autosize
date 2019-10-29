@@ -1,7 +1,7 @@
+import '@testing-library/jest-dom/extend-expect';
 import * as React from 'react';
 import { render } from '@testing-library/react';
 import TextareaAutosize from '../index';
-import 'jest-dom/extend-expect';
 
 describe('<TextareaAutosize />', () => {
   it('renders default component', () => {
