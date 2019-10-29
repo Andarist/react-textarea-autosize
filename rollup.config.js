@@ -64,7 +64,6 @@ const createConfig = ({ output, browser = false, umd = false, env } = {}) => {
             pure_getters: true,
             unsafe: true,
             unsafe_comps: true,
-            warnings: false,
           },
         }),
     ].filter(Boolean),
