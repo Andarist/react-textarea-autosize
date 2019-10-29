@@ -1,5 +1,10 @@
 {
-  "extends": ["eslint:recommended", "prettier", "plugin:prettier/recommended", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "prettier",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended"
+  ],
   "parser": "babel-eslint",
   "env": {
     "node": true
@@ -16,21 +21,25 @@
   "globals": {
     "process": false
   },
-  "overrides": [{
-    "files": ["src", "example/index.js"],
-    "env": {
-      "browser": true,
-      "node": false
+  "overrides": [
+    {
+      "files": ["src/*.js", "example/index.js"],
+      "env": {
+        "browser": true,
+        "node": false
+      }
+    },
+    {
+      "files": "**/__tests__/**",
+      "env": {
+        "jest": true
+      }
+    },
+    {
+      "files": ["scripts", "*.macro.js"],
+      "env": {
+        "node": true
+      }
     }
-  }, {
-    "files": "**/__tests__/**",
-    "env": {
-      "jest": true
-    }
-  }, {
-    "files": ["scripts", "*.macro.js"],
-    "env": {
-      "node": true
-    }
-  }]
+  ]
 }

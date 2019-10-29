@@ -1,4 +1,3 @@
-/* global window document */
 import isBrowser from './isBrowser.macro';
 
 const isIE = isBrowser ? !!document.documentElement.currentStyle : false;
