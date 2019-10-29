@@ -45,7 +45,11 @@ const createConfig = ({ output, browser = false, umd = false, env } = {}) => {
           ],
         ],
       }),
-      commonjs(),
+      commonjs({
+        namedExports: {
+          'prop-types': Object.keys(require('prop-types')),
+        },
+      }),
       replace(
         Object.assign(
           env ? { 'process.env.NODE_ENV': JSON.stringify(env) } : {},
