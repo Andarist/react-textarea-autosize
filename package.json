@@ -33,7 +33,7 @@
     "lint": "eslint src",
     "update:size": "cross-env ROLLUP_BUILDS=browser_esm npm run build && node scripts/update-size.js && git add README.md",
     "prepare": "npm run build",
-    "preversion": "npm run lint",
+    "preversion": "npm run lint && npm test",
     "release:patch": "npm version patch && npm publish && git push --follow-tags",
     "release:minor": "npm version minor && npm publish && git push --follow-tags",
     "release:major": "npm version major && npm publish && git push --follow-tags",
