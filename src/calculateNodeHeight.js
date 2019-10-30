@@ -39,8 +39,6 @@ const SIZING_STYLE = [
 
 let computedStyleCache = {};
 const hiddenTextarea = isBrowser && document.createElement('textarea');
-hiddenTextarea.setAttribute('tab-index', '-1');
-hiddenTextarea.setAttribute('aria-hidden', 'true');
 
 const forceHiddenStyles = node => {
   Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(key => {
@@ -49,6 +47,8 @@ const forceHiddenStyles = node => {
 };
 
 if (isBrowser) {
+  hiddenTextarea.setAttribute('tab-index', '-1');
+  hiddenTextarea.setAttribute('aria-hidden', 'true');
   forceHiddenStyles(hiddenTextarea);
 }
 
