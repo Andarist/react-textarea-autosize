@@ -38,6 +38,7 @@ https://andreypopp.github.io/react-textarea-autosize/
 
 | prop                         | type      | description                                                                                                                                    |
 | ---------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `avoidSubpixelHeight`        | `boolean` | Always `ceil` computed height values to avoid subpixel rendering. Default: `false`                                                             |
 | `inputRef`                   | `func`    | Function invoked with DOM node as argument. Default: `() => {}`                                                                                |
 | `maxRows`                    | `number`  | Maximum number of rows upto which the textarea can grow                                                                                        |
 | `minRows`                    | `number`  | Minimum number of rows to show for textarea                                                                                                    |

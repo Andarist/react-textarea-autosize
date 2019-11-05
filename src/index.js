@@ -8,6 +8,7 @@ let uid = 0;
 
 export default class TextareaAutosize extends React.Component {
   static propTypes = {
+    avoidSubpixelHeight: PropTypes.bool,
     inputRef: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.shape({
@@ -24,6 +25,7 @@ export default class TextareaAutosize extends React.Component {
   };
 
   static defaultProps = {
+    avoidSubpixelHeight: false,
     inputRef: noop,
     onChange: noop,
     onHeightChange: noop,
@@ -130,6 +132,7 @@ export default class TextareaAutosize extends React.Component {
       this.props.useCacheForDOMMeasurements,
       this.props.minRows,
       this.props.maxRows,
+      this.props.avoidSubpixelHeight,
     );
 
     if (nodeHeight === null) {

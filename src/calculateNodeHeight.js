@@ -58,6 +58,7 @@ export default function calculateNodeHeight(
   useCache = false,
   minRows = null,
   maxRows = null,
+  avoidSubpixelHeight = false,
 ) {
   if (hiddenTextarea.parentNode === null) {
     document.body.appendChild(hiddenTextarea);
@@ -120,7 +121,7 @@ export default function calculateNodeHeight(
 
   const rowCount = Math.floor(height / singleRowHeight);
 
-  return { height, minHeight, maxHeight, rowCount, valueRowCount };
+  return { height: avoidSubpixelHeight ? Math.ceil(height) : height, minHeight, maxHeight, rowCount, valueRowCount };
 }
 
 function calculateNodeStyling(node, uid, useCache = false) {
