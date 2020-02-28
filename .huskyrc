@@ -1,5 +1,5 @@
 {
   "hooks": {
-    "pre-commit": "lint-staged && npm run update:size"
+    "pre-commit": "lint-staged"
   }
 }

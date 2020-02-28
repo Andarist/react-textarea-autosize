@@ -1,8 +1,7 @@
 {
   "*.js": [
     "prettier --write",
-    "eslint --fix --no-ignore .*.js",
-    "git add"
+    "eslint --fix --no-ignore .*.js"
   ],
-  "*.md": ["prettier --write", "git add"]
+  "*.md": ["prettier --write"]
 }
