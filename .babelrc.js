@@ -11,11 +11,14 @@ module.exports = {
       },
     ],
     '@babel/react',
+    '@babel/typescript',
   ],
   plugins: [
-    ['@babel/proposal-class-properties', { loose }],
-    ['@babel/proposal-object-rest-spread', { loose }],
-    ['transform-react-remove-prop-types', { mode: 'unsafe-wrap' }],
-    'macros',
+    '@babel/transform-runtime',
+    [
+      '@babel/proposal-object-rest-spread',
+      { loose },
+      'parcel seems to add some plugins in a way which conflicts with this one defined here (causing a duplicate)',
+    ],
   ],
 };

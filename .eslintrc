@@ -3,43 +3,24 @@
     "eslint:recommended",
     "prettier",
     "plugin:prettier/recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "env": {
+    "browser": true,
     "node": true
   },
-  "plugins": ["react"],
+  "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "no-unused-vars": ["error", { "varsIgnorePattern": "^_" }]
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/prop-types": "off"
   },
   "settings": {
     "react": {
       "version": "detect"
     }
-  },
-  "globals": {
-    "process": false
-  },
-  "overrides": [
-    {
-      "files": ["src/*.js", "example/index.js"],
-      "env": {
-        "browser": true,
-        "node": false
-      }
-    },
-    {
-      "files": "**/__tests__/**",
-      "env": {
-        "jest": true
-      }
-    },
-    {
-      "files": ["scripts", "*.macro.js"],
-      "env": {
-        "node": true
-      }
-    }
-  ]
+  }
 }

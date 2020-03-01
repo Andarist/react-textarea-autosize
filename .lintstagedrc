@@ -1,7 +1,7 @@
 {
-  "*.js": [
+  "*.{js,ts,tsx}": [
     "prettier --write",
     "eslint --fix --no-ignore .*.js"
   ],
-  "*.md": ["prettier --write"]
+  "*.{md,json}": ["prettier --write"]
 }
