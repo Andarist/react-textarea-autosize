@@ -20,7 +20,7 @@ React.renderComponent(
   <div>
     <TextareaAutosize />
   </div>,
-  document.getElementById('element')
+  document.getElementById('element'),
 );
 ```
 
@@ -36,13 +36,13 @@ https://andreypopp.github.io/react-textarea-autosize/
 
 ### Special props:
 
-| prop                         | type      | description                                                                                                                                    |
-| ---------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `inputRef`                   | `func`    | Function invoked with DOM node as argument. Default: `() => {}`                                                                                |
-| `maxRows`                    | `number`  | Maximum number of rows upto which the textarea can grow                                                                                        |
-| `minRows`                    | `number`  | Minimum number of rows to show for textarea                                                                                                    |
-| `onHeightChange`             | `func`    | Function invoked on textarea height change, with height as first argument and React component instance (`this`) as second. Default: `() => {}` |
-| `useCacheForDOMMeasurements` | `boolean` | Use object cache when computing height of textarea. Default: `false`                                                                           |
+| prop                | type      | description                                                                                |
+| ------------------- | --------- | ------------------------------------------------------------------------------------------ |
+| `inputRef`          | `func`    | Function invoked with DOM node as argument. Default: `() => {}`                            |
+| `maxRows`           | `number`  | Maximum number of rows upto which the textarea can grow                                    |
+| `minRows`           | `number`  | Minimum number of rows to show for textarea                                                |
+| `onHeightChange`    | `func`    | Function invoked on textarea height change, with height as first argument                  |
+| `cacheMeasurements` | `boolean` | Reuse previously computed measurements when computing height of textarea. Default: `false` |
 
 Apart from these, the component accepts all props that are accepted by `<textarea/>`, like `style`, `onChange`, `value`, etc.
 
@@ -83,20 +83,7 @@ You can do it like this (more can be read
 ```js
 const tree = renderer
   .create(<TextareaAutosize />, {
-    createNodeMock: () => document.createElement('textarea')
+    createNodeMock: () => document.createElement('textarea'),
   })
   .toJSON();
 ```
-
-## Development
-
-To release patch, minor or major version:
-
-    % npm run release:patch
-    % npm run release:minor
-    % npm run release:major
-
-This will run eslint, compile sources from `src/` to `dist/`, bump a version in
-`package.json` and then create a new git commit with tag. If tests or linter
-fails — commit won't be created. If tasks succeed it publishes to npm and pushes
-a tag to github.
