@@ -4,7 +4,10 @@ import getSizingData, { SizingData } from './getSizingData';
 import { useComposedRef, useWindowResizeListener } from './hooks';
 import { noop } from './utils';
 
-type Style = NonNullable<JSX.IntrinsicElements['textarea']['style']> & {
+type Style = Omit<
+  NonNullable<JSX.IntrinsicElements['textarea']['style']>,
+  'maxHeight' | 'minHeight'
+> & {
   height?: number;
 };
 
@@ -26,11 +29,22 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     minRows,
     onChange = noop,
     onHeightChange = noop,
-    style: { maxHeight: _maxHeight, minHeight: _minHeight, ...style } = {},
     ...props
   },
   userRef: React.Ref<HTMLTextAreaElement>,
 ) => {
+  if (process.env.NODE_ENV !== 'production' && props.style) {
+    if ('maxHeight' in props.style) {
+      throw new Error(
+        'Using `style.maxHeight` for <TextareaAutosize/> is not supported. Please use `maxRows`.',
+      );
+    }
+    if ('minHeight' in props.style) {
+      throw new Error(
+        'Using `style.minHeight` for <TextareaAutosize/> is not supported. Please use `minRows`.',
+      );
+    }
+  }
   const isControlled = props.value !== undefined;
   const libRef = React.useRef<HTMLTextAreaElement | null>(null);
   const ref = useComposedRef(libRef, userRef);
@@ -74,9 +88,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
   }
   useWindowResizeListener(resizeTextarea);
 
-  return (
-    <textarea {...props} onChange={handleChange} ref={ref} style={style} />
-  );
+  return <textarea {...props} onChange={handleChange} ref={ref} />;
 };
 
 export default /* #__PURE__ */ React.forwardRef(TextareaAutosize);
