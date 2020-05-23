@@ -34,10 +34,9 @@
     "clean": "rimraf dist",
     "lint": "eslint --ext .js,.ts,.tsx src",
     "prepare": "npm run build",
-    "preversion": "npm run lint && npm test",
-    "release:patch": "npm version patch && npm publish && git push --follow-tags",
-    "release:minor": "npm version minor && npm publish && git push --follow-tags",
-    "release:major": "npm version major && npm publish && git push --follow-tags",
+    "changeset": "changeset",
+    "prerelease": "npm run lint && npm test",
+    "release": "changeset publish",
     "test": "jest",
     "test:watch": "npm test -- --watch"
   },
