@@ -1,6 +1,9 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@0.3.0/schema.json",
-  "changelog": "./changelog.js",
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "Andarist/react-textarea-autosize" }
+  ],
   "commit": false,
   "linked": [],
   "access": "public",

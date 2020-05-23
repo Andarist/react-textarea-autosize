@@ -18,7 +18,9 @@
     "./dist/react-textarea-autosize.esm.js": "./dist/react-textarea-autosize.browser.esm.js"
   },
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "author": "Andrey Popp <8mayday@gmail.com> (httsps://andreypopp.com/)",
   "contributors": [
     "Mateusz Burzyński <mateuszburzynski@gmail.com> (https://github.com/Andarist)"
@@ -53,6 +55,7 @@
     "@babel/preset-env": "^7.8.6",
     "@babel/preset-react": "^7.8.3",
     "@babel/preset-typescript": "^7.8.3",
+    "@changesets/changelog-github": "^0.2.6",
     "@changesets/cli": "^2.5.2",
     "@preconstruct/cli": "^1.1.7",
     "@testing-library/jest-dom": "^5.8.0",

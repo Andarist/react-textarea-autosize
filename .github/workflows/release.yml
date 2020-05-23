@@ -8,6 +8,7 @@ on:
 jobs:
   release:
     name: Release
+    if: github.repository == 'Andarist/react-textarea-autosize'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
