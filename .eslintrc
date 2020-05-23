@@ -9,7 +9,8 @@
   "parser": "@typescript-eslint/parser",
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {

@@ -6,7 +6,6 @@ import { noop } from './utils';
 
 type Style = NonNullable<JSX.IntrinsicElements['textarea']['style']> & {
   height?: number;
-  maxHeight?: number;
 };
 
 type Props = JSX.IntrinsicElements['textarea'] & {
@@ -27,7 +26,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     minRows,
     onChange = noop,
     onHeightChange = noop,
-    style: { height, maxHeight, minHeight, ...style } = {},
+    style: { maxHeight: _maxHeight, minHeight: _minHeight, ...style } = {},
     ...props
   },
   userRef: React.Ref<HTMLTextAreaElement>,
