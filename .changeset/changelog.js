@@ -1,7 +1,7 @@
 const {
   getReleaseLine,
   getDependencyReleaseLine,
-} = require('@changesets/cli/changelog');
+} = require('@changesets/cli/changelog').default;
 
 const changelogFunctions = {
   async getReleaseLine(changeset, type) {
