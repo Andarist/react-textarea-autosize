@@ -62,6 +62,8 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
       return;
     }
 
+    measurementsCacheRef.current = nodeSizingData;
+
     const height = calculateNodeHeight(
       nodeSizingData,
       node.value || node.placeholder || 'x',
