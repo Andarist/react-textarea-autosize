@@ -52,16 +52,10 @@ export default function calculateNodeHeight(
   hiddenTextarea.value = 'x';
   const rowHeight = getContentHeight(hiddenTextarea, sizingData);
 
-  let minHeight = rowHeight * minRows;
-  if (boxSizing === 'border-box') {
-    minHeight = minHeight + paddingSize + borderSize;
-  }
+  const minHeight = rowHeight * minRows;
   height = Math.max(minHeight, height);
 
-  let maxHeight = rowHeight * maxRows;
-  if (boxSizing === 'border-box') {
-    maxHeight = maxHeight + paddingSize + borderSize;
-  }
+  const maxHeight = rowHeight * maxRows;
   height = Math.min(maxHeight, height);
 
   return height;
