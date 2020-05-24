@@ -3,10 +3,7 @@ import forceHiddenStyles from './forceHiddenStyles';
 
 let hiddenTextarea: HTMLTextAreaElement | null = null;
 
-const getContentHeight = (
-  node: HTMLElement,
-  sizingData: SizingData,
-): number => {
+const getHeight = (node: HTMLElement, sizingData: SizingData): number => {
   const height = node.scrollHeight;
 
   if (sizingData.sizingStyle.boxSizing === 'border-box') {
@@ -46,11 +43,11 @@ export default function calculateNodeHeight(
   forceHiddenStyles(hiddenTextarea);
 
   hiddenTextarea.value = value;
-  let height = getContentHeight(hiddenTextarea, sizingData);
+  let height = getHeight(hiddenTextarea, sizingData);
 
   // measure height of a textarea with a single row
   hiddenTextarea.value = 'x';
-  const rowHeight = getContentHeight(hiddenTextarea, sizingData);
+  const rowHeight = hiddenTextarea.scrollHeight - paddingSize;
 
   let minHeight = rowHeight * minRows;
   if (boxSizing === 'border-box') {
