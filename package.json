@@ -9,7 +9,10 @@
     "react-component",
     "textarea"
   ],
-  "repository": "andreypopp/react-textarea-autosize",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andarist/react-textarea-autosize.git"
+  },
   "license": "MIT",
   "main": "dist/react-textarea-autosize.cjs.js",
   "module": "dist/react-textarea-autosize.esm.js",
