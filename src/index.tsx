@@ -11,7 +11,7 @@ type Style = Omit<
   height?: number;
 };
 
-type Props = JSX.IntrinsicElements['textarea'] & {
+export type TextareaAutosizeProps = JSX.IntrinsicElements['textarea'] & {
   maxRows?: number;
   minRows?: number;
   onHeightChange?: (height: number) => void;
@@ -21,7 +21,7 @@ type Props = JSX.IntrinsicElements['textarea'] & {
 
 const TextareaAutosize: React.ForwardRefRenderFunction<
   HTMLTextAreaElement,
-  Props
+  TextareaAutosizeProps
 > = (
   {
     cacheMeasurements,
