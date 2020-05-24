@@ -38,7 +38,6 @@ https://andarist.github.io/react-textarea-autosize/
 
 | prop                | type      | description                                                                                |
 | ------------------- | --------- | ------------------------------------------------------------------------------------------ |
-| `inputRef`          | `func`    | Function invoked with DOM node as argument. Default: `() => {}`                            |
 | `maxRows`           | `number`  | Maximum number of rows upto which the textarea can grow                                    |
 | `minRows`           | `number`  | Minimum number of rows to show for textarea                                                |
 | `onHeightChange`    | `func`    | Function invoked on textarea height change, with height as first argument                  |
