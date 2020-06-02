@@ -7,9 +7,7 @@ import { noop } from './utils';
 type Style = Omit<
   NonNullable<JSX.IntrinsicElements['textarea']['style']>,
   'maxHeight' | 'minHeight'
-> & {
-  height?: number;
-};
+>;
 
 export type TextareaAutosizeProps = JSX.IntrinsicElements['textarea'] & {
   maxRows?: number;
