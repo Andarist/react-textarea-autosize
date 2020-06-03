@@ -6,10 +6,12 @@ import { noop } from './utils';
 
 type Style = Omit<
   NonNullable<JSX.IntrinsicElements['textarea']['style']>,
-  'maxHeight' | 'minHeight'
+  'maxHeight' | 'minHeight' | 'height'
 >;
 
-export type TextareaAutosizeProps = JSX.IntrinsicElements['textarea'] & {
+export type TextareaAutosizeProps = React.TextareaHTMLAttributes<
+  HTMLTextAreaElement
+> & {
   maxRows?: number;
   minRows?: number;
   onHeightChange?: (height: number) => void;
