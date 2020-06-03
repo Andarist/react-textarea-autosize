@@ -11,7 +11,10 @@ type Style = Omit<
   height?: number;
 };
 
-export type TextareaAutosizeProps = JSX.IntrinsicElements['textarea'] & {
+export type TextareaAutosizeProps = Omit<
+  JSX.IntrinsicElements['textarea'],
+  'ref'
+> & {
   maxRows?: number;
   minRows?: number;
   onHeightChange?: (height: number) => void;
