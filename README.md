@@ -52,7 +52,7 @@ Apart from these, the component accepts all props that are accepted by `<textare
 Get a ref to inner textarea:
 
 ```js
-<TextareaAutosize inputRef={tag => (this.textarea = tag)} />
+<TextareaAutosize inputRef={(tag) => (this.textarea = tag)} />
 ```
 
 And then call a focus on that ref:

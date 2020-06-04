@@ -11,7 +11,7 @@ const HIDDEN_TEXTAREA_STYLE = {
 } as const;
 
 const forceHiddenStyles = (node: HTMLElement) => {
-  Object.keys(HIDDEN_TEXTAREA_STYLE).forEach(key => {
+  Object.keys(HIDDEN_TEXTAREA_STYLE).forEach((key) => {
     node.style.setProperty(
       key,
       HIDDEN_TEXTAREA_STYLE[key as keyof typeof HIDDEN_TEXTAREA_STYLE],

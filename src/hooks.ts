@@ -7,7 +7,7 @@ export const useWindowResizeListener = (listener: (event: UIEvent) => any) => {
   const latestListener = useLatest(listener);
 
   React.useEffect(() => {
-    const handler: typeof listener = event => {
+    const handler: typeof listener = (event) => {
       latestListener.current(event);
     };
 

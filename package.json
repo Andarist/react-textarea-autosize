@@ -21,7 +21,9 @@
     "./dist/react-textarea-autosize.esm.js": "./dist/react-textarea-autosize.browser.esm.js"
   },
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "author": "Andrey Popp <8mayday@gmail.com> (httsps://andreypopp.com/)",
   "contributors": [
     "Mateusz Burzyński <mateuszburzynski@gmail.com> (https://github.com/Andarist)"
@@ -45,40 +47,41 @@
     "react": "^16.8.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.8.4",
+    "@babel/runtime": "^7.10.2",
     "use-composed-ref": "^1.0.0",
     "use-latest": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.6",
-    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.8.3",
-    "@babel/preset-env": "^7.8.6",
-    "@babel/preset-react": "^7.8.3",
-    "@babel/preset-typescript": "^7.8.3",
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "@babel/preset-typescript": "^7.10.1",
     "@changesets/changelog-github": "^0.2.6",
-    "@changesets/cli": "^2.5.2",
-    "@preconstruct/cli": "^1.1.7",
-    "@testing-library/jest-dom": "^5.8.0",
-    "@testing-library/react": "^10.0.4",
-    "@typescript-eslint/eslint-plugin": "^2.21.0",
-    "@typescript-eslint/parser": "^2.21.0",
+    "@changesets/cli": "^2.8.0",
+    "@preconstruct/cli": "^1.1.14",
+    "@testing-library/jest-dom": "^5.9.0",
+    "@testing-library/react": "^10.1.0",
+    "@types/react": "^16.9.35",
+    "@typescript-eslint/eslint-plugin": "^3.1.0",
+    "@typescript-eslint/parser": "^3.1.0",
     "babel-eslint": "11.0.0-beta.2",
     "bytes": "^3.1.0",
-    "cross-env": "^7.0.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.18.3",
-    "husky": "^4.2.3",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.20.0",
+    "husky": "^4.2.5",
     "jest": "^26.0.1",
-    "lint-staged": "^10.0.8",
+    "lint-staged": "^10.2.8",
     "parcel-bundler": "^1.12.4",
-    "prettier": "^1.19.1",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "prettier": "^2.0.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "rimraf": "^3.0.2",
-    "terser": "^4.6.4",
-    "typescript": "^3.8.2"
+    "terser": "^4.7.0",
+    "typescript": "^3.9.3"
   }
 }
