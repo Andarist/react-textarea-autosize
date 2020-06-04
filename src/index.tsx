@@ -4,17 +4,16 @@ import getSizingData, { SizingData } from './getSizingData';
 import { useComposedRef, useWindowResizeListener } from './hooks';
 import { noop } from './utils';
 
+type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+
 type Style = Omit<
-  NonNullable<JSX.IntrinsicElements['textarea']['style']>,
+  NonNullable<TextareaProps['style']>,
   'maxHeight' | 'minHeight'
 > & {
   height?: number;
 };
 
-export type TextareaAutosizeProps = Omit<
-  JSX.IntrinsicElements['textarea'],
-  'ref'
-> & {
+export type TextareaAutosizeProps = Omit<TextareaProps, 'style'> & {
   maxRows?: number;
   minRows?: number;
   onHeightChange?: (height: number) => void;
