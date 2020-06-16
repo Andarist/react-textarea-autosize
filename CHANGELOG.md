@@ -1,5 +1,17 @@
 # react-textarea-autosize
 
+## 8.1.0
+
+### Minor Changes
+
+- [`722e10a`](https://github.com/Andarist/react-textarea-autosize/commit/722e10a0a446c2b9a51f1526895e47538b3d9f5a) [#278](https://github.com/Andarist/react-textarea-autosize/pull/278) Thanks [@emdotem](https://github.com/emdotem)! - Set inline style's `height` property with the `"important"` priority.
+
+### Patch Changes
+
+- [`db872f0`](https://github.com/Andarist/react-textarea-autosize/commit/db872f035e8c033eb96c40eead9c041ec6b2e09f) Thanks [@Andarist](https://github.com/Andarist)! - `TextareaAutosizeProps` are now based on `React.TextareaHTMLAttributes<HTMLTextAreaElement>` instead of `JSX.IntrinsicElements['textarea']`. The latter one includes a type for `ref` attribute and it being included as part of `TextareaAutosizeProps` has caused problems when using `TextareaAutosizeProps` to declare wrapper components. This is also more semantically correct as `ref` shouldn't be a part of `props`. It's rather accepted by a particular JSX element and in case of the `react-textarea-autosize` this is the type of the exported component which is `React.ForwardRefExoticComponent<TextareaAutosizeProps>` (a result of `React.forwardRef` call).
+
+* [`61ca826`](https://github.com/Andarist/react-textarea-autosize/commit/61ca826a3fbe33abb9c67885d5bbd7b34ecd66db) Thanks [@Andarist](https://github.com/Andarist)! - `maxHeight` and `minHeight` has been disallowed as part of `TextareaAutosizeProps['style']`. The intention to do that was there since the v8 release but it was not implemented correctly and allowed those to slip into the mentioned type.
+
 ## 8.0.1
 
 ### Patch Changes
