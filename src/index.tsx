@@ -75,7 +75,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
 
     if (heightRef.current !== height) {
       heightRef.current = height;
-      node.style.setProperty(height, `${height}px`, 'important');
+      node.style.setProperty("height", `${height}px`, 'important');
       onHeightChange(height);
     }
   };
