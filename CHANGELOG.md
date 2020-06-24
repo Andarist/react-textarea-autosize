@@ -1,5 +1,11 @@
 # react-textarea-autosize
 
+## 8.1.1
+
+### Patch Changes
+
+- [`b7c227a`](https://github.com/Andarist/react-textarea-autosize/commit/b7c227a16b848b8bd6090566f3d151d4ffbe8515) [#280](https://github.com/Andarist/react-textarea-autosize/pull/280) Thanks [@emdotem](https://github.com/emdotem)! - Fixed a broken call to `setProperty` that has prevented the library to work correctly.
+
 ## 8.1.0
 
 ### Minor Changes
