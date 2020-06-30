@@ -13,10 +13,13 @@ type Style = Omit<
   height?: number;
 };
 
+export type TextareaHeightChangeMeta = {
+  rowHeight: number;
+};
 export type TextareaAutosizeProps = Omit<TextareaProps, 'style'> & {
   maxRows?: number;
   minRows?: number;
-  onHeightChange?: (height: number) => void;
+  onHeightChange?: (height: number, meta: TextareaHeightChangeMeta) => void;
   cacheMeasurements?: boolean;
   style?: Style;
 };
@@ -66,7 +69,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
 
     measurementsCacheRef.current = nodeSizingData;
 
-    const height = calculateNodeHeight(
+    const [height, rowHeight] = calculateNodeHeight(
       nodeSizingData,
       node.value || node.placeholder || 'x',
       minRows,
@@ -76,7 +79,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     if (heightRef.current !== height) {
       heightRef.current = height;
       node.style.setProperty('height', `${height}px`, 'important');
-      onHeightChange(height);
+      onHeightChange(height, { rowHeight });
     }
   };
 
