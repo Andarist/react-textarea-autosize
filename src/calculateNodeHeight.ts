@@ -1,6 +1,11 @@
 import { SizingData } from './getSizingData';
 import forceHiddenStyles from './forceHiddenStyles';
 
+export type CalculatedNodeHeights = {
+  height: number;
+  rowHeight: number;
+};
+
 let hiddenTextarea: HTMLTextAreaElement | null = null;
 
 const getHeight = (node: HTMLElement, sizingData: SizingData): number => {
@@ -20,7 +25,7 @@ export default function calculateNodeHeight(
   value: string,
   minRows = 1,
   maxRows = Infinity,
-): number {
+): CalculatedNodeHeights {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
     hiddenTextarea.setAttribute('tab-index', '-1');
@@ -61,5 +66,5 @@ export default function calculateNodeHeight(
   }
   height = Math.min(maxHeight, height);
 
-  return height;
+  return { height, rowHeight };
 }
