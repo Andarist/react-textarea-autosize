@@ -1,5 +1,11 @@
 # react-textarea-autosize
 
+## 8.2.0
+
+### Minor Changes
+
+- [`a1fc99f`](https://github.com/Andarist/react-textarea-autosize/commit/a1fc99f79fa28b5518f1c5e937f765ace46f68c2) [#284](https://github.com/Andarist/react-textarea-autosize/pull/284) Thanks [@emmenko](https://github.com/emmenko)! - Added `{ rowHeight: number }` as a second parameter to the `onHeightChange` callback. This is useful to construct custom behaviors according to the height values.
+
 ## 8.1.1
 
 ### Patch Changes
