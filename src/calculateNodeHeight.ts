@@ -1,10 +1,10 @@
 import { SizingData } from './getSizingData';
 import forceHiddenStyles from './forceHiddenStyles';
 
-export type CalculatedNodeHeights = {
-  height: number;
-  rowHeight: number;
-};
+// TODO: use labelled tuples once they are avaiable:
+//   export type CalculatedNodeHeights = [height: number, rowHeight: number];
+// https://github.com/microsoft/TypeScript/issues/28259
+export type CalculatedNodeHeights = number[];
 
 let hiddenTextarea: HTMLTextAreaElement | null = null;
 
@@ -66,5 +66,5 @@ export default function calculateNodeHeight(
   }
   height = Math.min(maxHeight, height);
 
-  return { height, rowHeight };
+  return [height, rowHeight];
 }

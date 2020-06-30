@@ -69,7 +69,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
 
     measurementsCacheRef.current = nodeSizingData;
 
-    const { height, rowHeight } = calculateNodeHeight(
+    const [height, rowHeight] = calculateNodeHeight(
       nodeSizingData,
       node.value || node.placeholder || 'x',
       minRows,
