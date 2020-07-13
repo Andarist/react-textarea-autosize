@@ -21,7 +21,9 @@
     "./dist/react-textarea-autosize.esm.js": "./dist/react-textarea-autosize.browser.esm.js"
   },
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "author": "Andrey Popp <8mayday@gmail.com> (httsps://andreypopp.com/)",
   "contributors": [
     "Mateusz Burzyński <mateuszburzynski@gmail.com> (https://github.com/Andarist)"
@@ -31,7 +33,7 @@
     "build": "preconstruct build",
     "docs:dev": "parcel example/index.html --out-dir example/dist --open",
     "docs:build": "parcel build example/index.html --out-dir example/dist",
-    "docs:publish": "npm run docs:build && cd example/dist && git init && git commit --allow-empty -m 'update docs' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update docs' && git push git@github.com:andreypopp/react-textarea-autosize gh-pages --force",
+    "docs:publish": "npm run docs:build && cd example/dist && git init && git commit --allow-empty -m 'update docs' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update docs' && git push git@github.com:Andarist/react-textarea-autosize gh-pages --force",
     "clean": "rimraf dist",
     "lint": "eslint --ext .js,.ts,.tsx src",
     "prepare": "npm run build",
