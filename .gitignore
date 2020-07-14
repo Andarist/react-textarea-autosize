@@ -5,3 +5,4 @@ example/.nojekyll
 dist
 node_modules
 .cache
+.parcel-cache

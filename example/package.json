@@ -1,0 +1,8 @@
+{
+  "name": "react-textarea-autosize-example",
+  "private": true,
+  "description": "Just make Parcel 2 ignore package.json in the parent directory.",
+  "scripts": {
+    "build": "../node_modules/.bin/parcel build ./index.html --dist-dir ./dist --public-url ."
+  }
+}
