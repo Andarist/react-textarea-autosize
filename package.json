@@ -83,5 +83,8 @@
     "rimraf": "^3.0.2",
     "terser": "^4.7.0",
     "typescript": "^3.9.3"
+  },
+  "engines": {
+    "node": ">=10"
   }
 }
