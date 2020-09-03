@@ -16,7 +16,7 @@ type Style = Omit<
 export type TextareaHeightChangeMeta = {
   rowHeight: number;
 };
-export type TextareaAutosizeProps = Omit<TextareaProps, 'style'> & {
+export type TextareaAutosizeProps = Partial<Omit<TextareaProps, 'style'>> & {
   maxRows?: number;
   minRows?: number;
   onHeightChange?: (height: number, meta: TextareaHeightChangeMeta) => void;
