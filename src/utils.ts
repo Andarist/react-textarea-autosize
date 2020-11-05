@@ -1,4 +1,4 @@
-export const noop: () => void = () => {};
+export const noop = () => {};
 
 export const pick = <Obj extends { [key: string]: any }, Key extends keyof Obj>(
   props: Key[],

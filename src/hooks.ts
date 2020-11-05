@@ -3,9 +3,7 @@ import useLatest from 'use-latest';
 
 export { default as useComposedRef } from 'use-composed-ref';
 
-export const useWindowResizeListener: (
-  listener: (event: UIEvent) => any,
-) => void = (listener) => {
+export const useWindowResizeListener = (listener: (event: UIEvent) => any) => {
   const latestListener = useLatest(listener);
 
   React.useEffect(() => {
