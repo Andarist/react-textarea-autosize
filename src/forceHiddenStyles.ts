@@ -10,7 +10,7 @@ const HIDDEN_TEXTAREA_STYLE = {
   right: '0',
 } as const;
 
-const forceHiddenStyles: (node: HTMLElement) => void = (node) => {
+const forceHiddenStyles = (node: HTMLElement) => {
   Object.keys(HIDDEN_TEXTAREA_STYLE).forEach((key) => {
     node.style.setProperty(
       key,
