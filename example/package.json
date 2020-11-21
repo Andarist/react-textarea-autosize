@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "parcel ./index.html --open",
+    "build": "parcel build ./index.html --dist-dir ./dist --public-url ."
+  }
+}

@@ -24,10 +24,6 @@
   "files": [
     "dist"
   ],
-  "targets": {
-    "main": false,
-    "module": false
-  },
   "author": "Andrey Popp <8mayday@gmail.com> (httsps://andreypopp.com/)",
   "contributors": [
     "Mateusz Burzyński <mateuszburzynski@gmail.com> (https://github.com/Andarist)"
@@ -35,8 +31,8 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "preconstruct build",
-    "docs:dev": "parcel ./example/index.html --open",
-    "docs:build": "parcel build ./example/index.html --dist-dir ./example/dist --public-url . --no-minify",
+    "docs:dev": "npm run dev --prefix example",
+    "docs:build": "npm run build --prefix example",
     "docs:publish": "npm run docs:build && cd ./example/dist && git init && git commit --allow-empty -m 'update docs' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update docs' && git push git@github.com:Andarist/react-textarea-autosize gh-pages --force",
     "clean": "rimraf dist",
     "lint": "eslint --ext .js,.ts,.tsx src",
