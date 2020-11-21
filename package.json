@@ -21,9 +21,12 @@
     "./dist/react-textarea-autosize.esm.js": "./dist/react-textarea-autosize.browser.esm.js"
   },
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "targets": {
-    "example": {}
+    "main": false,
+    "module": false
   },
   "author": "Andrey Popp <8mayday@gmail.com> (httsps://andreypopp.com/)",
   "contributors": [
@@ -33,7 +36,7 @@
     "prebuild": "npm run clean",
     "build": "preconstruct build",
     "docs:dev": "parcel ./example/index.html --open",
-    "docs:build": "parcel build ./example/index.html --dist-dir ./example/dist --public-url . --target example --no-minify",
+    "docs:build": "parcel build ./example/index.html --dist-dir ./example/dist --public-url . --no-minify",
     "docs:publish": "npm run docs:build && cd ./example/dist && git init && git commit --allow-empty -m 'update docs' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update docs' && git push git@github.com:Andarist/react-textarea-autosize gh-pages --force",
     "clean": "rimraf dist",
     "lint": "eslint --ext .js,.ts,.tsx src",
@@ -78,7 +81,7 @@
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.8",
-    "parcel": "^2.0.0-beta.1",
+    "parcel": "2.0.0-nightly.454",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
