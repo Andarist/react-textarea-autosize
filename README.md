@@ -1,5 +1,5 @@
 [![npm version](https://img.shields.io/npm/v/react-textarea-autosize.svg)](https://www.npmjs.com/package/react-textarea-autosize)
-[![npm](https://img.shields.io/npm/dm/react-textarea-autosize.svg)](https://www.npmjs.com/package/react-textarea-autosize)
+[![npm](https://img.shields.io/npm/dm/react-textarea-autosize.svg)](https://www.npmjs.com/package/react-textarea-autosize) [![Meercode CI Score](https://meercode.io/badge/Andarist/react-textarea-autosize?type=ci-score&branch=master)](https://meercode.io/Andarist/react-textarea-autosize)
 
 # react-textarea-autosize
 
