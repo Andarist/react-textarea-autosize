@@ -6,7 +6,7 @@ export { default as useComposedRef } from 'use-composed-ref';
 export const useWindowResizeListener = (listener: (event: UIEvent) => any) => {
   const latestListener = useLatest(listener);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const handler: typeof listener = (event) => {
       latestListener.current(event);
     };
