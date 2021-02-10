@@ -1,5 +1,11 @@
 # react-textarea-autosize
 
+## 8.3.1
+
+### Patch Changes
+
+- [`49d7d04`](https://github.com/Andarist/react-textarea-autosize/commit/49d7d04737136bea93b17f3c7eadb675a10a25ae) [#305](https://github.com/Andarist/react-textarea-autosize/pull/305) Thanks [@mxschmitt](https://github.com/mxschmitt)! - Moved internal `'resize'` listener to the layout effect since React 17 calls cleanups of regular effects asynchronously. This ensures that we don't ever try to access the already unmounted ref in our listener.
+
 ## 8.3.0
 
 ### Minor Changes
