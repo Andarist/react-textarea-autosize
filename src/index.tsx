@@ -92,8 +92,8 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
 
   if (typeof document !== 'undefined') {
     React.useLayoutEffect(resizeTextarea);
+    useWindowResizeListener(resizeTextarea);
   }
-  useWindowResizeListener(resizeTextarea);
 
   return <textarea {...props} onChange={handleChange} ref={ref} />;
 };
