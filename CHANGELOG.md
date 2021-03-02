@@ -1,5 +1,11 @@
 # react-textarea-autosize
 
+## 8.3.2
+
+### Patch Changes
+
+- [`3c71884`](https://github.com/Andarist/react-textarea-autosize/commit/3c7188444e66e0e199d90fbfec554f2b97695f38) [#311](https://github.com/Andarist/react-textarea-autosize/pull/311) Thanks [@Andarist](https://github.com/Andarist)! - Changed `TextareaAutosizeProps` to a TS interface which fixes the problem of "resolved" being type alias being inlined in the emitted types declaration which could cause incompatibilities with some versions of `@types/react`.
+
 ## 8.3.1
 
 ### Patch Changes

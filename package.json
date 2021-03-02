@@ -1,7 +1,7 @@
 {
   "name": "react-textarea-autosize",
   "description": "textarea component for React which grows with content",
-  "version": "8.3.1",
+  "version": "8.3.2",
   "keywords": [
     "autosize",
     "grow",
@@ -21,9 +21,7 @@
     "./dist/react-textarea-autosize.esm.js": "./dist/react-textarea-autosize.browser.esm.js"
   },
   "sideEffects": false,
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "author": "Andrey Popp <8mayday@gmail.com> (httsps://andreypopp.com/)",
   "contributors": [
     "Mateusz Burzyński <mateuszburzynski@gmail.com> (https://github.com/Andarist)"
