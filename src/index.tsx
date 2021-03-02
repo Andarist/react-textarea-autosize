@@ -16,13 +16,13 @@ type Style = Omit<
 export type TextareaHeightChangeMeta = {
   rowHeight: number;
 };
-export type TextareaAutosizeProps = Omit<TextareaProps, 'style'> & {
+export interface TextareaAutosizeProps extends Omit<TextareaProps, 'style'> {
   maxRows?: number;
   minRows?: number;
   onHeightChange?: (height: number, meta: TextareaHeightChangeMeta) => void;
   cacheMeasurements?: boolean;
   style?: Style;
-};
+}
 
 const TextareaAutosize: React.ForwardRefRenderFunction<
   HTMLTextAreaElement,
