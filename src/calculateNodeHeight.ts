@@ -20,6 +20,21 @@ const getHeight = (node: HTMLElement, sizingData: SizingData): number => {
   return height - sizingData.paddingSize;
 };
 
+const getNumberOfLinesInText = (value: string, minLines: number, maxLines: number): number => {
+  var lineBreakRegExp = /\r?\n|\r/g;
+  const calculatedNumberOfLines = (value.match(lineBreakRegExp) ?? []).length + 1;
+  
+  if (calculatedNumberOfLines > maxLines) {
+    return maxLines;
+  }
+                                   
+  if (calculatedNumberOfLines < minLines) {
+    return minLines;
+  }
+
+  return calculatedNumberOfLines;
+};
+
 export default function calculateNodeHeight(
   sizingData: SizingData,
   value: string,
@@ -28,6 +43,7 @@ export default function calculateNodeHeight(
 ): CalculatedNodeHeights {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
+    hiddenTextarea.setAttribute('rows', '1');
     hiddenTextarea.setAttribute('tab-index', '-1');
     hiddenTextarea.setAttribute('aria-hidden', 'true');
     forceHiddenStyles(hiddenTextarea);
@@ -46,12 +62,13 @@ export default function calculateNodeHeight(
   });
 
   forceHiddenStyles(hiddenTextarea);
-
+  hiddenTextarea.setAttribute('rows', `${getNumberOfLinesInText(value, minRows, maxRows)}`);
   hiddenTextarea.value = value;
   let height = getHeight(hiddenTextarea, sizingData);
 
   // measure height of a textarea with a single row
   hiddenTextarea.value = 'x';
+  hiddenTextarea.setAttribute('rows', '1');
   const rowHeight = hiddenTextarea.scrollHeight - paddingSize;
 
   let minHeight = rowHeight * minRows;
