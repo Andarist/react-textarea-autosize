@@ -20,4 +20,11 @@ describe('<TextareaAutosize />', () => {
 
     expect(asFragment()).toMatchSnapshot();
   });
+
+  it('renders with a div passsed for tagName', () => {
+    const props = { tagName: 'div', contentEditable: true };
+    const { asFragment } = render(<TextareaAutosize {...props} />);
+
+    expect(asFragment()).toMatchSnapshot();
+  });
 });

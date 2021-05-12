@@ -6,6 +6,14 @@ exports[`<TextareaAutosize /> renders ok 1`] = `
 </DocumentFragment>
 `;
 
+exports[`<TextareaAutosize /> renders with a div passsed for tagName 1`] = `
+<DocumentFragment>
+  <div
+    contenteditable="true"
+  />
+</DocumentFragment>
+`;
+
 exports[`<TextareaAutosize /> renders with initial height passed in style prop 1`] = `
 <DocumentFragment>
   <textarea
