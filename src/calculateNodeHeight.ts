@@ -28,7 +28,7 @@ export default function calculateNodeHeight(
 ): CalculatedNodeHeights {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
-    hiddenTextarea.setAttribute('tab-index', '-1');
+    hiddenTextarea.setAttribute('tabindex', '-1');
     hiddenTextarea.setAttribute('aria-hidden', 'true');
     forceHiddenStyles(hiddenTextarea);
   }
