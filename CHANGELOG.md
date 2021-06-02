@@ -1,5 +1,11 @@
 # react-textarea-autosize
 
+## 8.3.3
+
+### Patch Changes
+
+- [`0d7ac21`](https://github.com/Andarist/react-textarea-autosize/commit/0d7ac21f1dadf1fb9070aea5f76f20b7ce2f24bc) [#326](https://github.com/Andarist/react-textarea-autosize/pull/326) Thanks [@karlingen](https://github.com/karlingen)! - Account for `word-break` property when calculating the height.
+
 ## 8.3.2
 
 ### Patch Changes
