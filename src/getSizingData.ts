@@ -23,6 +23,7 @@ const SIZING_STYLE = [
   'textRendering',
   'textTransform',
   'width',
+  'wordBreak',
 ] as const;
 
 type SizingProps = Extract<
