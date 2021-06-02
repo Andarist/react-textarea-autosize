@@ -1,5 +1,13 @@
 # react-textarea-autosize
 
+## 8.3.3
+
+### Patch Changes
+
+- [`0d7ac21`](https://github.com/Andarist/react-textarea-autosize/commit/0d7ac21f1dadf1fb9070aea5f76f20b7ce2f24bc) [#326](https://github.com/Andarist/react-textarea-autosize/pull/326) Thanks [@karlingen](https://github.com/karlingen)! - Account for `word-break` property when calculating the height.
+
+* [`6336448`](https://github.com/Andarist/react-textarea-autosize/commit/63364489ca172b800663b8086757d719d911a2f5) [#327](https://github.com/Andarist/react-textarea-autosize/pull/327) Thanks [@circlingthesun](https://github.com/circlingthesun)! - Fixed the `tabindex` attribute name that is set on the hidden textarea used for height calculations.
+
 ## 8.3.2
 
 ### Patch Changes

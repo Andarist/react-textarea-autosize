@@ -1,7 +1,7 @@
 {
   "name": "react-textarea-autosize",
   "description": "textarea component for React which grows with content",
-  "version": "8.3.2",
+  "version": "8.3.3",
   "keywords": [
     "autosize",
     "grow",
