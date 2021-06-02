@@ -2,4 +2,4 @@
 'react-textarea-autosize': patch
 ---
 
-Include word-break property when calculating the height
+Account for `word-break` property when calculating the height.
