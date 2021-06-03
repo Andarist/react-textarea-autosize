@@ -6,10 +6,7 @@ import { noop } from './utils';
 
 type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
-type Style = Omit<
-  NonNullable<TextareaProps['style']>,
-  'maxHeight' | 'minHeight'
-> & {
+type Style = Omit<NonNullable<TextareaProps['style']>, 'maxHeight'> & {
   height?: number;
 };
 
@@ -42,11 +39,6 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     if ('maxHeight' in props.style) {
       throw new Error(
         'Using `style.maxHeight` for <TextareaAutosize/> is not supported. Please use `maxRows`.',
-      );
-    }
-    if ('minHeight' in props.style) {
-      throw new Error(
-        'Using `style.minHeight` for <TextareaAutosize/> is not supported. Please use `minRows`.',
       );
     }
   }
