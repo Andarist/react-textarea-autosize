@@ -42,6 +42,7 @@ https://andarist.github.io/react-textarea-autosize/
 | `minRows`           | `number`  | Minimum number of rows to show for textarea                                                                                                                                                                                                        |
 | `onHeightChange`    | `func`    | Function invoked on textarea height change, with height as first argument. The second function argument is an object containing additional information that might be useful for custom behaviors. Current options include `{ rowHeight: number }`. |
 | `cacheMeasurements` | `boolean` | Reuse previously computed measurements when computing height of textarea. Default: `false`                                                                                                                                                         |
+| `tagName`           | `string`  | Optionally use a different tag than `textarea`. This is useful for create content editable divs. Default: `textarea`                                                                                                                               |
 
 Apart from these, the component accepts all props that are accepted by `<textarea/>`, like `style`, `onChange`, `value`, etc.
 

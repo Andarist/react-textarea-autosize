@@ -22,6 +22,7 @@ export interface TextareaAutosizeProps extends Omit<TextareaProps, 'style'> {
   onHeightChange?: (height: number, meta: TextareaHeightChangeMeta) => void;
   cacheMeasurements?: boolean;
   style?: Style;
+  tagName?: string;
 }
 
 const TextareaAutosize: React.ForwardRefRenderFunction<
@@ -34,6 +35,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     minRows,
     onChange = noop,
     onHeightChange = noop,
+    tagName = 'textarea',
     ...props
   },
   userRef: React.Ref<HTMLTextAreaElement>,
@@ -95,7 +97,11 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     useWindowResizeListener(resizeTextarea);
   }
 
-  return <textarea {...props} onChange={handleChange} ref={ref} />;
+  return React.createElement(tagName, {
+    onChange: handleChange,
+    ref,
+    ...props,
+  });
 };
 
 export default /* #__PURE__ */ React.forwardRef(TextareaAutosize);
