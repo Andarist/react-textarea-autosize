@@ -21,7 +21,9 @@
     "./dist/react-textarea-autosize.esm.js": "./dist/react-textarea-autosize.browser.esm.js"
   },
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "author": "Andrey Popp <8mayday@gmail.com> (httsps://andreypopp.com/)",
   "contributors": [
     "Mateusz Burzyński <mateuszburzynski@gmail.com> (https://github.com/Andarist)"
@@ -85,5 +87,6 @@
   },
   "engines": {
     "node": ">=10"
-  }
+  },
+  "packageManager": "yarn@3.1.1"
 }
