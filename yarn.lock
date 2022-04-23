@@ -11376,7 +11376,7 @@ fsevents@~2.3.1:
     use-composed-ref: ^1.0.0
     use-latest: ^1.0.0
   peerDependencies:
-    react: ^16.8.0 || ^17.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
   languageName: unknown
   linkType: soft
 
