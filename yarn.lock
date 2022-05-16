@@ -11373,10 +11373,10 @@ fsevents@~2.3.1:
     rimraf: ^3.0.2
     terser: ^4.7.0
     typescript: ^3.9.3
-    use-composed-ref: ^1.0.0
+    use-composed-ref: ^1.3.0
     use-latest: ^1.0.0
   peerDependencies:
-    react: ^16.8.0 || ^17.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
   languageName: unknown
   linkType: soft
 
@@ -13025,13 +13025,6 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"ts-essentials@npm:^2.0.3":
-  version: 2.0.12
-  resolution: "ts-essentials@npm:2.0.12"
-  checksum: e46916ef44b4417f0c726faac333c8d2f363a47a5c1994eb9d42045a85d247284a3220cb7f71fb30a9bd2eef43ed7eb3bc1f76f4fedf946200a98cfde7eb3a3f
-  languageName: node
-  linkType: hard
-
 "tslib@npm:^1.8.1, tslib@npm:^1.9.0":
   version: 1.13.0
   resolution: "tslib@npm:1.13.0"
@@ -13329,14 +13322,12 @@ typescript@^3.9.3:
   languageName: node
   linkType: hard
 
-"use-composed-ref@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "use-composed-ref@npm:1.0.0"
-  dependencies:
-    ts-essentials: ^2.0.3
+"use-composed-ref@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "use-composed-ref@npm:1.3.0"
   peerDependencies:
-    react: ^16.8.0
-  checksum: e8af62dfb1e4e7f9ccc151ebdfffc9e160c13f025b61b2dc0f7320ca28b4d525452d3c95f3a3c13c9a99d3d2623d57372ac854f3c8d267704847d12e60bb873a
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: f771cbadfdc91e03b7ab9eb32d0fc0cc647755711801bf507e891ad38c4bbc5f02b2509acadf9c965ec9c5f2f642fd33bdfdfb17b0873c4ad0a9b1f5e5e724bf
   languageName: node
   linkType: hard
 
