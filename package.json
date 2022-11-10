@@ -17,8 +17,18 @@
   "main": "dist/react-textarea-autosize.cjs.js",
   "module": "dist/react-textarea-autosize.esm.js",
   "browser": {
-    "./dist/react-textarea-autosize.cjs.js": "./dist/react-textarea-autosize.browser.cjs.js",
     "./dist/react-textarea-autosize.esm.js": "./dist/react-textarea-autosize.browser.esm.js"
+  },
+  "exports": {
+    ".": {
+      "module": {
+        "worker": "./dist/react-textarea-autosize.worker.esm.js",
+        "browser": "./dist/react-textarea-autosize.browser.esm.js",
+        "default": "./dist/react-textarea-autosize.esm.js"
+      },
+      "default": "./dist/react-textarea-autosize.cjs.js"
+    },
+    "./package.json": "./package.json"
   },
   "sideEffects": false,
   "files": [
@@ -60,7 +70,7 @@
     "@babel/preset-typescript": "^7.10.4",
     "@changesets/changelog-github": "^0.4.4",
     "@changesets/cli": "^2.22.0",
-    "@preconstruct/cli": "^2.0.5",
+    "@preconstruct/cli": "^2.2.2",
     "@testing-library/jest-dom": "^5.9.0",
     "@testing-library/react": "^10.1.0",
     "@types/react": "^16.9.35",
@@ -88,5 +98,16 @@
   "engines": {
     "node": ">=10"
   },
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.1.1",
+  "preconstruct": {
+    "exports": {
+      "envConditions": [
+        "browser",
+        "worker"
+      ]
+    },
+    "___experimentalFlags_WILL_CHANGE_IN_PATCH": {
+      "exports": true
+    }
+  }
 }
