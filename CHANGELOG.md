@@ -1,5 +1,13 @@
 # react-textarea-autosize
 
+## 8.4.0
+
+### Minor Changes
+
+- [#354](https://github.com/Andarist/react-textarea-autosize/pull/354) [`41d10b2`](https://github.com/Andarist/react-textarea-autosize/commit/41d10b2c5c8f9b8040fe208d09cdb60863fa0f29) Thanks [@Andarist](https://github.com/Andarist)! - `exports` field has been added to the `package.json` manifest.
+
+  Thanks to this, the package now includes a `worker` condition that can be utilized by properly configured bundlers when targeting worker-like environments. It fixes the issue with browser-specific files being prioritized by some bundlers when targeting workers.
+
 ## 8.3.4
 
 ### Patch Changes
