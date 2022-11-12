@@ -33,6 +33,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     maxRows,
     minRows,
     onChange = noop,
+    onFocus = noop,
     onHeightChange = noop,
     ...props
   },
@@ -90,12 +91,28 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     onChange(event);
   };
 
+  const handleFocus = (event: React.FocusEvent<HTMLTextAreaElement>) => {
+    if (props.autoFocus) {
+      const value = event.target.value;
+      event.target.value = '';
+      event.target.value = value;
+    }
+    onFocus(event);
+  };
+
   if (typeof document !== 'undefined') {
     React.useLayoutEffect(resizeTextarea);
     useWindowResizeListener(resizeTextarea);
   }
 
-  return <textarea {...props} onChange={handleChange} ref={ref} />;
+  return (
+    <textarea
+      {...props}
+      onChange={handleChange}
+      onFocus={handleFocus}
+      ref={ref}
+    />
+  );
 };
 
 export default /* #__PURE__ */ React.forwardRef(TextareaAutosize);
