@@ -18,3 +18,20 @@ export const useWindowResizeListener = (listener: (event: UIEvent) => any) => {
     };
   }, []);
 };
+
+export const useFontsLoadedListener = (listener: () => any) => {
+  const latestListener = useLatest(listener);
+
+  React.useLayoutEffect(() => {
+    const handler: typeof listener = () => {
+      console.log('loaded!');
+      latestListener.current();
+    };
+
+    document.fonts.addEventListener('loadingdone', handler);
+
+    return () => {
+      document.fonts.removeEventListener('loadingdone', handler);
+    };
+  }, []);
+};
