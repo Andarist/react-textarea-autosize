@@ -17,17 +17,20 @@ type InferEventType<TTarget> = TTarget extends {
   ? P & string
   : never;
 
-type InferEvent<TTarget, TType extends string> = `on${TType}` extends keyof TTarget
+type InferEvent<
+  TTarget,
+  TType extends string,
+> = `on${TType}` extends keyof TTarget
   ? Parameters<Extract<TTarget[`on${TType}`], UnknownFunction>>[0]
   : Event;
 
 function useListener<
   TTarget extends EventTarget,
-  TType extends InferEventType<TTarget>
+  TType extends InferEventType<TTarget>,
 >(
   target: TTarget,
   type: TType,
-  listener: (event: InferEvent<TTarget, TType>) => void
+  listener: (event: InferEvent<TTarget, TType>) => void,
 ) {
   const latestListener = useLatest(listener);
   React.useLayoutEffect(() => {
@@ -39,9 +42,9 @@ function useListener<
 }
 
 export const useWindowResizeListener = (listener: (event: UIEvent) => any) => {
-  useListener(window, 'resize', listener)
+  useListener(window, 'resize', listener);
 };
 
 export const useFontsLoadedListener = (listener: (event: Event) => any) => {
-  useListener(document.fonts, 'loadingdone', listener)
+  useListener(document.fonts, 'loadingdone', listener);
 };

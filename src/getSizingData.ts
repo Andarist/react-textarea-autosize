@@ -27,7 +27,7 @@ const SIZING_STYLE = [
 ] as const;
 
 type SizingProps = Extract<
-  typeof SIZING_STYLE[number],
+  (typeof SIZING_STYLE)[number],
   keyof CSSStyleDeclaration
 >;
 
@@ -51,7 +51,7 @@ const getSizingData = (node: HTMLElement): SizingData | null => {
     return null;
   }
 
-  const sizingStyle = pick((SIZING_STYLE as unknown) as SizingProps[], style);
+  const sizingStyle = pick(SIZING_STYLE as unknown as SizingProps[], style);
   const { boxSizing } = sizingStyle;
 
   // probably node is detached from DOM, can't read computed dimensions
