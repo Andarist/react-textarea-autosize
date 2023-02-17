@@ -20,4 +20,15 @@ describe('<TextareaAutosize />', () => {
 
     expect(asFragment()).toMatchSnapshot();
   });
+
+  it('renders component with custom class name.', () => {
+    const props = {
+      className: 'custom-classname',
+    };
+    const { getByRole } = render(<TextareaAutosize {...props} />);
+
+    const textArea = getByRole('textbox');
+
+    expect(textArea).toHaveClass('custom-classname');
+  });
 });
