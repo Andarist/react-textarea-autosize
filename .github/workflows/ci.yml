@@ -7,16 +7,8 @@ jobs:
     timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-
-      - name: Setup Node.js 12.x
-        uses: actions/setup-node@master
-        with:
-          node-version: 12.x
-
-      - name: Install dependencies
-        run: yarn
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/ci-setup
 
       - name: Test
         run: yarn test
