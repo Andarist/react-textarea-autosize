@@ -2,4 +2,4 @@
 'react-textarea-autosize': patch
 ---
 
-Support custom fonts loading
+Support automatic resizing when a custom fonts ends up loading
