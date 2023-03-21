@@ -117,7 +117,7 @@ const ControlledMode = () => {
       <TextareaAutosize
         cacheMeasurements
         value={value}
-        onChange={ev => setValue(ev.target.value)}
+        onChange={(ev) => setValue(ev.target.value)}
       />
       <button onClick={() => setValue('This value was set programatically')}>
         {'Change value programatically'}
@@ -156,7 +156,7 @@ const OnHeightChangeCallback = () => {
       </pre>
       <TextareaAutosize
         cacheMeasurements
-        onHeightChange={height => {
+        onHeightChange={(height) => {
           // eslint-disable-next-line no-console
           console.log(height);
         }}
@@ -173,12 +173,31 @@ const MultipleTextareas = () => {
       <div>{'This one controls the rest.'}</div>
       <TextareaAutosize
         value={value}
-        onChange={ev => setValue(ev.target.value)}
+        onChange={(ev) => setValue(ev.target.value)}
       />
       <div>{'Those get controlled by the one above.'}</div>
-      {range(15).map(i => (
+      {range(15).map((i) => (
         <TextareaAutosize key={i} value={value} />
       ))}
+    </div>
+  );
+};
+
+const WithCustomFont = () => {
+  return (
+    <div>
+      <h2>{'Adapts to custom fonts.'}</h2>
+      <div>{'Resizes once the font is loaded.'}</div>
+      <TextareaAutosize
+        style={{
+          fontSize: 20,
+          fontFamily: "'Work Sans', sans-serif",
+        }}
+        defaultValue={'The quick brown fox jumps over the lazy dog'}
+        onHeightChange={(rows) => {
+          console.log('onChange', rows);
+        }}
+      />
     </div>
   );
 };
@@ -195,6 +214,7 @@ const Demo = () => {
       <UncontrolledMode />
       <OnHeightChangeCallback />
       <MultipleTextareas />
+      <WithCustomFont />
     </div>
   );
 };

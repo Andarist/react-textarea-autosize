@@ -1,7 +1,11 @@
 import * as React from 'react';
 import calculateNodeHeight from './calculateNodeHeight';
 import getSizingData, { SizingData } from './getSizingData';
-import { useComposedRef, useWindowResizeListener } from './hooks';
+import {
+  useComposedRef,
+  useWindowResizeListener,
+  useFontsLoadedListener,
+} from './hooks';
 import { noop } from './utils';
 
 type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
@@ -93,6 +97,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
   if (typeof document !== 'undefined') {
     React.useLayoutEffect(resizeTextarea);
     useWindowResizeListener(resizeTextarea);
+    useFontsLoadedListener(resizeTextarea);
   }
 
   return <textarea {...props} onChange={handleChange} ref={ref} />;
