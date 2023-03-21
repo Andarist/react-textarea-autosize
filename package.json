@@ -62,15 +62,15 @@
     "use-latest": "^1.2.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.12",
+    "@babel/core": "^7.21.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
-    "@babel/plugin-transform-runtime": "^7.19.6",
+    "@babel/plugin-transform-runtime": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.18.6",
+    "@babel/preset-typescript": "^7.21.0",
     "@changesets/changelog-github": "^0.4.4",
     "@changesets/cli": "^2.22.0",
-    "@preconstruct/cli": "^2.2.2",
+    "@preconstruct/cli": "^2.3.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^10.4.9",
     "@types/react": "^16.14.35",
@@ -106,9 +106,6 @@
         "browser",
         "worker"
       ]
-    },
-    "___experimentalFlags_WILL_CHANGE_IN_PATCH": {
-      "exports": true
     }
   }
 }
