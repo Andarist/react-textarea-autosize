@@ -1,5 +1,13 @@
 # react-textarea-autosize
 
+## 8.4.1
+
+### Patch Changes
+
+- [#353](https://github.com/Andarist/react-textarea-autosize/pull/353) [`19aead9`](https://github.com/Andarist/react-textarea-autosize/commit/19aead90a90311362cec51e841d2a56147ad4b5d) Thanks [@knownasilya](https://github.com/knownasilya)! - Workaround for Firefox `scrollHeight` bug affecting textarea's height on a dynamic toggle
+
+* [#362](https://github.com/Andarist/react-textarea-autosize/pull/362) [`2301195`](https://github.com/Andarist/react-textarea-autosize/commit/23011958b6095ea017ecb4482ac043bb9f7a9c3a) Thanks [@ArnaudRinquin](https://github.com/ArnaudRinquin)! - Support automatic resizing when a custom fonts ends up loading
+
 ## 8.4.0
 
 ### Minor Changes
