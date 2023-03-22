@@ -25,6 +25,7 @@ export interface TextareaAutosizeProps extends Omit<TextareaProps, 'style'> {
   minRows?: number;
   onHeightChange?: (height: number, meta: TextareaHeightChangeMeta) => void;
   cacheMeasurements?: boolean;
+  ignorePlaceholder?: boolean;
   style?: Style;
 }
 
@@ -33,7 +34,8 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
   TextareaAutosizeProps
 > = (
   {
-    cacheMeasurements,
+    cacheMeasurements = false,
+    ignorePlaceholder = false,
     maxRows,
     minRows,
     onChange = noop,
@@ -75,7 +77,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
 
     const [height, rowHeight] = calculateNodeHeight(
       nodeSizingData,
-      node.value || node.placeholder || 'x',
+      node.value || (!ignorePlaceholder && node.placeholder) || 'x',
       minRows,
       maxRows,
     );

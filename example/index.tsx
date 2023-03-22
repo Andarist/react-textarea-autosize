@@ -100,6 +100,42 @@ const SetRows = () => {
   );
 };
 
+const WithPlaceholder = () => {
+  return (
+    <div>
+      <h2>{'Component with placeholder'}</h2>
+      <pre>
+        {`
+  <TextareaAutosize
+    placeholder="The quick brown fox jumps over the lazy dog..."
+    />
+`}
+      </pre>
+      <TextareaAutosize placeholder="The quick brown fox jumps over the lazy dog..." />
+    </div>
+  );
+};
+
+const WithIgnoredPlaceholder = () => {
+  return (
+    <div>
+      <h2>{'Component with ignored placeholder'}</h2>
+      <pre>
+        {`
+  <TextareaAutosize
+    placeholder="The quick brown fox jumps over the lazy dog..."
+    ignorePlaceholder
+    />
+`}
+      </pre>
+      <TextareaAutosize
+        placeholder="The quick brown fox jumps over the lazy dog..."
+        ignorePlaceholder
+      />
+    </div>
+  );
+};
+
 const ControlledMode = () => {
   const [value, setValue] = React.useState(new Array(15).join('\nLine.'));
   return (
@@ -210,6 +246,8 @@ const Demo = () => {
       <MinMaxRowsBorderBox />
       <MaxRows />
       <SetRows />
+      <WithPlaceholder />
+      <WithIgnoredPlaceholder />
       <ControlledMode />
       <UncontrolledMode />
       <OnHeightChangeCallback />
