@@ -26,6 +26,7 @@ export interface TextareaAutosizeProps extends Omit<TextareaProps, 'style'> {
   onHeightChange?: (height: number, meta: TextareaHeightChangeMeta) => void;
   cacheMeasurements?: boolean;
   style?: Style;
+  className?: string;
 }
 
 const TextareaAutosize: React.ForwardRefRenderFunction<
@@ -36,6 +37,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     cacheMeasurements,
     maxRows,
     minRows,
+    className,
     onChange = noop,
     onHeightChange = noop,
     ...props
@@ -100,7 +102,14 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     useFontsLoadedListener(resizeTextarea);
   }
 
-  return <textarea {...props} onChange={handleChange} ref={ref} />;
+  return (
+    <textarea
+      {...props}
+      className={className}
+      onChange={handleChange}
+      ref={ref}
+    />
+  );
 };
 
 export default /* #__PURE__ */ React.forwardRef(TextareaAutosize);
