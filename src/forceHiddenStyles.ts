@@ -1,6 +1,7 @@
 const HIDDEN_TEXTAREA_STYLE = {
   'min-height': '0',
   'max-height': 'none',
+  width: 'auto',
   height: '0',
   visibility: 'hidden',
   overflow: 'hidden',
