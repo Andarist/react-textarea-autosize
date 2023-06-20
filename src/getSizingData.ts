@@ -1,3 +1,4 @@
+import isBrowser from '#is-browser';
 import { pick } from './utils';
 
 const SIZING_STYLE = [
@@ -39,10 +40,9 @@ export type SizingData = {
   borderSize: number;
 };
 
-const isIE =
-  typeof document !== 'undefined'
-    ? !!(document.documentElement as any).currentStyle
-    : false;
+const isIE = isBrowser
+  ? !!(document.documentElement as any).currentStyle
+  : false;
 
 const getSizingData = (node: HTMLElement): SizingData | null => {
   const style = window.getComputedStyle(node);
