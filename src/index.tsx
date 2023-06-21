@@ -1,4 +1,6 @@
 import * as React from 'react';
+import isDevelopment from '#is-development';
+import isBrowser from '#is-browser';
 import calculateNodeHeight from './calculateNodeHeight';
 import getSizingData, { SizingData } from './getSizingData';
 import {
@@ -42,7 +44,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
   },
   userRef: React.Ref<HTMLTextAreaElement>,
 ) => {
-  if (process.env.NODE_ENV !== 'production' && props.style) {
+  if (isDevelopment && props.style) {
     if ('maxHeight' in props.style) {
       throw new Error(
         'Using `style.maxHeight` for <TextareaAutosize/> is not supported. Please use `maxRows`.',
@@ -94,13 +96,14 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     onChange(event);
   };
 
-  if (typeof document !== 'undefined') {
+  if (isBrowser) {
     React.useLayoutEffect(resizeTextarea);
     useWindowResizeListener(resizeTextarea);
     useFontsLoadedListener(resizeTextarea);
+    return <textarea {...props} onChange={handleChange} ref={ref} />;
   }
 
-  return <textarea {...props} onChange={handleChange} ref={ref} />;
+  return <textarea {...props} ref={ref} />;
 };
 
 export default /* #__PURE__ */ React.forwardRef(TextareaAutosize);
