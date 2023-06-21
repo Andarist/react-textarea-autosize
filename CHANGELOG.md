@@ -1,5 +1,19 @@
 # react-textarea-autosize
 
+## 8.5.0
+
+### Minor Changes
+
+- [#373](https://github.com/Andarist/react-textarea-autosize/pull/373) [`05b014a`](https://github.com/Andarist/react-textarea-autosize/commit/05b014a8c46834bba42ccd506d18e28064b9dc9a) Thanks [@Andarist](https://github.com/Andarist)! - Compatibility with node's ESM has been improved. `import TextareaAutosize from 'react-textarea-autosize';` was always meant to provide you the default export of this package (the exported component) and now node should load it this way.
+
+* [#373](https://github.com/Andarist/react-textarea-autosize/pull/373) [`05b014a`](https://github.com/Andarist/react-textarea-autosize/commit/05b014a8c46834bba42ccd506d18e28064b9dc9a) Thanks [@Andarist](https://github.com/Andarist)! - SSR environments should now be able to pick smaller bundles through `package.json#exports`.
+
+- [#373](https://github.com/Andarist/react-textarea-autosize/pull/373) [`05b014a`](https://github.com/Andarist/react-textarea-autosize/commit/05b014a8c46834bba42ccd506d18e28064b9dc9a) Thanks [@Andarist](https://github.com/Andarist)! - This package no longer depends on `process.env.NODE_ENV`. To get dev-only warnings you have to configure your bundler/runtime to use the `development` condition.
+
+### Patch Changes
+
+- [#370](https://github.com/Andarist/react-textarea-autosize/pull/370) [`d33b120`](https://github.com/Andarist/react-textarea-autosize/commit/d33b1200198eb49a3579225a118389e0e1fb82cd) Thanks [@ArnaudRinquin](https://github.com/ArnaudRinquin)! - Add a guard against potentially missing `documents.fonts`
+
 ## 8.4.1
 
 ### Patch Changes
