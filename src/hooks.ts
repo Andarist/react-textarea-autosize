@@ -36,6 +36,11 @@ function useListener<
   React.useLayoutEffect(() => {
     const handler: typeof listener = (ev) => latestListener.current(ev);
 
+    // might happen if document.fonts is not defined, for instance
+    if (!target) {
+      return;
+    }
+
     target.addEventListener(type, handler);
     return () => target.removeEventListener(type, handler);
   }, []);
