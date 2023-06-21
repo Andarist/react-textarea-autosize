@@ -2,4 +2,4 @@
 'react-textarea-autosize': patch
 ---
 
-Clean handling of absence of document.fonts API
+Add a guard against potentially missing `documents.fonts`
