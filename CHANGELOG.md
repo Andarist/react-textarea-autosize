@@ -1,5 +1,11 @@
 # react-textarea-autosize
 
+## 8.5.1
+
+### Patch Changes
+
+- [#377](https://github.com/Andarist/react-textarea-autosize/pull/377) [`4087205`](https://github.com/Andarist/react-textarea-autosize/commit/4087205acb89a2cdfda02dc9297c0db4cafd0ee9) Thanks [@Andarist](https://github.com/Andarist)! - The provided `onChange` will get forwarded again to the underlying `<textarea/>` on the server side.
+
 ## 8.5.0
 
 ### Minor Changes
