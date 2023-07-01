@@ -103,7 +103,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     return <textarea {...props} onChange={handleChange} ref={ref} />;
   }
 
-  return <textarea {...props} ref={ref} />;
+  return <textarea {...props} onChange={onChange} ref={ref} />;
 };
 
 export default /* #__PURE__ */ React.forwardRef(TextareaAutosize);
