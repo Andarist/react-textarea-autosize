@@ -1,5 +1,11 @@
 # react-textarea-autosize
 
+## 8.5.2
+
+### Patch Changes
+
+- [#381](https://github.com/Andarist/react-textarea-autosize/pull/381) [`e16c24a`](https://github.com/Andarist/react-textarea-autosize/commit/e16c24aaf15e33458c4b433a2debee87b9aab723) Thanks [@Andarist](https://github.com/Andarist)! - Publish files that were previously missing for some conditions.
+
 ## 8.5.1
 
 ### Patch Changes
