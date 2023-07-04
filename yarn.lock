@@ -3182,9 +3182,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@preconstruct/cli@npm:^2.7.0":
-  version: 2.7.0
-  resolution: "@preconstruct/cli@npm:2.7.0"
+"@preconstruct/cli@npm:^2.8.1":
+  version: 2.8.1
+  resolution: "@preconstruct/cli@npm:2.8.1"
   dependencies:
     "@babel/code-frame": ^7.5.5
     "@babel/core": ^7.7.7
@@ -3226,7 +3226,7 @@ __metadata:
     zod: ^3.21.4
   bin:
     preconstruct: bin.js
-  checksum: b1d63016a8cc6bd8f00d76eab756b2b9680d1bb7773036508ae2469f71293c7c9b9c84e5d459798182165d416905004f26f319ac87dad4e54a5185239f0f5492
+  checksum: 11b956d71635848acad8e8abd4e4cbddf45158921b26186ad2d3251ad094033bf0c758dcd016d584df008d972d4d2439127e458d75182259b2ca429da541875c
   languageName: node
   linkType: hard
 
@@ -12302,7 +12302,7 @@ __metadata:
     "@babel/runtime": ^7.20.13
     "@changesets/changelog-github": ^0.4.4
     "@changesets/cli": ^2.22.0
-    "@preconstruct/cli": ^2.7.0
+    "@preconstruct/cli": ^2.8.1
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^10.4.9
     "@types/react": ^16.14.35
