@@ -107,7 +107,7 @@
     "@babel/preset-typescript": "^7.21.0",
     "@changesets/changelog-github": "^0.4.4",
     "@changesets/cli": "^2.22.0",
-    "@preconstruct/cli": "^2.7.0",
+    "@preconstruct/cli": "^2.8.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^10.4.9",
     "@types/react": "^16.14.35",
