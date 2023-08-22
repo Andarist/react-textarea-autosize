@@ -1,5 +1,11 @@
 # react-textarea-autosize
 
+## 8.5.3
+
+### Patch Changes
+
+- [#386](https://github.com/Andarist/react-textarea-autosize/pull/386) [`b3dc597`](https://github.com/Andarist/react-textarea-autosize/commit/b3dc597c7b33e7fc858e82b1605f1fe1137ec775) Thanks [@Andarist](https://github.com/Andarist)! - Distribute completely separate files for the `worker` condition to avoid bundlers from aliasing files targeting node to the ones targeting browsers through the `package.json#browser` alias field.
+
 ## 8.5.2
 
 ### Patch Changes
