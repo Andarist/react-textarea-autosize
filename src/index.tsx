@@ -1,6 +1,6 @@
 import * as React from 'react';
-import isDevelopment from '#is-development';
-import isBrowser from '#is-browser';
+import { isDevelopment } from '#is-development';
+import { isBrowser } from '#is-browser';
 import calculateNodeHeight from './calculateNodeHeight';
 import getSizingData, { SizingData } from './getSizingData';
 import {

@@ -27,9 +27,9 @@
       },
       "development": {
         "worker": {
-          "module": "./dist/react-textarea-autosize.development.esm.js",
-          "import": "./dist/react-textarea-autosize.development.cjs.mjs",
-          "default": "./dist/react-textarea-autosize.development.cjs.js"
+          "module": "./dist/react-textarea-autosize.development.worker.esm.js",
+          "import": "./dist/react-textarea-autosize.development.worker.cjs.mjs",
+          "default": "./dist/react-textarea-autosize.development.worker.cjs.js"
         },
         "browser": {
           "module": "./dist/react-textarea-autosize.browser.development.esm.js",
@@ -41,9 +41,9 @@
         "default": "./dist/react-textarea-autosize.development.cjs.js"
       },
       "worker": {
-        "module": "./dist/react-textarea-autosize.esm.js",
-        "import": "./dist/react-textarea-autosize.cjs.mjs",
-        "default": "./dist/react-textarea-autosize.cjs.js"
+        "module": "./dist/react-textarea-autosize.worker.esm.js",
+        "import": "./dist/react-textarea-autosize.worker.cjs.mjs",
+        "default": "./dist/react-textarea-autosize.worker.cjs.js"
       },
       "browser": {
         "module": "./dist/react-textarea-autosize.browser.esm.js",
@@ -58,13 +58,13 @@
   },
   "imports": {
     "#is-browser": {
-      "worker": "./src/resolved-conditions/false.ts",
-      "browser": "./src/resolved-conditions/true.ts",
-      "default": "./src/resolved-conditions/false.ts"
+      "worker": "./src/resolved-conditions/worker.ts",
+      "browser": "./src/resolved-conditions/browser.ts",
+      "default": "./src/resolved-conditions/node.ts"
     },
     "#is-development": {
-      "development": "./src/resolved-conditions/true.ts",
-      "default": "./src/resolved-conditions/false.ts"
+      "development": "./src/resolved-conditions/development.ts",
+      "default": "./src/resolved-conditions/production.ts"
     }
   },
   "sideEffects": false,
