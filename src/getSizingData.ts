@@ -1,4 +1,4 @@
-import isBrowser from '#is-browser';
+import { isBrowser } from '#is-browser';
 import { pick } from './utils';
 
 const SIZING_STYLE = [
