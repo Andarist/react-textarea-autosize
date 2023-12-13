@@ -9,7 +9,7 @@ export type CalculatedNodeHeights = number[];
 let hiddenTextarea: HTMLTextAreaElement | null = null;
 
 const getHeight = (node: HTMLElement, sizingData: SizingData): number => {
-  const height = node.scrollHeight;
+  const height = node.scrollHeight + 1;
 
   if (sizingData.sizingStyle.boxSizing === 'border-box') {
     // border-box: add border, since height = content + padding + border
