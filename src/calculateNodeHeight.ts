@@ -1,5 +1,5 @@
-import { SizingData } from './getSizingData';
 import forceHiddenStyles from './forceHiddenStyles';
+import { SizingData } from './getSizingData';
 
 // TODO: use labelled tuples once they are avaiable:
 //   export type CalculatedNodeHeights = [height: number, rowHeight: number];
