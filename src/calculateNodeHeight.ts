@@ -26,6 +26,7 @@ export default function calculateNodeHeight(
   minRows = 1,
   maxRows = Infinity,
 ): CalculatedNodeHeights {
+  console.log('Calculating node height');
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
     hiddenTextarea.setAttribute('tabindex', '-1');
