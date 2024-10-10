@@ -1,5 +1,11 @@
 # react-textarea-autosize
 
+## 8.5.4
+
+### Patch Changes
+
+- [#397](https://github.com/Andarist/react-textarea-autosize/pull/397) [`bf3cad8`](https://github.com/Andarist/react-textarea-autosize/commit/bf3cad84e64cc838834e5c71e6074b96e0109b0c) Thanks [@Oyveloper](https://github.com/Oyveloper)! - Force `display: block` for the hidden textarea to prevent other styles from overriding it and thus breaking the resizing functionality
+
 ## 8.5.3
 
 ### Patch Changes
