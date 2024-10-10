@@ -12,6 +12,7 @@ const HIDDEN_TEXTAREA_STYLE = {
 } as const;
 
 const forceHiddenStyles = (node: HTMLElement) => {
+  console.log('forceHiddenStyles');
   Object.keys(HIDDEN_TEXTAREA_STYLE).forEach((key) => {
     node.style.setProperty(
       key,
