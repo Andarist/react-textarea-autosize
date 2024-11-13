@@ -25,6 +25,8 @@ const SIZING_STYLE = [
   'textTransform',
   'width',
   'wordBreak',
+  'wordSpacing',
+  'scrollbarGutter',
 ] as const;
 
 type SizingProps = Extract<
