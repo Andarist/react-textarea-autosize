@@ -1,5 +1,11 @@
 # react-textarea-autosize
 
+## 8.5.5
+
+### Patch Changes
+
+- [#401](https://github.com/Andarist/react-textarea-autosize/pull/401) [`4a34e1b`](https://github.com/Andarist/react-textarea-autosize/commit/4a34e1b28a4b8840ba041fc9f5e448beabd56c5e) Thanks [@olee](https://github.com/olee)! - Add missing `wordSpacing` and `scrollbarGutter` as properties that can impact sizing
+
 ## 8.5.4
 
 ### Patch Changes
