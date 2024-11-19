@@ -24,6 +24,11 @@ React.renderComponent(
 );
 ```
 
+## React-TextArea-Autosize AI Bot
+
+[React-TextArea-Autosize](https://codeparrot.ai/oracle?owner=Andarist&repo=react-textarea-autosize) Bot will help you understand this repository better. You can ask for code examples, installation guide, debugging help and much more.
+
+
 ## Install
 
 `npm install react-textarea-autosize`
