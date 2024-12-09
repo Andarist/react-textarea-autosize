@@ -1,5 +1,11 @@
 # react-textarea-autosize
 
+## 8.5.6
+
+### Patch Changes
+
+- [#400](https://github.com/Andarist/react-textarea-autosize/pull/400) [`7d48e9e`](https://github.com/Andarist/react-textarea-autosize/commit/7d48e9e80a3c6d8c123d135205857cbe39dbf6ee) Thanks [@Yonom](https://github.com/Yonom)! - Add React 19 to the allowed peer dependency range.
+
 ## 8.5.5
 
 ### Patch Changes
