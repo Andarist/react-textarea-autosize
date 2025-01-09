@@ -25,26 +25,33 @@ type InferEvent<
   : Event;
 
 function useListener<
-  TTarget extends EventTarget,
-  TType extends InferEventType<TTarget>,
+  TTarget extends EventTarget | null | undefined,
+  TType extends InferEventType<NonNullable<TTarget>>,
 >(
-  target: TTarget,
+  target: (() => TTarget) | TTarget,
   type: TType,
-  listener: (event: InferEvent<TTarget, TType>) => void,
+  listener: (event: InferEvent<NonNullable<TTarget>, TType>) => void,
 ) {
   const latestListener = useLatest(listener);
   React.useLayoutEffect(() => {
     const handler: typeof listener = (ev) => latestListener.current(ev);
+    const resolvedTarget = typeof target === 'function' ? target() : target;
 
     // might happen if document.fonts is not defined, for instance
-    if (!target) {
+    if (!resolvedTarget) {
       return;
     }
-
-    target.addEventListener(type, handler);
-    return () => target.removeEventListener(type, handler);
+    resolvedTarget.addEventListener(type, handler);
+    return () => resolvedTarget.removeEventListener(type, handler);
   }, []);
 }
+
+export const useFormResetListener = (
+  libRef: React.MutableRefObject<HTMLTextAreaElement | null>,
+  listener: (event: Event) => any,
+) => {
+  useListener(() => libRef.current?.form, 'reset', listener);
+};
 
 export const useWindowResizeListener = (listener: (event: UIEvent) => any) => {
   useListener(window, 'resize', listener);
@@ -52,4 +59,9 @@ export const useWindowResizeListener = (listener: (event: UIEvent) => any) => {
 
 export const useFontsLoadedListener = (listener: (event: Event) => any) => {
   useListener(document.fonts, 'loadingdone', listener);
+};
+
+export const useForceRerender = () => {
+  const [, setState] = React.useState({});
+  return React.useCallback(() => setState({}), []);
 };

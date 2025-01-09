@@ -7,6 +7,8 @@ import {
   useComposedRef,
   useWindowResizeListener,
   useFontsLoadedListener,
+  useFormResetListener,
+  useForceRerender,
 } from './hooks';
 import { noop } from './utils';
 
@@ -97,7 +99,25 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
   };
 
   if (isBrowser) {
+    const forceRerender = useForceRerender();
     React.useLayoutEffect(resizeTextarea);
+    useFormResetListener(libRef, () => {
+      if (!isControlled) {
+        // force rerender is used here because form reset doesn't trigger React's onChange:
+        // https://github.com/facebook/react/issues/19078
+        //
+        // the problem with a reset listener is that it's called before the value gets actually changed
+        // the event itself can, after all, be even .preventDefault()ed
+        // so given it's not possible to know if the reset will actually happen, we "schedule" a rerender so our resizing layout effect can take care of it
+        //
+        // this doesn't work with <input type="reset" /> though
+        // updates scheduled by reset handlers called called by those happen synchronously~
+        // React is eager to rerender this before the reset action actually takes place
+        //
+        // it might be a good idea to use a native change listener on the textarea itself to workaround this
+        forceRerender();
+      }
+    });
     useWindowResizeListener(resizeTextarea);
     useFontsLoadedListener(resizeTextarea);
     return <textarea {...props} onChange={handleChange} ref={ref} />;

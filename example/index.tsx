@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import TextareaAutosize from '../src';
 
 const range = (n: number): number[] => Array.from({ length: n }, (_, i) => i);
@@ -202,6 +202,22 @@ const WithCustomFont = () => {
   );
 };
 
+const WithFormReset = () => {
+  const ref = React.useRef<HTMLFormElement>(null);
+  return (
+    <div>
+      <h2>{'Resettable form via manual reset call.'}</h2>
+      <div>{'Resizes once the form gets reset.'}</div>
+      <form ref={ref}>
+        <TextareaAutosize />
+        <button type="button" onClick={() => ref.current?.reset()}>
+          {'Reset'}
+        </button>
+      </form>
+    </div>
+  );
+};
+
 const Demo = () => {
   return (
     <div>
@@ -215,8 +231,9 @@ const Demo = () => {
       <OnHeightChangeCallback />
       <MultipleTextareas />
       <WithCustomFont />
+      <WithFormReset />
     </div>
   );
 };
 
-ReactDOM.render(<Demo />, document.getElementById('main'));
+createRoot(document.getElementById('main')!).render(<Demo />);
