@@ -49,7 +49,7 @@ export const useFormResetListener = (
   listener: (event: Event) => any,
 ) => {
   useListener(document.body, 'reset', (ev) => {
-    if (libRef.current?.form === ev.target) {
+    if (libRef.current!.form === ev.target) {
       listener(ev);
     }
   });
