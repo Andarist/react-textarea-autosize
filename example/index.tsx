@@ -206,6 +206,20 @@ const WithFormReset = () => {
   const ref = React.useRef<HTMLFormElement>(null);
   return (
     <div>
+      <h2>{'Resettable form.'}</h2>
+      <div>{'Resizes once the form gets reset.'}</div>
+      <form ref={ref}>
+        <TextareaAutosize />
+        <input type="reset" />
+      </form>
+    </div>
+  );
+};
+
+const WithManualFormReset = () => {
+  const ref = React.useRef<HTMLFormElement>(null);
+  return (
+    <div>
       <h2>{'Resettable form via manual reset call.'}</h2>
       <div>{'Resizes once the form gets reset.'}</div>
       <form ref={ref}>
@@ -232,6 +246,7 @@ const Demo = () => {
       <MultipleTextareas />
       <WithCustomFont />
       <WithFormReset />
+      <WithManualFormReset />
     </div>
   );
 };
