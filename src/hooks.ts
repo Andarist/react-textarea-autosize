@@ -35,16 +35,25 @@ function useListener<
   const latestListener = useLatest(listener);
   React.useLayoutEffect(() => {
     const handler: typeof listener = (ev) => latestListener.current(ev);
-
     // might happen if document.fonts is not defined, for instance
     if (!target) {
       return;
     }
-
     target.addEventListener(type, handler);
     return () => target.removeEventListener(type, handler);
   }, []);
 }
+
+export const useFormResetListener = (
+  libRef: React.MutableRefObject<HTMLTextAreaElement | null>,
+  listener: (event: Event) => any,
+) => {
+  useListener(document.body, 'reset', (ev) => {
+    if (libRef.current!.form === ev.target) {
+      listener(ev);
+    }
+  });
+};
 
 export const useWindowResizeListener = (listener: (event: UIEvent) => any) => {
   useListener(window, 'resize', listener);

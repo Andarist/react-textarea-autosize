@@ -7,6 +7,7 @@ import {
   useComposedRef,
   useWindowResizeListener,
   useFontsLoadedListener,
+  useFormResetListener,
 } from './hooks';
 import { noop } from './utils';
 
@@ -98,6 +99,17 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
 
   if (isBrowser) {
     React.useLayoutEffect(resizeTextarea);
+    useFormResetListener(libRef, () => {
+      if (!isControlled) {
+        const node = libRef.current!;
+        const currentValue = node.value;
+        requestAnimationFrame(() => {
+          if (currentValue !== node.value) {
+            resizeTextarea();
+          }
+        });
+      }
+    });
     useWindowResizeListener(resizeTextarea);
     useFontsLoadedListener(resizeTextarea);
     return <textarea {...props} onChange={handleChange} ref={ref} />;
