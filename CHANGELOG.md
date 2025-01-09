@@ -1,5 +1,11 @@
 # react-textarea-autosize
 
+## 8.5.7
+
+### Patch Changes
+
+- [#409](https://github.com/Andarist/react-textarea-autosize/pull/409) [`8c47e31`](https://github.com/Andarist/react-textarea-autosize/commit/8c47e314bc96077fba62505e71fbcd55a7b9a485) Thanks [@Andarist](https://github.com/Andarist)! - Fixed an issue with resize not happening after the containing form being reset
+
 ## 8.5.6
 
 ### Patch Changes
