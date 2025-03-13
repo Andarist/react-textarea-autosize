@@ -1,5 +1,11 @@
 # react-textarea-autosize
 
+## 8.5.8
+
+### Patch Changes
+
+- [#414](https://github.com/Andarist/react-textarea-autosize/pull/414) [`d12e6a5`](https://github.com/Andarist/react-textarea-autosize/commit/d12e6a5f9a9f37860cfad86410d5dcc4e6aaf9ec) Thanks [@benjaminwaterlot](https://github.com/benjaminwaterlot)! - Fixed a race condition leading to an error caused by textarea being unmounted before internal `requestAnimationFrame`'s callback being fired
+
 ## 8.5.7
 
 ### Patch Changes
