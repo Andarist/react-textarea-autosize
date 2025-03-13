@@ -101,10 +101,10 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     React.useLayoutEffect(resizeTextarea);
     useFormResetListener(libRef, () => {
       if (!isControlled) {
-        const node = libRef.current!;
-        const currentValue = node.value;
+        const currentValue = libRef.current!.value;
         requestAnimationFrame(() => {
-          if (currentValue !== node.value) {
+          const node = libRef.current;
+          if (node && currentValue !== node.value) {
             resizeTextarea();
           }
         });
