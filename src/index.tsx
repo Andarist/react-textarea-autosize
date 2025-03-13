@@ -104,7 +104,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
         const node = libRef.current!;
         const currentValue = node.value;
         requestAnimationFrame(() => {
-          if (currentValue !== node.value) {
+          if (libRef.current && currentValue !== node.value) {
             resizeTextarea();
           }
         });
