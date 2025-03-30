@@ -2,6 +2,6 @@
 'react-textarea-autosize': patch
 ---
 
-Add a workerd target for cloudflare workers
+Added `edge-light` and `workerd` conditions to `package.json` manifest to better serve users using Vercel Edge and Cloudflare Workers.
 
-This adds a patch that adds a workerd target to the build process. This lets wrangler and the cloudflare vite plugin pick up the right version of the built module, preventing issues like https://github.com/cloudflare/workers-sdk/issues/8723. It also adds an edge-light target for vercel edge functions.
+This lets tools like Wrangler and the Cloudflare Vite Plugin pick up the right version of the built module, preventing issues like https://github.com/cloudflare/workers-sdk/issues/8723.
