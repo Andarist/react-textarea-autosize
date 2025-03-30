@@ -26,6 +26,11 @@
         "default": "./dist/react-textarea-autosize.cjs.js"
       },
       "development": {
+        "workerd": {
+          "module": "./dist/react-textarea-autosize.development.workerd.esm.js",
+          "import": "./dist/react-textarea-autosize.development.workerd.cjs.mjs",
+          "default": "./dist/react-textarea-autosize.development.workerd.cjs.js"
+        },
         "worker": {
           "module": "./dist/react-textarea-autosize.development.worker.esm.js",
           "import": "./dist/react-textarea-autosize.development.worker.cjs.mjs",
@@ -39,6 +44,11 @@
         "module": "./dist/react-textarea-autosize.development.esm.js",
         "import": "./dist/react-textarea-autosize.development.cjs.mjs",
         "default": "./dist/react-textarea-autosize.development.cjs.js"
+      },
+      "workerd": {
+        "module": "./dist/react-textarea-autosize.workerd.esm.js",
+        "import": "./dist/react-textarea-autosize.workerd.cjs.mjs",
+        "default": "./dist/react-textarea-autosize.workerd.cjs.js"
       },
       "worker": {
         "module": "./dist/react-textarea-autosize.worker.esm.js",
@@ -58,6 +68,7 @@
   },
   "imports": {
     "#is-browser": {
+      "workerd": "./src/resolved-conditions/workerd.ts",
       "worker": "./src/resolved-conditions/worker.ts",
       "browser": "./src/resolved-conditions/browser.ts",
       "default": "./src/resolved-conditions/node.ts"
