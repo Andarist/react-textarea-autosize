@@ -1,5 +1,13 @@
 # react-textarea-autosize
 
+## 8.5.9
+
+### Patch Changes
+
+- [#417](https://github.com/Andarist/react-textarea-autosize/pull/417) [`cbced4f`](https://github.com/Andarist/react-textarea-autosize/commit/cbced4f2e22b1ed04eca5183bd3f5d3659dd345e) Thanks [@threepointone](https://github.com/threepointone)! - Added `edge-light` and `workerd` conditions to `package.json` manifest to better serve users using Vercel Edge and Cloudflare Workers.
+
+  This lets tools like Wrangler and the Cloudflare Vite Plugin pick up the right version of the built module, preventing issues like https://github.com/cloudflare/workers-sdk/issues/8723.
+
 ## 8.5.8
 
 ### Patch Changes
