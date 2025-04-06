@@ -29,6 +29,7 @@ export interface TextareaAutosizeProps extends Omit<TextareaProps, 'style'> {
   onHeightChange?: (height: number, meta: TextareaHeightChangeMeta) => void;
   cacheMeasurements?: boolean;
   style?: Style;
+  className?: string;
 }
 
 const TextareaAutosize: React.ForwardRefRenderFunction<
