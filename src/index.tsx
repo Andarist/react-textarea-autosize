@@ -16,9 +16,7 @@ type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 type Style = Omit<
   NonNullable<TextareaProps['style']>,
   'maxHeight' | 'minHeight'
-> & {
-  height?: number;
-};
+>;
 
 export type TextareaHeightChangeMeta = {
   rowHeight: number;
