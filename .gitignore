@@ -9,6 +9,7 @@ node_modules
 
 .pnp.*
 .yarn/*
+.idea
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
