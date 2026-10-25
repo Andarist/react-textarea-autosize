@@ -6,6 +6,7 @@ import getSizingData, { SizingData } from './getSizingData';
 import {
   useComposedRef,
   useWindowResizeListener,
+  useResizeObserver,
   useFontsLoadedListener,
   useFormResetListener,
 } from './hooks';
@@ -97,6 +98,11 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
     onChange(event);
   };
 
+  const handleResize = () => {
+    measurementsCacheRef.current = undefined;
+    resizeTextarea();
+  };
+
   if (isBrowser) {
     React.useLayoutEffect(resizeTextarea);
     useFormResetListener(libRef, () => {
@@ -110,7 +116,8 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
         });
       }
     });
-    useWindowResizeListener(resizeTextarea);
+    useWindowResizeListener(handleResize);
+    useResizeObserver(libRef, handleResize);
     useFontsLoadedListener(resizeTextarea);
     return <textarea {...props} onChange={handleChange} ref={ref} />;
   }

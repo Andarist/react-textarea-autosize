@@ -59,6 +59,30 @@ export const useWindowResizeListener = (listener: (event: UIEvent) => any) => {
   useListener(window, 'resize', listener);
 };
 
+export const useResizeObserver = (
+  libRef: React.MutableRefObject<HTMLTextAreaElement | null>,
+  listener: () => any,
+) => {
+  const latestListener = useLatest(listener);
+  React.useLayoutEffect(() => {
+    const node = libRef.current;
+    if (!node || typeof ResizeObserver === 'undefined') {
+      return;
+    }
+
+    let width = node.clientWidth;
+    const observer = new ResizeObserver((entries) => {
+      const newWidth = entries[entries.length - 1].contentRect.width;
+      if (newWidth !== width) {
+        width = newWidth;
+        latestListener.current();
+      }
+    });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+};
+
 export const useFontsLoadedListener = (listener: (event: Event) => any) => {
   useListener(document.fonts, 'loadingdone', listener);
 };
