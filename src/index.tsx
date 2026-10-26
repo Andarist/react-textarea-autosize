@@ -83,9 +83,14 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
       maxRows,
     );
 
+    if (
+      node.style.height !== `${height}px` ||
+      node.style.getPropertyPriority('height') !== 'important'
+    ) {
+      node.style.setProperty('height', `${height}px`, 'important');
+    }
     if (heightRef.current !== height) {
       heightRef.current = height;
-      node.style.setProperty('height', `${height}px`, 'important');
       onHeightChange(height, { rowHeight });
     }
   };
